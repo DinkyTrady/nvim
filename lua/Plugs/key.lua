@@ -30,7 +30,7 @@ o.timeoutlen = 400
 o.updatetime = 250
 o.whichwrap:append "<>[]hl"
 
---Diaable default plugins of vim
+--Disable default plugins of vim
 local defaultplugs = {
   "2html_plugin",
   "getscript",
@@ -60,7 +60,7 @@ local defaultplugs = {
   "ftplugin",
 }
 for _, plugin in pairs(defaultplugs) do
-  g["loaded_" .. plugin] = 1
+  vim.g["loaded_" .. plugin] = 1
 end
 
 --mappings
