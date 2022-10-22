@@ -1,0 +1,2 @@
+--bufferline
+require ("bufferline").setup{}
