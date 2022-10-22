@@ -12,7 +12,6 @@ local ensure_packer = function()
     })
     print('installing packer and configure it.....')
     vim.cmd [[packadd packer.nvim]]
-    require('Plugs')
     vim.cmd "bw | silent! MasonInstallAll" -- close packer window
     require("packer").loader "nvim-treesitter"
     return true
