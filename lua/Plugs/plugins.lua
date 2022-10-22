@@ -47,7 +47,10 @@ return require('packer').startup(function(use)
   use 'nvim-lualine/lualine.nvim'
   use {'akinsho/bufferline.nvim', tag = "v3.*"}
   --Syntax highlighting && colorscheme
-  use {'nvim-treesitter/nvim-treesitter', run = ':TSUpdate'}
+  use {
+       'nvim-treesitter/nvim-treesitter',
+       run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+  }
   use 'folke/tokyonight.nvim'
   if packer_bootstrap then
     require('packer').sync()
