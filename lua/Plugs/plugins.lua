@@ -13,6 +13,29 @@ local ensure_packer = function()
     print('installing packer and configure it.....')
     vim.cmd [[packadd packer.nvim]]
     return true
+    --for bot show error massage
+    local status_ok, packer = pcall(require, "packer")
+   if not status_ok then
+     return
+   end
+
+   -- Have packer use a popup window
+   packer.init({
+     display = {
+        open_fn = function()
+          return require("packer.util").float({ border = "rounded" })
+        end,
+     },
+   })
+
+   --Install Mason config && treesitter
+   vim.api.nvim_create_autocmd("User", {
+       pattern = "PackerComplete",
+       callback = function()
+         vim.cmd "bw | silent! MasonInstallAll" -- close packer window
+         require("packer").loader "nvim-treesitter"
+      end,
+   })
   end
   return false
 end
