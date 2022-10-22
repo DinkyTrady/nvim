@@ -43,7 +43,7 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-return require('packer').startup(function(use)
+return packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   --LSP
   use 'neovim/nvim-lspconfig'
