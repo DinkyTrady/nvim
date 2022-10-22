@@ -13,7 +13,11 @@ local ensure_packer = function()
     print('installing packer and configure it.....')
     vim.cmd [[packadd packer.nvim]]
     return true
-    --for bot show error massage
+  end
+  return false
+end
+
+    --for not show error massage
     local status_ok, packer = pcall(require, "packer")
     if not status_ok then
       return
@@ -34,11 +38,8 @@ local ensure_packer = function()
        callback = function()
          vim.cmd "bw | silent! MasonInstallAll" -- close packer window
          require("packer").loader "nvim-treesitter"
-       end,
+       end
     })
-  end
-  return false
-end
 
 local packer_bootstrap = ensure_packer()
 
