@@ -69,7 +69,9 @@ return packer.startup(function(use)
   --helper
   use 'windwp/nvim-ts-autotag'
   use 'numToStr/Comment.nvim'
-  use 'windwp/nvim-autopairs'
+  use {"windwp/nvim-autopairs",
+    config = function() require("nvim-autopairs").setup {} end
+  }
   use 'karb94/neoscroll.nvim'
   use {'folke/which-key.nvim',
     config = function()
