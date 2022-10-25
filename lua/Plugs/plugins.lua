@@ -76,7 +76,7 @@ return packer.startup(function(use)
     end
   }
   use 'nvim-treesitter/nvim-treesitter-context'
-  use 'iamcco/markdown-preview.nvim', { do = 'cd app && yarn install' }
+  use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
   if status_ok then
     require('packer').sync()
       packer.init(init_options)
