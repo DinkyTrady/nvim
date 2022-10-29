@@ -1,2 +1,0 @@
---bufferline
-require ("bufferline").setup{}

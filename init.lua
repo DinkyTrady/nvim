@@ -1,13 +1,8 @@
-require('Plugs.plugins')
-require('Plugs.autopairs')
-require('Plugs.cmp')
-require('Plugs.lsp')
-require('Plugs.onenord')
-require('Plugs.bufferlines')
-require('Plugs.comment')
-require('Plugs.blankline')
-require('Plugs.lualine')
-require('Plugs.mason')
-require('Plugs.nvim-tree')
-require('Plugs.treesitter')
-require('Plugs.key')
+--set core
+require("KYRA.core")
+
+--set plugins manager
+require("KYRA.plugins")
+
+--configuration plugins
+require("KYRA.plugs")
