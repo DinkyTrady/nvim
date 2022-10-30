@@ -1,6 +1,6 @@
-local opt = { noremap = true, silent = true }
-
 local map = vim.keymap.set
+
+local opt = { noremap = true, silent = true }
 
 map("", '<Space>', '<Nop>', opt)
 
@@ -10,13 +10,13 @@ vim.g.maplocalleader = ' '
 
 
 --open nvim-tree with 'space + t'
-map('n', '<leader>t', ':NvimTreeToggle<CR>', opts)
+map('n', '<leader>t', ':NvimTreeToggle<CR>', opt)
 
 --For save click 'space + w', save and quit click 'wq', quit neovim click 'space + q', to force quit click 'fq' in normal mode, and reset neovim use 'space + s'
 map('n', '<leader>w', ':w<CR>', opt)
-map('n', 'wq', ':wq<CR>', opt)
+map('n', '<leader>mw', ':wq<CR>', opt)
 map('n', '<leader>q', ':q<CR>', opt)
-map('n', 'fq', ':q!<CR>', opt)
+map('n', '<leader>xq', ':q!<CR>', opt)
 map('n', '<leader>s', ':so<CR>', opt)
 
   --To another tab & pick tab or close it

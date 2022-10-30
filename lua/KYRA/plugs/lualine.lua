@@ -5,26 +5,31 @@ local diff = {
   'diff',
   sources = {'nvim_diagnostic'},
   symbols = { added = ' ', modified = '柳 ', removed = ' ' },
+  diff_color = {
+    added = { fg = '#00ff00' },
+    modified = { fg = '#ffdd00' },
+    removed = { fg = '#ff0000' },
+  },
 }
 
 local lsp = {
-function()
-  local msg = 'No Lsp'
-  local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-  local clients = vim.lsp.get_active_clients()
-  if next(clients) == nil then
-    return msg
-  end
-  for _, client in ipairs(clients) do
-    local filetypes = client.config.filetypes
-    if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-      return client.name
+  function()
+    local msg = 'No Lsp'
+    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
+    local clients = vim.lsp.get_active_clients()
+    if next(clients) == nil then
+      return msg
     end
-  end
-  return msg
-end,
-icon = ' LSP:',
-color = { fg = '#ffffff', gui = 'bold' },
+    for _, client in ipairs(clients) do
+      local filetypes = client.config.filetypes
+      if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+        return client.name
+      end
+    end
+    return msg
+  end,
+  icon = ' LSP:',
+  color = { fg = '#ffffff', gui = 'bold' },
 }
 
 lualine.setup {
@@ -57,8 +62,8 @@ lualine.setup {
   inactive_sections = {
     lualine_a = {},
     lualine_b = {},
-    lualine_c = {'filename'},
-    lualine_x = {'location'},
+    lualine_c = {},
+    lualine_x = {},
     lualine_y = {},
     lualine_z = {}
   },

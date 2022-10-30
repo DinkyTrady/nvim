@@ -38,13 +38,6 @@ npairs.setup({
   }
 })
 
-npairs.add_rules({
-  Rule("%", "%", "lua")
-    :with_pair(ts_conds.is_ts_node({'string','comment'})),
-  Rule("$", "$", "lua")
-    :with_pair(ts_conds.is_not_ts_node({'function'}))
-})
-
 local cmp = require('cmp')
 cmp.event:on(
   'confirm_done',

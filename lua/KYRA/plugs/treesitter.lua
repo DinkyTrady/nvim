@@ -4,16 +4,6 @@ if not treesitter_ok then
   return
 end
 
-local tag_ok, tag = pcall(require, 'nvim-ts-autotag')
-if not tag_ok then
-  return 
-end
-
-local text_ok, comment = pcall(require, 'treesitter-context')
-if not text_ok then
-  return 
-end
-
 treesitter.setup({
   ensure_installed = { 'lua', 'javascript', 'html', 'css' },
   sync_install = true,
@@ -38,6 +28,3 @@ treesitter.setup({
     enable_autocmd = false
   }
 })
-
-tag.setup()
-comment.setup{}
