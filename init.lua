@@ -1,8 +1,8 @@
 --set core
-require("KYRA.core")
+require("core")
 
 --set plugins manager
-require("KYRA.plugins")
+require("plugins")
 
 --configuration plugins
-require("KYRA.plugs")
+require("plugs")

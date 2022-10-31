@@ -40,10 +40,11 @@ return require('packer').startup(function(use)
   use 'windwp/nvim-autopairs'
   use 'numToStr/Comment.nvim'
   use "lukas-reineke/indent-blankline.nvim"
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.0',
-    requires = {{'nvim-lua/plenary.nvim'}}
-  }
+  use 'folke/which-key.nvim'
+  use 'nvim-lua/plenary.nvim'
+  use 'nvim-treesitter/nvim-treesitter-refactor'
+  use 'karb94/neoscroll.nvim'
+  use {'nvim-telescope/telescope.nvim', tag = '0.1.0'}
   use ('akinsho/bufferline.nvim', {tag = 'v.3*'})
   --for fast to another file and icons
   use {
@@ -79,7 +80,8 @@ return require('packer').startup(function(use)
     'windwp/nvim-ts-autotag',
     'p00f/nvim-ts-rainbow',
     'JoosepAlviste/nvim-ts-context-commentstring',
-    'nvim-treesitter/nvim-treesitter-context'
+    'nvim-treesitter/nvim-treesitter-context',
+    'nvim-treesitter/nvim-treesitter-textobjects'
   }
   --ui
   use 'nvim-lualine/lualine.nvim'
