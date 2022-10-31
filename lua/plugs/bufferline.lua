@@ -15,7 +15,6 @@ bufferline.setup({
         filetype = "NvimTree",
         text = "  File Explorer  ",
         highlight = "Directory",
-        separator = true,
         padding = 1,
       },
     },

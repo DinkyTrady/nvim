@@ -24,7 +24,7 @@ mason.setup({
 })
 
 masonlsp.setup({
-  ensure_installed = { 'sumneko_lua', 'html', 'cssls', 'tsserver', 'emmet_ls' },
+  ensure_installed = { 'html', 'cssls', 'tsserver', 'emmet_ls' },
   automatic_installation = false,
 })
 

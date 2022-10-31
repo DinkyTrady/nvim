@@ -55,7 +55,8 @@ cmp.setup({
     end,
   },
   window = {
-    completion = cmp.config.window.bordered()
+    completion = cmp.config.window.bordered(),
+    document = cmp.config.window.bordered()
   },
   formatting = {
     format = function(entry, vim_item)
@@ -109,8 +110,8 @@ cmp.setup({
     ["<Up>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
-      elseif luasnip.jumpable(-1) then
-        luasnip.jump(-1)
+      -- elseif luasnip.jumpable(-1) then
+      --   luasnip.jump(-1)
       else
         fallback()
       end
@@ -127,6 +128,7 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp', priority = 30 },
+    { name = 'nvim_lsp_signature_help' },
     { name = 'luasnip', priority = 40 }, -- For luasnip users.
     { name = 'buffer', priority = 30 },
   })

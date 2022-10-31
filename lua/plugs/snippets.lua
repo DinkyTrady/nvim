@@ -15,7 +15,7 @@ ls.config.setup({
   ext_base_prio = 300,
   ext_prio_increase = 2,
   ship_env = {
-    types = require("luasnip.util.types"),
+    types = types,
     parse = parse,
   },
 })

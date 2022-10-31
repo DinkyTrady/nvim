@@ -15,7 +15,7 @@ tokyonight.setup({
   styles = {
     comments = { italic = true },
     keywords = { italic = true },
-    functions = { bold = true, italic = true },
+    functions = { bold = true },
     variables = {},
     sidebars = "dark",
     floats = "dark",

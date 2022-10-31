@@ -76,14 +76,14 @@ local mappings = {
   q = {
     name = 'Quits',
     q = {':q<cr>', 'Quit File'},
-    a = {':qall', 'Quit All Files'},
-    f = {':q!', 'Force Quit'},
+    a = {':qall<cr>', 'Quit All Files'},
+    f = {':q!<cr>', 'Force Quit'},
   },
   f = {
     name = 'Telescope',
     t = {':Telescope<cr>', 'Open Telescope'},
-    f = {'<cmd>Telescope find_files<cr>', 'Find Fles'},
-    o = {':Telescope oldfiles<cr>', 'Recent Files'},
+    f = {'<cmd>Telescope find_files layout_strategy=vertical<cr>', 'Find Fles'},
+    o = {':Telescope oldfiles layout_strategy=vertical<cr>', 'Recent Files'},
     b = {'<cmd>Telescope buffers<cr>', 'Choose Buffers'},
     c = {':Telescope colorscheme<cr>', 'Choose Colorscheme'}
   },

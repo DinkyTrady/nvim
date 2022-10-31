@@ -1,16 +1,6 @@
 local lualine_ok, lualine = pcall(require, 'lualine')
 if not lualine_ok then return end
 
-local colors = {
-  red = '#ca1243',
-  grey = '#a0a1a7',
-  black = '#383a42',
-  white = '#f3f3f3',
-  light_green = '#83a598',
-  orange = '#fe8019',
-  green = '#8ec07c',
-}
-
 local diff = {
   'diff',
   sources = {'nvim_diagnostic'},
@@ -44,10 +34,10 @@ lualine.setup {
   },
   sections = --[[ process_sections ]] {
     lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
-    lualine_b = { {'filename', color = {gui='bold'}}, 'filesize' },
+    lualine_b = {'filetype', 'filesize' },
     lualine_c = { diff, 'diagnostics' },
     lualine_x = {{'branch', icon = '', color = {fg='#ff0000'}}},
-    lualine_y = { {'filetype', icon_only = true}, 'progress' },
+    lualine_y = { 'progress', 'fileformat' },
     lualine_z = { 'location' }
   },
   inactive_sections = {

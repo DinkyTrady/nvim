@@ -9,7 +9,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
   'https://github.com/wbthomason/packer.nvim',
   install_path
   }
-  print 'installing Pakcer and Sync it'
+  print 'installing plugins and Sync it'
   vim.cmd [[packadd packer.nvim]]
 end
 
@@ -35,25 +35,18 @@ packer.init {
 
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
+  use 'nvim-lua/plenary.nvim'
   use 'folke/tokyonight.nvim'
-  use 'navarasu/onedark.nvim'
   use 'windwp/nvim-autopairs'
+  use 'karb94/neoscroll.nvim'
   use 'numToStr/Comment.nvim'
   use "lukas-reineke/indent-blankline.nvim"
   use 'folke/which-key.nvim'
-  use 'nvim-lua/plenary.nvim'
-  use 'nvim-treesitter/nvim-treesitter-refactor'
-  use 'karb94/neoscroll.nvim'
-  use {'nvim-telescope/telescope.nvim', tag = '0.1.0'}
-  use ('akinsho/bufferline.nvim', {tag = 'v.3*'})
+  use 'nvim-tree/nvim-web-devicons'
+  use 'nvim-telescope/telescope.nvim'
+  use 'akinsho/bufferline.nvim'
   --for fast to another file and icons
-  use {
-    'nvim-tree/nvim-tree.lua',
-    requires = {
-      'nvim-tree/nvim-web-devicons',
-    },
-    tag = 'nightly'
-  }
+  use {'nvim-tree/nvim-tree.lua', tag = 'nightly'}
   use {
     'williamboman/mason.nvim',
     'neovim/nvim-lspconfig',
@@ -64,8 +57,8 @@ return require('packer').startup(function(use)
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
-    'hrsh7th/cmp-cmdline',
     'hrsh7th/nvim-cmp',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
     'onsails/lspkind.nvim'
   }
   --snippets
@@ -75,14 +68,12 @@ return require('packer').startup(function(use)
     'rafamadriz/friendly-snippets'
   }
   --treesitter
-  use {
-    {'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({with_sync = true}) end},
-    'windwp/nvim-ts-autotag',
-    'p00f/nvim-ts-rainbow',
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    'nvim-treesitter/nvim-treesitter-context',
-    'nvim-treesitter/nvim-treesitter-textobjects'
-  }
+  use {'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+    -- 'windwp/nvim-ts-autotag',
+    -- 'p00f/nvim-ts-rainbow',
+    -- 'JoosepAlviste/nvim-ts-context-commentstring',
+ --   'nvim-treesitter/nvim-treesitter-context'
+  } 
   --ui
   use 'nvim-lualine/lualine.nvim'
   if packer_bootstrap then
