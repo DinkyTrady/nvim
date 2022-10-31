@@ -11,21 +11,6 @@ local colors = {
   green = '#8ec07c',
 }
 
--- Put proper separators and gaps between components in sections
--- local function process_sections(sections)
---   for name, section in pairs(sections) do
---     local left = name:sub(9, 10) < 'x'
---     for id, comp in ipairs(section) do
---       if type(comp) ~= 'table' then
---         comp = { comp }
---         section[id] = comp
---       end
---       comp.separator = left and { right = '' } or { left = '' }
---     end
---   end
---   return sections
--- end
-
 local diff = {
   'diff',
   sources = {'nvim_diagnostic'},
