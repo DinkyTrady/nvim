@@ -32,12 +32,12 @@ lualine.setup {
       winbar = 1000,
     }
   },
-  sections = --[[ process_sections ]] {
-    lualine_a = {{ 'mode', fmt = function(str) return str:sub(1,1) end }},
-    lualine_b = {'filetype', 'filesize' },
+  sections = {
+    lualine_a = {{'mode',fmt=function(str) return str:sub(1,1) end}},
+    lualine_b = { 'filename', 'filesize' },
     lualine_c = { diff, 'diagnostics' },
     lualine_x = {{'branch', icon = '', color = {fg='#ff0000'}}},
-    lualine_y = { 'progress', 'fileformat' },
+    lualine_y = { {'filetype', icon_only = true}, 'progress' },
     lualine_z = { 'location' }
   },
   inactive_sections = {

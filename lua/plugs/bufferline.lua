@@ -1,6 +1,6 @@
 local bufferline_ok, bufferline = pcall(require, 'bufferline')
 if not bufferline_ok then
-  return 
+  return
 end
 
 bufferline.setup({
@@ -10,8 +10,7 @@ bufferline.setup({
       style = 'icon',
     },
     numbers = "ordinal",
-    offsets = {
-      {
+    offsets = {{
         filetype = "NvimTree",
         text = "  File Explorer  ",
         highlight = "Directory",

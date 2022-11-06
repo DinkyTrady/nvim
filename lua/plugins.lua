@@ -34,11 +34,11 @@ packer.init {
 }
 
 return require('packer').startup(function(use)
+  use 'karb94/neoscroll.nvim'
+  use 'navarasu/onedark.nvim'
   use 'wbthomason/packer.nvim'
   use 'nvim-lua/plenary.nvim'
-  use 'folke/tokyonight.nvim'
   use 'windwp/nvim-autopairs'
-  use 'karb94/neoscroll.nvim'
   use 'numToStr/Comment.nvim'
   use "lukas-reineke/indent-blankline.nvim"
   use 'folke/which-key.nvim'
@@ -69,11 +69,11 @@ return require('packer').startup(function(use)
   }
   --treesitter
   use {'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-    -- 'windwp/nvim-ts-autotag',
-    -- 'p00f/nvim-ts-rainbow',
-    -- 'JoosepAlviste/nvim-ts-context-commentstring',
- --   'nvim-treesitter/nvim-treesitter-context'
-  } 
+    'windwp/nvim-ts-autotag',
+    'p00f/nvim-ts-rainbow',
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    'nvim-treesitter/nvim-treesitter-context'
+  }
   --ui
   use 'nvim-lualine/lualine.nvim'
   if packer_bootstrap then

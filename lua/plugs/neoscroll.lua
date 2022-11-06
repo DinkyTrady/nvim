@@ -1,8 +1,8 @@
-local status, ns = pcall(require, 'neoscroll')
+local status, neoscroll = pcall(require, 'neoscroll')
 if not status then
-  return 
+  return
 end
 
-ns.setup{
-  mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>', '<C-y>', '<C-e>', 'zt', 'zz', 'zb', 'Down', 'Up'},
-}
+neoscroll.setup({
+  mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>', '<C-y>', '<C-e>', 'zt', 'zz', 'zb', 'Up', 'Down'},
+})

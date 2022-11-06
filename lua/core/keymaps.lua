@@ -8,6 +8,7 @@ vim.g.maplocalleader = ' '
 --fast to normal mode with 'jj'
 map('i', 'jj', '<esc>', opt)
 map('s', 'jj', '<esc>', opt)
+map('v', 'jk', '<esc>', opt)
 --
 map("v", "<C-Up>", ":m .-2<CR>==", opt)
 map("v", "<C-Down>", ":m .+1<CR>==", opt)

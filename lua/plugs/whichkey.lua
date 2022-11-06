@@ -85,7 +85,8 @@ local mappings = {
     f = {'<cmd>Telescope find_files layout_strategy=vertical<cr>', 'Find Fles'},
     o = {':Telescope oldfiles layout_strategy=vertical<cr>', 'Recent Files'},
     b = {'<cmd>Telescope buffers<cr>', 'Choose Buffers'},
-    c = {':Telescope colorscheme<cr>', 'Choose Colorscheme'}
+    c = {':Telescope colorscheme<cr>', 'Choose Colorscheme'},
+    k = {':Telescope keymaps<cr>', 'See all Keybindings'}
   },
   p = {
     name = 'Packer',

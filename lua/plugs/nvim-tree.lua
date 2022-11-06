@@ -14,31 +14,23 @@ tree.setup ({
   view = {
     number = true,
     width = 30,
-    adaptive_size = false, 
+    adaptive_size = false,
     hide_root_folder = false,
-    side = "left",  
+    side = "left",
     relativenumber = false,
   },
-  renderer = { 
+  renderer = {
     group_empty = true,
     indent_width = 2,
     indent_markers = {
       enable = true,
     },
-    icons = { 
+    highlight_git = true,
+    icons = {
       webdev_colors = true,
       git_placement = "before",
       padding = " ",
       symlink_arrow = " ➛ ",
-      show = {
-        file = true,
-        folder = true,
-        folder_arrow = true,
-        git = true,
-      },
-    },
-    highlight_git = true,
-    icons = {
       show = {
         file = true,
         folder = true,
@@ -66,7 +58,7 @@ tree.setup ({
         },
       }
     }
-  }, 
+  },
   filters = {
     dotfiles = false,
   },

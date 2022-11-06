@@ -2,10 +2,10 @@
 Thanks for vist my repository and intrested to use my neovim setup.
 - **Note**
   - In here the ***leader*** change to ***space***, _remember it's only work in normal mode_.
-  - If you want save use 'space + w'
-  - Quit neovim use 'space + q'
-  - Force quit (ignore change file before saved) use 'fq'
-  - To save and quit use 'wq'
+  - If you want save use 'space + ww'
+  - Quit neovim use 'space + qq'
+  - Force quit (ignore change file before saved) use 'space + qf'
+  - To save and quit use 'space + wq'
   - Reset neovim (not quit neovim and open it) use 'space + s'
 >For another information please visit **[wiki](https://github.com/DinkyTrady/nvim/wiki).**
 ## ⚠️ Requirements
