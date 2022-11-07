@@ -35,7 +35,7 @@ packer.init {
 
 return require('packer').startup(function(use)
   use 'karb94/neoscroll.nvim'
-  use 'navarasu/onedark.nvim'
+  use 'folke/tokyonight.nvim'
   use 'wbthomason/packer.nvim'
   use 'nvim-lua/plenary.nvim'
   use 'windwp/nvim-autopairs'

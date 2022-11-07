@@ -1,4 +1,4 @@
-require('plugs.onedark')
+require('plugs.tokyonight')
 require('plugs.nvim-tree')
 require('plugs.cmp')
 require('plugs.snippets')
