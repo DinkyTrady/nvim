@@ -16,6 +16,6 @@ Thanks for vist my repository and intrested to use my neovim setup.
 - [node.js](https://github.com/nodejs/node)
 ## 🚀 Installation
 - **Do this in your terminal**
-```git 
+``` bash
 git clone https://github.com/DinkyTrady/nvim ~/.config/nvim --depth 1 && nvim
 ```
