@@ -16,10 +16,12 @@ tokyonight.setup({
   hide_inactive_statusline = false,
   lualine_bold = true,
   on_colors = function(colors) end,
-  on_highlights = function(hl, c) 
+  on_highlights = function(hl, c)
     hl.NvimTreeFolderIcon = { fg='#639fff' }
     hl.NvimTreeIndentMarker = { fg='#f5f5f5' }
   end,
 })
 
-vim.cmd[[colorscheme tokyonight]]
+if status then
+  vim.cmd[[colorscheme tokyonight]]
+end

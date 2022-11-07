@@ -34,31 +34,23 @@ packer.init {
 }
 
 return require('packer').startup(function(use)
-  use 'karb94/neoscroll.nvim'
-  use 'folke/tokyonight.nvim'
   use 'wbthomason/packer.nvim'
   use 'nvim-lua/plenary.nvim'
-  use 'windwp/nvim-autopairs'
-  use 'numToStr/Comment.nvim'
-  use "lukas-reineke/indent-blankline.nvim"
-  use 'folke/which-key.nvim'
-  use 'nvim-tree/nvim-web-devicons'
-  use 'nvim-telescope/telescope.nvim'
-  use 'akinsho/bufferline.nvim'
   --for fast to another file and icons
   use {'nvim-tree/nvim-tree.lua', tag = 'nightly'}
+  -- lsp (language server protocol)
   use {
     'williamboman/mason.nvim',
     'neovim/nvim-lspconfig',
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
     'williamboman/mason-lspconfig.nvim'
   }
-  --complation
+  --completion
   use {
-    'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/nvim-cmp',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
     'onsails/lspkind.nvim'
   }
   --snippets
@@ -74,8 +66,17 @@ return require('packer').startup(function(use)
     'JoosepAlviste/nvim-ts-context-commentstring',
     'nvim-treesitter/nvim-treesitter-context'
   }
-  --ui
+  --ui and ux
   use 'nvim-lualine/lualine.nvim'
+  use 'folke/tokyonight.nvim'
+  use "lukas-reineke/indent-blankline.nvim"
+  use 'nvim-telescope/telescope.nvim'
+  use 'nvim-tree/nvim-web-devicons'
+  use 'karb94/neoscroll.nvim'
+  use 'windwp/nvim-autopairs'
+  use 'numToStr/Comment.nvim'
+  use 'folke/which-key.nvim'
+  use 'akinsho/bufferline.nvim'
   if packer_bootstrap then
     require('packer').sync()
   end

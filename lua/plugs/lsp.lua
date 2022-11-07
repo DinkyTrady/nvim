@@ -1,16 +1,16 @@
 local lsp_ok, nvim_lsp = pcall(require, 'lspconfig')
-if not lsp_ok then 
-  return 
+if not lsp_ok then
+  return
 end
 
 local mason_ok, mason = pcall(require, 'mason')
 if not mason_ok then
-  return 
+  return
 end
 
 local masonlsp_ok, masonlsp = pcall(require, 'mason-lspconfig')
-if not masonlsp_ok then 
-  return 
+if not masonlsp_ok then
+  return
 end
 
 mason.setup({
@@ -56,7 +56,7 @@ nvim_lsp.clangd.setup {
   capabilities = capabilities,
 }
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " } 
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
