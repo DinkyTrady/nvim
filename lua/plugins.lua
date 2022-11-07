@@ -36,8 +36,10 @@ packer.init {
 return require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'nvim-lua/plenary.nvim'
+
   --for fast to another file and icons
   use {'nvim-tree/nvim-tree.lua', tag = 'nightly'}
+
   -- lsp (language server protocol)
   use {
     'williamboman/mason.nvim',
@@ -46,6 +48,7 @@ return require('packer').startup(function(use)
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'williamboman/mason-lspconfig.nvim'
   }
+
   --completion
   use {
     'hrsh7th/cmp-buffer',
@@ -53,12 +56,14 @@ return require('packer').startup(function(use)
     'hrsh7th/nvim-cmp',
     'onsails/lspkind.nvim'
   }
+
   --snippets
   use {
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
     'rafamadriz/friendly-snippets'
   }
+
   --treesitter
   use {'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
     'windwp/nvim-ts-autotag',
@@ -66,6 +71,7 @@ return require('packer').startup(function(use)
     'JoosepAlviste/nvim-ts-context-commentstring',
     'nvim-treesitter/nvim-treesitter-context'
   }
+
   --ui and ux
   use 'nvim-lualine/lualine.nvim'
   use 'folke/tokyonight.nvim'
