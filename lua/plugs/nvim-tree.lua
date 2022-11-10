@@ -14,7 +14,7 @@ tree.setup ({
   view = {
     number = true,
     width = 30,
-    adaptive_size = false, 
+    adaptive_size = true, 
     hide_root_folder = false,
     side = "left",  
     relativenumber = false,
