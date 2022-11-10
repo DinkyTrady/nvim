@@ -56,14 +56,14 @@ cmp.setup({
   },
   window = {
     completion = cmp.config.window.bordered(),
-    document = cmp.config.window.bordered()
+    documentation = cmp.config.window.bordered()
   },
   formatting = {
     format = function(entry, vim_item)
       -- Kind icons
       vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
       vim_item.menu = ({
-        buffer = "[TXT]",
+        buffer = "[BUF]",
         nvim_lsp = "[LSP]",
         luasnip = "[SNIP]",
         nvim_lua = "[Lua]",
