@@ -26,3 +26,4 @@ o.scrolloff = 5
 o.signcolumn = "yes"
 o.splitbelow = true
 o.splitright = true
+vim.opt.undofile = true

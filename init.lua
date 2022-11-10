@@ -1,3 +1,6 @@
+--default colorscheme
+vim.cmd[[colorscheme vscode_dark]]
+
 --set core
 require("core")
 

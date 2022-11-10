@@ -21,7 +21,3 @@ tokyonight.setup({
     hl.NvimTreeIndentMarker = { fg='#f5f5f5' }
   end,
 })
-
-if status then
-  vim.cmd[[colorscheme tokyonight]]
-end

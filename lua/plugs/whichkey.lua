@@ -17,8 +17,8 @@ local setup = {
       text_objects = false,
       windows = true,
       nav = true,
-      z = true, 
-      g = true, 
+      z = true,
+      g = true,
     },
   },
   key_labels = {
@@ -65,7 +65,7 @@ local opts = {
 }
 
 local mappings = {
-  ["t"] = { '<cmd>NvimTreeToggle<cr>', 'Files Explorer' },
+  ["e"] = { '<cmd>NvimTreeToggle<cr>', 'Files Explorer' },
   ["s"] = { '<cmd>so<cr>', 'Reload File' },
   w = {
     name = 'Save',

@@ -83,6 +83,7 @@ return require('packer').startup(function(use)
   use 'numToStr/Comment.nvim'
   use 'folke/which-key.nvim'
   use 'akinsho/bufferline.nvim'
+  use 'norcalli/nvim-colorizer.lua'
   if packer_bootstrap then
     require('packer').sync()
   end
