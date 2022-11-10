@@ -65,7 +65,7 @@ local opts = {
 }
 
 local mappings = {
-  ["t"] = { '<cmd>NvimTreeToggle<cr>', 'Files Explorer' },
+  ["e"] = { '<cmd>NvimTreeToggle<cr>', 'Files Explorer' },
   ["s"] = { '<cmd>so<cr>', 'Reload File' },
   w = {
     name = 'Save',
