@@ -91,6 +91,7 @@ return packer.startup(function(use)
   use 'folke/which-key.nvim'
   use 'akinsho/bufferline.nvim'
   use 'NvChad/nvim-colorizer.lua'
+  use 'lewis6991/gitsigns.nvim'
   if packer_bootstrap then
     require('packer').sync()
   end

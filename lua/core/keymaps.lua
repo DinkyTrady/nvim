@@ -16,9 +16,8 @@ map("v", "<C-Down>", ":m .+1<CR>==", opt)
   --To another tab & pick tab or close it
 map('n', '<tab>', ':bnext<CR>', opt)
 map('n', '<bs>', ':bprev<CR>', opt)
-map('n', 'cc', ':bdelete<CR>',opt)
 
---
+--To another window
 map('n', '<C-h>', '<C-w>h<CR>', opt)
 map('n', '<C-l>', '<C-w>l<CR>', opt)
 map('n', '<C-j>', '<C-w>j<CR>', opt)

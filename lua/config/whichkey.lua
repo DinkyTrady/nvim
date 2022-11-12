@@ -51,7 +51,7 @@ local setup = {
   triggers = "auto",
   triggers_blacklist = {
     i = { "j", "j" },
-    v = { "j", "j" },
+    v = { "j", "k" },
   },
 }
 
@@ -68,11 +68,13 @@ local mappings = {
   ['a'] = { ':Alpha<cr>', 'Open Alpha' },
   ["e"] = { '<cmd>NvimTreeToggle<cr>', 'Files Explorer' },
   ["s"] = { '<cmd>so<cr>', 'Reload File' },
+  ['x'] = { ':bdelete<cr>', 'Close Buffer' },
   w = {
     name = 'Save',
     w = { ':w<cr>', 'Save File' },
     a = { ':wall<cr>', 'Save All Files' },
     q = { ':wq<cr>', 'Save & Quit' },
+    f = { ':wall<cr> :qall<cr>', 'Save All Files & Quit' },
   },
   q = {
     name = 'Quits',
@@ -91,20 +93,42 @@ local mappings = {
   },
   p = {
     name = 'Packer',
-    s = {':PackerStatus<cr>', 'Packer Status'},
-    i = {':PackerInstall<cr>', 'Packer Installing Plugins'},
+    i = {':PackerStatus<cr>', 'Packer Status'},
+    d = {':PackerInstall<cr>', 'Packer Installing Plugins'},
     c = {':PackerCompile<cr>', 'Packer Compile'},
     r = {':PackerClean<cr>', 'Clean Plugins'},
-    u = {':PackerSync<cr>', 'Packer Sync'},
+    s = {':PackerSync<cr>', 'Packer Sync'},
   },
-  m = {
+  l = {
     name = 'LSP',
     m = {':Mason<cr>', 'Open Mason'},
     i = {':LspInfo<cr>', 'LSP Info'},
     s = {':LspStart<cr>', 'Start LSP'},
     o = {':LspStop<cr>', 'Stop LSP'},
     r = {':LspRestart<cr>', 'Restar LSP'}
-  }
+  },
+  g = {
+    name = "Git",
+    g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+    j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+    k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+    l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+    p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+    r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+    R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+    s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+    u = {
+      "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+      "Undo Stage Hunk",
+    },
+    o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+    b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+    c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+    d = {
+      "<cmd>Gitsigns diffthis HEAD<cr>",
+      "Diff",
+    },
+  },
 }
 
 wk.setup(setup)

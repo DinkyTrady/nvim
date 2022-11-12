@@ -400,6 +400,11 @@ function M.setup(colors, config)
   hi.AlphaButtons = 'rainbowcol1'
   hi.AlphaFooter = { guifg = M.colors.green, gui = 'italic' }
 
+  --gitsigns
+  hi.GitSignsAdd = { guifg = M.colors.green }
+  hi.GitSignsChange = { guibg = M.colors.base00, guifg = M.colors.yellow }
+  hi.GitSignsDelete = { guifg = M.colors.red }
+
 end
 
 function M.available_colorschemes()
