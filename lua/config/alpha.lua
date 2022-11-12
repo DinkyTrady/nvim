@@ -20,9 +20,9 @@ db.section.buttons.val = {
 	db.button("f", "  Find file", ":Telescope find_files <CR>"),
   db.button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
 	db.button("n", "  New file", ":ene <BAR> startinsert <CR>"),
-  db.button("k", "  Mapping", ":Telescope keymaps <CR>"),
+  db.button("m", "  Mapping", ":Telescope keymaps <CR>"),
   db.button("e", "  Explore Tree", ":NvimTreeToggle <CR>"),
-	db.button("o", "  Configuration", ":e $MYVIMRC <CR>"),
+	db.button("c", "  Configuration", ":e $MYVIMRC <CR>"),
 	db.button("q", "  Quit Neovim", ":q<CR>"),
 }
 

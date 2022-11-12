@@ -55,7 +55,6 @@ if vim.cmd([[colorscheme vscode_dark]]) then
   vim.cmd([[highlight luaTSField guifg=#569cd6]])
   vim.cmd([[highlight @parameter guifg=#569cd6]])
   vim.cmd([[highlight @keyword guifg=#569cd6]])
-  vim.cmd([[highlight @variable guifg=#9CDCFE]])
   vim.cmd([[highlight @fieldkey guifg=#4EC994]])
   vim.cmd([[highlight @keywordreturn guifg=#C586C0]])
   vim.cmd([[highlight @keywordfunction guifg=#4294D6]])

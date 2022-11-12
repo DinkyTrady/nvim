@@ -22,3 +22,6 @@ map('n', '<C-h>', '<C-w>h<CR>', opt)
 map('n', '<C-l>', '<C-w>l<CR>', opt)
 map('n', '<C-j>', '<C-w>j<CR>', opt)
 map('n', '<C-k>', '<C-w>k<CR>', opt)
+
+--ToggleTerm
+map('n', '<C-t>', ':ToggleTerm<CR>', opt)

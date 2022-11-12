@@ -38,6 +38,7 @@ return packer.startup(function(use)
   use 'nvim-lua/plenary.nvim'
   use 'lewis6991/impatient.nvim'
   use 'goolord/alpha-nvim'
+  use 'akinsho/toggleterm.nvim'
 
   --for fast to another file and icons
   use {'nvim-tree/nvim-tree.lua', tag = 'nightly'}
@@ -93,6 +94,6 @@ return packer.startup(function(use)
   use 'NvChad/nvim-colorizer.lua'
   use 'lewis6991/gitsigns.nvim'
   if packer_bootstrap then
-    require('packer').sync()
+    packer.sync()
   end
 end)

@@ -375,7 +375,6 @@ function M.setup(colors, config)
   hi["@text.literal"] = { guifg = M.colors.base09 }
   hi["@text.url"] = { guifg = M.colors.base09, gui = 'underline' }
   hi["@type.builtin"] = { guifg = M.colors.base0A }
-  hi["@variable"] = { guifg = M.colors.base05 }
   hi["@variable.builtin"] = { guifg = M.colors.base09 }
   hi["@definition"] = { guisp = M.colors.base04, gui = 'underline' }
   hi.TSDefinitionUsage = { guisp = M.colors.base04, gui = 'underline' }
