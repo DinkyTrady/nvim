@@ -33,9 +33,11 @@ packer.init {
   },
 }
 
-return require('packer').startup(function(use)
+return packer.startup(function(use)
   use 'wbthomason/packer.nvim'
   use 'nvim-lua/plenary.nvim'
+  use 'lewis6991/impatient.nvim'
+  use 'goolord/alpha-nvim'
 
   --for fast to another file and icons
   use {'nvim-tree/nvim-tree.lua', tag = 'nightly'}
@@ -44,13 +46,13 @@ return require('packer').startup(function(use)
   use {
     'williamboman/mason.nvim',
     'neovim/nvim-lspconfig',
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
     'williamboman/mason-lspconfig.nvim'
   }
 
   --completion
   use {
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/nvim-cmp',
@@ -65,11 +67,17 @@ return require('packer').startup(function(use)
   }
 
   --treesitter
-  use {'nvim-treesitter/nvim-treesitter', run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
-    'windwp/nvim-ts-autotag',
-    'p00f/nvim-ts-rainbow',
-    'JoosepAlviste/nvim-ts-context-commentstring',
-    'nvim-treesitter/nvim-treesitter-context'
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    requires = {
+      'windwp/nvim-ts-autotag',
+      'JoosepAlviste/nvim-ts-context-commentstring',
+      'p00f/nvim-ts-rainbow',
+      'nvim-treesitter/nvim-treesitter-context',
+    },
+    run = function()
+      require('nvim-treesitter.install').update({ with_sync = true })
+    end,
   }
 
   --ui and ux
@@ -78,12 +86,11 @@ return require('packer').startup(function(use)
   use "lukas-reineke/indent-blankline.nvim"
   use 'nvim-telescope/telescope.nvim'
   use 'nvim-tree/nvim-web-devicons'
-  use 'karb94/neoscroll.nvim'
   use 'windwp/nvim-autopairs'
   use 'numToStr/Comment.nvim'
   use 'folke/which-key.nvim'
   use 'akinsho/bufferline.nvim'
-  use 'norcalli/nvim-colorizer.lua'
+  use 'NvChad/nvim-colorizer.lua'
   if packer_bootstrap then
     require('packer').sync()
   end

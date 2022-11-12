@@ -302,7 +302,6 @@ function M.setup(colors, config)
   hi.Define = { guifg = M.colors.base0E }
   hi.Delimiter = { guifg = M.colors.base0F }
   hi.Float = { guifg = M.colors.base09 }
-  hi.Variable = { guifg = M.colors.base05 }
   hi.Function = { guifg = M.colors.base0D }
   hi.Identifier = { guifg = M.colors.base08 }
   hi.Include = { guifg = M.colors.base0D }
@@ -333,7 +332,7 @@ function M.setup(colors, config)
   hi.TelescopePreviewTitle = { guifg = M.colors.black, guibg = M.colors.green }
   hi.TelescopePreviewBorder = { guifg = M.colors.darker_black, guibg = M.colors.darker_black }
   hi.TelescopePromptTitle = { guifg = M.colors.black, guibg = M.colors.red }
-  hi.TelescopeResultsBorder = { guifg = M.colors.base00, guibg = M.colors.base00 }
+  hi.TelescopeResultsBorder = { guifg = M.colors.white, guibg = M.colors.base00 }
   hi.TelescopeResultsTitle = { guifg = M.colors.black, guibg = M.colors.yellow }
   hi.TelescopeSelection = { guibg = M.colors.grey, guifg = M.colors.white }
   hi.TelescopeResultsDiffAdd = { guifg = M.colors.green }
@@ -343,7 +342,6 @@ function M.setup(colors, config)
   --treesitter
   hi["@annotation"] = { guifg = M.colors.base0F }
   hi["@attribute"] = { guifg = M.colors.base0A }
-  hi["@character"] = { guifg = M.colors.base08 }
   hi["@constructor"] = { guifg = M.colors.base0C }
   hi["@constant.builtin"] = { guifg = M.colors.base09 }
   hi["@constant.macro"] = { guifg = M.colors.base08 }
@@ -353,7 +351,6 @@ function M.setup(colors, config)
   hi["@keyword"] = { guifg = M.colors.base0E }
   hi["@keyword.function"] = { guifg = M.colors.base0E }
   hi["@keyword.return"] = { guifg = M.colors.base0E }
-  hi["@function"] = { guifg = M.colors.base0D }
   hi["@function.builtin"] = { guifg = M.colors.base0D }
   hi["@function.macro"] = { guifg = M.colors.base08 }
   hi["@keyword.operator"] = { guifg = M.colors.base0E }
@@ -384,7 +381,7 @@ function M.setup(colors, config)
   hi.TSDefinitionUsage = { guisp = M.colors.base04, gui = 'underline' }
   hi["@scope"] = { gui = 'bold' }
   hi["@field"] = { guifg = M.colors.base08 }
-  hi["@field.key"] = { guifg = M.colors.base0D }
+  -- hi["@field.key"] = { guifg = M.colors.base0D }
   hi["@property"] = { guifg = M.colors.base08 }
   hi["@include"] = { guifg = M.colors.base0D}
   hi["@conditional"] = { guifg = M.colors.base0E }
@@ -398,6 +395,10 @@ function M.setup(colors, config)
   hi.rainbowcol6 = { guifg = M.colors.base0E }
   hi.rainbowcol7 = { guifg = M.colors.base0F }
 
+  --Alpha
+  hi.AlphaHeader = { guifg = M.colors.blue, gui = 'bold' }
+  hi.AlphaButtons = 'rainbowcol1'
+  hi.AlphaFooter = { guifg = M.colors.green, gui = 'italic' }
 
 end
 

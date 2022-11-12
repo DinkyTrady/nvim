@@ -1,5 +1,5 @@
 --default colorscheme
-vim.cmd[[colorscheme vscode_dark]]
+vim.cmd[[colorscheme onedark]]
 
 --set core
 require("core")
@@ -8,4 +8,4 @@ require("core")
 require("plugins")
 
 --configuration plugins
-require("plugs")
+require("config")

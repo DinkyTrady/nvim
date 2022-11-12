@@ -65,6 +65,7 @@ local opts = {
 }
 
 local mappings = {
+  ['a'] = { ':Alpha<cr>', 'Open Alpha' },
   ["e"] = { '<cmd>NvimTreeToggle<cr>', 'Files Explorer' },
   ["s"] = { '<cmd>so<cr>', 'Reload File' },
   w = {

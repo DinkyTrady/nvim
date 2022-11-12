@@ -28,7 +28,10 @@ masonlsp.setup({
   automatic_installation = false,
 })
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
+local capabilities = {
+  vim.lsp.protocol.make_client_capabilities(),
+  require('cmp_nvim_lsp').default_capabilities()
+}
 
 for _,lsp in ipairs(masonlsp.get_installed_servers()) do
   nvim_lsp[lsp].setup {
@@ -37,6 +40,7 @@ for _,lsp in ipairs(masonlsp.get_installed_servers()) do
 end
 
 nvim_lsp.sumneko_lua.setup {
+  capabilities = capabilities,
   settings = {
     Lua = {
       diagnostics = {
@@ -61,4 +65,3 @@ for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
 end
-
