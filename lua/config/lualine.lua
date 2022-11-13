@@ -34,7 +34,7 @@ lualine.setup {
   },
   sections = {
     lualine_a = {{'mode',fmt=function(str) return str:sub(1,1) end}},
-    lualine_b = { 'filename', 'filesize' },
+    lualine_b = { 'filesize' },
     lualine_c = { diff, 'diagnostics' },
     lualine_x = {{'branch', icon = '', color = {fg='#ff0000'}}},
     lualine_y = { {'filetype', icon_only = true}, 'progress' },

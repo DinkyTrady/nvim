@@ -2,7 +2,7 @@ local o = vim.opt  --make vim options eazier with variable
 
 --settingup options
 o.encoding = "utf-8"
-o.numberwidth = 2
+o.numberwidth = 3
 o.number = true
 o.relativenumber = true
 o.cursorline = true
@@ -21,9 +21,12 @@ o.showmode = false
 o.showtabline = 2
 o.timeoutlen = 600
 o.updatetime = 300
---o.completeopt = { "menuone", "noselect" }
+o.completeopt = { "menuone", "noselect" }
 o.scrolloff = 5
 o.signcolumn = "yes"
 o.splitbelow = true
 o.splitright = true
-vim.opt.undofile = true
+o.undofile = true
+o.foldmethod = 'expr'
+o.foldexpr = 'nvim_treesitter#foldexpr()'
+o.foldlevel = 20

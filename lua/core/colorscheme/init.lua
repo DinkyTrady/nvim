@@ -156,7 +156,7 @@ function M.setup(colors, config)
     guibg = M.colors.base01,
   }
   hi.Folded = {
-    guifg = M.colors.base03,
+    guifg = M.colors.white,
     guibg = M.colors.base01,
   }
   hi.InSearch = {

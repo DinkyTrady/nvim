@@ -51,6 +51,7 @@ local setup = {
   triggers = "auto",
   triggers_blacklist = {
     i = { "j", "j" },
+    n = { 'z', 'g' },
     v = { "j", "k" },
   },
 }
@@ -67,7 +68,7 @@ local opts = {
 local mappings = {
   ['a'] = { ':Alpha<cr>', 'Open Alpha' },
   ["e"] = { '<cmd>NvimTreeToggle<cr>', 'Files Explorer' },
-  ["s"] = { '<cmd>so<cr>', 'Reload File' },
+  ["r"] = { '<cmd>so<cr>', 'Reload File' },
   ['x'] = { ':bdelete<cr>', 'Close Buffer' },
   w = {
     name = 'Save',
@@ -78,34 +79,51 @@ local mappings = {
   },
   q = {
     name = 'Quits',
-    q = {':q<cr>', 'Quit File'},
-    a = {':qall<cr>', 'Quit All Files'},
-    f = {':q!<cr>', 'Force Quit'},
+    q = { ':q<cr>', 'Quit File' },
+    a = { ':qall<cr>', 'Quit All Files' },
+    f = { ':q!<cr>', 'Force Quit' },
   },
   f = {
     name = 'Telescope',
-    t = {':Telescope<cr>', 'Open Telescope'},
-    f = {'<cmd>Telescope find_files layout_strategy=vertical<cr>', 'Find Fles'},
-    o = {':Telescope oldfiles layout_strategy=vertical<cr>', 'Recent Files'},
-    b = {'<cmd>Telescope buffers<cr>', 'Choose Buffers'},
-    c = {':Telescope colorscheme<cr>', 'Choose Colorscheme'},
-    k = {':Telescope keymaps<cr>', 'See all Keybindings'}
+    t = { ':Telescope<cr>', 'Open Telescope' },
+    f = { '<cmd>Telescope find_files layout_strategy=vertical<cr>', 'Find Fles' },
+    o = { ':Telescope oldfiles layout_strategy=vertical<cr>', 'Recent Files' },
+    b = { '<cmd>Telescope buffers<cr>', 'Choose Buffers' },
+    c = { ':Telescope colorscheme<cr>', 'Choose Colorscheme' },
+    k = { ':Telescope keymaps<cr>', 'See all Keybindings' }
   },
   p = {
     name = 'Packer',
-    i = {':PackerStatus<cr>', 'Packer Status'},
-    d = {':PackerInstall<cr>', 'Packer Installing Plugins'},
-    c = {':PackerCompile<cr>', 'Packer Compile'},
-    r = {':PackerClean<cr>', 'Clean Plugins'},
-    s = {':PackerSync<cr>', 'Packer Sync'},
+    i = { ':PackerStatus<cr>', 'Packer Status' },
+    d = { ':PackerInstall<cr>', 'Packer Installing Plugins' },
+    c = { ':PackerCompile<cr>', 'Packer Compile' },
+    r = { ':PackerClean<cr>', 'Clean Plugins' },
+    s = { ':PackerSync<cr>', 'Packer Sync' },
   },
-  l = {
+  m = {
     name = 'LSP',
-    m = {':Mason<cr>', 'Open Mason'},
-    i = {':LspInfo<cr>', 'LSP Info'},
-    s = {':LspStart<cr>', 'Start LSP'},
-    o = {':LspStop<cr>', 'Stop LSP'},
-    r = {':LspRestart<cr>', 'Restar LSP'}
+    m = { ':Mason<cr>', 'Open Mason' },
+    i = { ':LspInfo<cr>', 'LSP Info' },
+    s = { ':LspStart<cr>', 'Start LSP' },
+    o = { ':LspStop<cr>', 'Stop LSP' },
+    t = { ':lua vim.diagnostic.open_float()<cr>', 'Diagnostic Float' },
+    r = { ':LspRestart<cr>', 'Restar LSP' }
+  },
+  s = {
+    name = 'Lsp Saga',
+    f = { ':Lspsaga lsp_finder<cr>', 'Saga Finder' },
+    a = { ':Lspsaga code_action<cr>', 'Saga Code Action' },
+    r = { ':Lspsaga rename<cr>', 'Saga Rename' },
+    p = { ':Lspsaga diagnostic_jump_prev<cr>', 'Jump Previous' },
+    n = { ':Lspsaga diagnostic_jump_next<cr>', 'Jump Next' },
+    d = { ':Lspsaga hover_doc<cr>', 'Saga Hover Doc' },
+    l = { ':Lspsaga show_line_diagnostics<cr>', 'Saga Line Diagnostic' },
+    c = { ':Lspsaga show_cursor_diagnostics<cr>', 'Saga Cursor Diagnostic' },
+    o = { ':LSoutlineToggle<cr>', 'Out Line Toggle' },
+    e = { ':lua require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })<cr>',
+      'Saga go to Next Error' },
+    u = { ':lua require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })<cr>',
+      'Saga go to Prev Error' },
   },
   g = {
     name = "Git",

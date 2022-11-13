@@ -47,7 +47,8 @@ return packer.startup(function(use)
   use {
     'williamboman/mason.nvim',
     'neovim/nvim-lspconfig',
-    'williamboman/mason-lspconfig.nvim'
+    'williamboman/mason-lspconfig.nvim',
+    'glepnir/lspsaga.nvim'
   }
 
   --completion
@@ -71,10 +72,10 @@ return packer.startup(function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     requires = {
-      'windwp/nvim-ts-autotag',
-      'JoosepAlviste/nvim-ts-context-commentstring',
-      'p00f/nvim-ts-rainbow',
-      'nvim-treesitter/nvim-treesitter-context',
+      {'windwp/nvim-ts-autotag', after = 'nvim-treesitter'},
+      {'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter'},
+      {'p00f/nvim-ts-rainbow', after = 'nvim-treesitter'},
+      {'nvim-treesitter/nvim-treesitter-context'},
     },
     run = function()
       require('nvim-treesitter.install').update({ with_sync = true })

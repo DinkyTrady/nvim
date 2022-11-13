@@ -16,9 +16,9 @@ end
 mason.setup({
   ui = {
     icons = {
-       package_installed = "✓",
-       package_pending = "➜",
-       package_uninstalled = "✗"
+      package_installed = "✓",
+      package_pending = "➜",
+      package_uninstalled = "✗"
     }
   }
 })
@@ -33,18 +33,17 @@ local capabilities = {
   require('cmp_nvim_lsp').default_capabilities()
 }
 
-for _,lsp in ipairs(masonlsp.get_installed_servers()) do
+for _, lsp in ipairs(masonlsp.get_installed_servers()) do
   nvim_lsp[lsp].setup {
     capabilities = capabilities,
   }
 end
 
 nvim_lsp.sumneko_lua.setup {
-  capabilities = capabilities,
   settings = {
     Lua = {
       diagnostics = {
-        globals = {'vim'},
+        globals = { 'vim' },
       },
       workspace = {
         library = {
@@ -60,8 +59,8 @@ nvim_lsp.clangd.setup {
   capabilities = capabilities,
 }
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
