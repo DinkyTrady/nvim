@@ -82,6 +82,7 @@ local mappings = {
     q = { ':q<cr>', 'Quit File' },
     a = { ':qall<cr>', 'Quit All Files' },
     f = { ':q!<cr>', 'Force Quit' },
+    i = { ':qall!<cr>', 'Force Quit All Files' }
   },
   f = {
     name = 'Telescope',
@@ -100,14 +101,15 @@ local mappings = {
     r = { ':PackerClean<cr>', 'Clean Plugins' },
     s = { ':PackerSync<cr>', 'Packer Sync' },
   },
-  m = {
+  l = {
     name = 'LSP',
     m = { ':Mason<cr>', 'Open Mason' },
     i = { ':LspInfo<cr>', 'LSP Info' },
     s = { ':LspStart<cr>', 'Start LSP' },
     o = { ':LspStop<cr>', 'Stop LSP' },
     t = { ':lua vim.diagnostic.open_float()<cr>', 'Diagnostic Float' },
-    r = { ':LspRestart<cr>', 'Restar LSP' }
+    r = { ':LspRestart<cr>', 'Restar LSP' },
+    f = { ':lua vim.lsp.buf.format()<cr>', 'Format Code' }
   },
   s = {
     name = 'Lsp Saga',

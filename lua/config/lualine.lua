@@ -4,7 +4,7 @@ if not lualine_ok then return end
 local diff = {
   'diff',
   sources = {'nvim_diagnostic'},
-  symbols = { added = ' ', modified = '柳 ', removed = ' ' },
+  symbols = { added = ' ', modified = ' ', removed = ' ' },
   diff_color = {
     added = { fg = '#00ff00' },
     modified = { fg = '#ffdd00' },
@@ -17,7 +17,7 @@ lualine.setup {
     icons_enabled = true,
     theme = 'auto',
     component_separators = {right = "/", left = '\\'},
-    section_separators = {right = '', left = '' },
+    section_separators = {right = ' ', left = ' ' },
     fmt = string.lower,
     disabled_filetypes = {
       statusline = {},
@@ -34,7 +34,7 @@ lualine.setup {
   },
   sections = {
     lualine_a = {{'mode',fmt=function(str) return str:sub(1,1) end}},
-    lualine_b = { 'filesize' },
+    lualine_b = { 'filename', 'filesize' },
     lualine_c = { diff, 'diagnostics' },
     lualine_x = {{'branch', icon = '', color = {fg='#ff0000'}}},
     lualine_y = { {'filetype', icon_only = true}, 'progress' },

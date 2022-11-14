@@ -9,7 +9,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
   'https://github.com/wbthomason/packer.nvim',
   install_path
   }
-  print 'installing plugins and Sync it'
+  print 'Installing Packer and Sync All Plugins'
   vim.cmd [[packadd packer.nvim]]
 end
 
@@ -39,6 +39,7 @@ return packer.startup(function(use)
   use 'lewis6991/impatient.nvim'
   use 'goolord/alpha-nvim'
   use 'akinsho/toggleterm.nvim'
+  use 'SmiteshP/nvim-navic'
 
   --for fast to another file and icons
   use {'nvim-tree/nvim-tree.lua', tag = 'nightly'}
@@ -72,10 +73,10 @@ return packer.startup(function(use)
   use {
     'nvim-treesitter/nvim-treesitter',
     requires = {
-      {'windwp/nvim-ts-autotag', after = 'nvim-treesitter'},
-      {'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter'},
-      {'p00f/nvim-ts-rainbow', after = 'nvim-treesitter'},
-      {'nvim-treesitter/nvim-treesitter-context'},
+      'windwp/nvim-ts-autotag',
+      'JoosepAlviste/nvim-ts-context-commentstring',
+      'p00f/nvim-ts-rainbow',
+      'nvim-treesitter/nvim-treesitter-context',
     },
     run = function()
       require('nvim-treesitter.install').update({ with_sync = true })
