@@ -108,7 +108,7 @@ local mappings = {
 		o = { ":LspStop<cr>", "Stop LSP" },
 		t = { ":lua vim.diagnostic.open_float()<cr>", "Diagnostic Float" },
 		r = { ":LspRestart<cr>", "Restar LSP" },
-		f = { ":lua vim.lsp.buf.format()<cr>", "Format Code" },
+		f = { ":lua vim.lsp.buf.format({ timeout_ms = 2000 })<cr>", "Format Code" },
 	},
 	s = {
 		name = "Lsp Saga",
