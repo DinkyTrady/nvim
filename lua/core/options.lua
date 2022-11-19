@@ -1,9 +1,9 @@
-local o = vim.opt  --make vim options eazier with variable
+local o = vim.opt --make vim options eazier with variable
 
 --settingup options
 o.encoding = "utf-8"
 o.numberwidth = 3
-o.number = true
+-- o.number = true
 o.relativenumber = true
 o.cursorline = true
 o.tabstop = 2
@@ -27,6 +27,7 @@ o.signcolumn = "yes"
 o.splitbelow = true
 o.splitright = true
 o.undofile = true
-o.foldmethod = 'expr'
-o.foldexpr = 'nvim_treesitter#foldexpr()'
+o.foldmethod = "expr"
+o.foldexpr = "nvim_treesitter#foldexpr()"
 o.foldlevel = 20
+o.wrap = false

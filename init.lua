@@ -1,5 +1,5 @@
 --default colorscheme
-vim.cmd[[colorscheme onedark]]
+vim.cmd([[colorscheme onedark]])
 
 --set core
 require("core")
