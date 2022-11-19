@@ -1,11 +1,11 @@
 --default colorscheme
-vim.cmd [[colorscheme onedark]]
+vim.cmd([[colorscheme onedark]])
 
 --set core
-require "core"
+require("core")
 
 --set plugins manager
-require "plugins"
+require("plugins")
 
 --configuration plugins
-require "config"
+require("config")

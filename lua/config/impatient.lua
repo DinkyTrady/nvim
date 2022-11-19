@@ -1,6 +1,6 @@
 local status, impatent = pcall(require, "impatent")
 if not status then
-	return
+  return
 end
 
 impatent.enable_profile()
