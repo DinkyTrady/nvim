@@ -1,6 +1,6 @@
 vim.g.colors_name = "tokyonight_custom"
 
-require("core.colorscheme").setup({
+require("core.colorscheme").setup {
 	white = "#c0caf5",
 	darker_black = "#16161e",
 	black = "#1a1b26", --  nvim bg
@@ -47,10 +47,10 @@ require("core.colorscheme").setup({
 	base0D = "#7aa2f7",
 	base0E = "#bb9af7",
 	base0F = "#c0caf5",
-})
+}
 
-if vim.cmd([[colorscheme tokyonight_custom]]) then
-	vim.cmd([[highlight @variable guifg=#f7768e]])
-	vim.cmd([[highlight @parameter guifg=#c0caf5]])
-	vim.cmd([[highlight @function.builtin guifg=#7dcfff]])
+if vim.cmd [[colorscheme tokyonight_custom]] then
+	vim.cmd [[highlight @variable guifg=#f7768e]]
+	vim.cmd [[highlight @parameter guifg=#c0caf5]]
+	vim.cmd [[highlight @function.builtin guifg=#7dcfff]]
 end

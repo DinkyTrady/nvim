@@ -3,7 +3,7 @@ if not bufferline_ok then
 	return
 end
 
-bufferline.setup({
+bufferline.setup {
 	options = {
 		indicator = {
 			icon = "▎ ",
@@ -19,4 +19,4 @@ bufferline.setup({
 			},
 		},
 	},
-})
+}

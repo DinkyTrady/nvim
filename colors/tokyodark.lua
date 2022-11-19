@@ -1,6 +1,6 @@
 vim.g.colors_name = "tokyodark"
 
-require("core.colorscheme").setup({
+require("core.colorscheme").setup {
 	white = "#A0A8CD",
 	darker_black = "#0c0d18",
 	black = "#11121D", --  nvim bg
@@ -47,4 +47,4 @@ require("core.colorscheme").setup({
 	base0D = "#95c561",
 	base0E = "#a485dd",
 	base0F = "#f3627a",
-})
+}

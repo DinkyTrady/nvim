@@ -1,6 +1,6 @@
 vim.g.colors_name = "dracula"
 
-require("core.colorscheme").setup({
+require("core.colorscheme").setup {
 	white = "#F8F8F2",
 	darker_black = "#222430",
 	black = "#282A36", --  nvim bg
@@ -47,9 +47,9 @@ require("core.colorscheme").setup({
 	base0D = "#50fa7b",
 	base0E = "#ff86d3",
 	base0F = "#F8F8F2",
-})
+}
 
-if vim.cmd([[colorscheme dracula]]) then
-	vim.cmd([[highlight @number guifg=#BD93F9]])
-	vim.cmd([[highlight @function.builtin guifg=#8BE9FD]])
+if vim.cmd [[colorscheme dracula]] then
+	vim.cmd [[highlight @number guifg=#BD93F9]]
+	vim.cmd [[highlight @function.builtin guifg=#8BE9FD]]
 end

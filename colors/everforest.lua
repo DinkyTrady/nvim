@@ -1,6 +1,6 @@
 vim.g.colors_name = "everforest"
 
-require("core.colorscheme").setup({
+require("core.colorscheme").setup {
 	white = "#D3C6AA",
 	darker_black = "#272f35",
 	black = "#2b3339", --  nvim bg
@@ -47,9 +47,9 @@ require("core.colorscheme").setup({
 	base0D = "#a7c080",
 	base0E = "#e67e80",
 	base0F = "#d699b6",
-})
+}
 
-if vim.cmd([[colorscheme everforest]]) then
-	vim.cmd([[highlight @tag guifg=#e69875]])
-	vim.cmd([[highlight @tag.delimeter guifg=#83c092]])
+if vim.cmd [[colorscheme everforest]] then
+	vim.cmd [[highlight @tag guifg=#e69875]]
+	vim.cmd [[highlight @tag.delimeter guifg=#83c092]]
 end

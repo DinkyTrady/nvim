@@ -3,7 +3,7 @@ if not tree_ok then
 	return
 end
 
-tree.setup({
+tree.setup {
 	sort_by = "case_sensitive",
 	hijack_cursor = true,
 	hijack_unnamed_buffer_when_opening = true,
@@ -73,4 +73,4 @@ tree.setup({
 			error = "",
 		},
 	},
-})
+}

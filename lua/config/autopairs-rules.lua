@@ -20,9 +20,9 @@ end
 
 local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
 
-npairs.add_rules({
-	Rule("%", "%", "lua"):with_pair(conds.is_ts_node({ "string", "comment" })),
-	Rule("$", "$", "lua"):with_pair(conds.is_not_ts_node({ "function" })),
+npairs.add_rules {
+	Rule("%", "%", "lua"):with_pair(conds.is_ts_node { "string", "comment" }),
+	Rule("$", "$", "lua"):with_pair(conds.is_not_ts_node { "function" }),
 	Rule(" ", " ")
 		:with_pair(function(opts)
 			local pair = opts.line:sub(opts.col - 1, opts.col)
@@ -46,7 +46,7 @@ npairs.add_rules({
 	Rule("%(.*%)%s*%=>$", " {  }", { "typescript", "typescriptreact", "javascript" })
 		:use_regex(true)
 		:set_end_pair_length(2),
-})
+}
 for _, bracket in pairs(brackets) do
 	Rule("", " " .. bracket[2])
 		:with_pair(cond.none())

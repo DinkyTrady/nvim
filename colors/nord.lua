@@ -1,6 +1,6 @@
 vim.g.colors_name = "nord"
 
-require("core.colorscheme").setup({
+require("core.colorscheme").setup {
 	white = "#abb2bf",
 	darker_black = "#2a303c",
 	black = "#2E3440", --  nvim bg
@@ -47,9 +47,9 @@ require("core.colorscheme").setup({
 	base0D = "#81A1C1",
 	base0E = "#81A1C1",
 	base0F = "#B48EAD",
-})
+}
 
-if vim.cmd([[colorscheme nord]]) then
-	vim.cmd([[highlight @punctuation.bracket guifg=#abb2bf]])
-	vim.cmd([[highlight @punctuation.delimeter guifg=#abb2bf]])
+if vim.cmd [[colorscheme nord]] then
+	vim.cmd [[highlight @punctuation.bracket guifg=#abb2bf]]
+	vim.cmd [[highlight @punctuation.delimeter guifg=#abb2bf]]
 end

@@ -1,21 +1,21 @@
-require("config.tokyonight")
-require("config.nvim-tree")
-require("config.completion")
-require("config.snippets")
-require("config.lsp")
-require("config.lualine")
-require("config.treesitter")
-require("config.bufferline")
-require("config.autopairs")
-require("config.blankline")
-require("config.comment")
-require("config.telescope")
-require("config.autopairs-rules")
-require("config.whichkey")
-require("config.impatient")
-require("config.alpha")
-require("config.neoscroll")
-require("config.colorizer")
-require("config.gitsigns")
-require("config.toggleterm")
-require("config.winbar")
+require "config.tokyonight"
+require "config.nvim-tree"
+require "config.completion"
+require "config.snippets"
+require "config.lsp"
+require "config.lualine"
+require "config.treesitter"
+require "config.bufferline"
+require "config.autopairs"
+require "config.blankline"
+require "config.comment"
+require "config.telescope"
+require "config.autopairs-rules"
+require "config.whichkey"
+require "config.impatient"
+require "config.alpha"
+require "config.neoscroll"
+require "config.colorizer"
+require "config.gitsigns"
+require "config.toggleterm"
+require "config.winbar"

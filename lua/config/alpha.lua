@@ -3,7 +3,7 @@ if not status then
 	return
 end
 
-local db = require("alpha.themes.dashboard")
+local db = require "alpha.themes.dashboard"
 
 db.section.header.val = {
 	"                                                         ",
@@ -26,7 +26,7 @@ db.section.buttons.val = {
 	db.button("q", "  Quit Neovim", ":q<CR>"),
 }
 
-db.section.footer.val = require("alpha.fortune")()
+db.section.footer.val = require "alpha.fortune"()
 
 db.section.footer.opts.hl = "AlphaFooter"
 db.section.header.opts.hl = "AlphaHeader"

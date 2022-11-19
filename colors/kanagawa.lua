@@ -1,6 +1,6 @@
 vim.g.colors_name = "kanagawa"
 
-require("core.colorscheme").setup({
+require("core.colorscheme").setup {
 	white = "#DCD7BA",
 	darker_black = "#191922",
 	black = "#1F1F28", --  nvim bg
@@ -47,11 +47,11 @@ require("core.colorscheme").setup({
 	base0D = "#7e9cd8",
 	base0E = "#9c86bf",
 	base0F = "#d8616b",
-})
+}
 
-if vim.cmd([[colorscheme kanagawa]]) then
-	vim.cmd([[highlight @include guifg=#a48ec7]])
-	vim.cmd([[highlight @uri guifg=#7FB4CA]])
-	vim.cmd([[highlight @tag.delimeter guifg=#d8616b]])
-	vim.cmd([[highlight Number guifg=#D27E99]])
+if vim.cmd [[colorscheme kanagawa]] then
+	vim.cmd [[highlight @include guifg=#a48ec7]]
+	vim.cmd [[highlight @uri guifg=#7FB4CA]]
+	vim.cmd [[highlight @tag.delimeter guifg=#d8616b]]
+	vim.cmd [[highlight Number guifg=#D27E99]]
 end

@@ -6,9 +6,9 @@ end
 require("luasnip.loaders.from_vscode").lazy_load()
 
 local parse = ls.parser.parse_snippet
-local types = require("luasnip.util.types")
+local types = require "luasnip.util.types"
 
-ls.config.setup({
+ls.config.setup {
 	history = true,
 	updateevents = "TextChanged,TextChangedI",
 	enable_autosnippets = true,
@@ -18,4 +18,4 @@ ls.config.setup({
 		types = types,
 		parse = parse,
 	},
-})
+}

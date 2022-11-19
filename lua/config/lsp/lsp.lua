@@ -13,7 +13,7 @@ if not masonlsp_ok then
 	return
 end
 
-mason.setup({
+mason.setup {
 	ui = {
 		icons = {
 			package_installed = "✓",
@@ -21,12 +21,12 @@ mason.setup({
 			package_uninstalled = "✗",
 		},
 	},
-})
+}
 
-masonlsp.setup({
+masonlsp.setup {
 	ensure_installed = { "html", "cssls", "tsserver", "emmet_ls" },
 	automatic_installation = false,
-})
+}
 
 local capabilities = {
 	vim.lsp.protocol.make_client_capabilities(),
@@ -35,7 +35,7 @@ local capabilities = {
 
 local function on_attach(client, bufnr)
 	if client.server_capabilities.documentSymbolProvider then
-		local navic = require("nvim-navic")
+		local navic = require "nvim-navic"
 		navic.attach(client, bufnr)
 	end
 
@@ -45,13 +45,13 @@ local function on_attach(client, bufnr)
 end
 
 for _, lsp in ipairs(masonlsp.get_installed_servers()) do
-	nvim_lsp[lsp].setup({
+	nvim_lsp[lsp].setup {
 		on_attach = on_attach,
 		capabilities = capabilities,
-	})
+	}
 end
 
-nvim_lsp.sumneko_lua.setup({
+nvim_lsp.sumneko_lua.setup {
 	capabilities = capabilities,
 	on_attach = on_attach,
 	settings = {
@@ -61,18 +61,18 @@ nvim_lsp.sumneko_lua.setup({
 			},
 			workspace = {
 				library = {
-					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+					[vim.fn.expand "$VIMRUNTIME/lua"] = true,
+					[vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
 				},
 			},
 		},
 	},
-})
+}
 
-nvim_lsp.clangd.setup({
+nvim_lsp.clangd.setup {
 	on_attach = on_attach,
 	capabilities = capabilities,
-})
+}
 
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do

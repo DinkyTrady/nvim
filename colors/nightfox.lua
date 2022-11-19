@@ -1,6 +1,6 @@
 vim.g.colors_name = "nightfox"
 
-require("core.colorscheme").setup({
+require("core.colorscheme").setup {
 	white = "#cdcecf",
 	darker_black = "#121c29",
 	black = "#192330",
@@ -47,4 +47,4 @@ require("core.colorscheme").setup({
 	base0D = "#86abdc",
 	base0E = "#9d79d6",
 	base0F = "#d85e7c",
-})
+}

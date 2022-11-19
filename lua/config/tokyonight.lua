@@ -3,7 +3,7 @@ if not status then
 	return
 end
 
-tokyonight.setup({
+tokyonight.setup {
 	style = "storm",
 	styles = {
 		comments = { italic = true },
@@ -20,4 +20,4 @@ tokyonight.setup({
 		hl.NvimTreeFolderIcon = { fg = "#639fff" }
 		hl.NvimTreeIndentMarker = { fg = "#f5f5f5" }
 	end,
-})
+}

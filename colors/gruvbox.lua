@@ -1,6 +1,6 @@
 vim.g.colors_name = "gruvbox"
 
-require("core.colorscheme").setup({
+require("core.colorscheme").setup {
 	white = "#ebdbb2",
 	darker_black = "#232323",
 	black = "#282828", --  nvim bg
@@ -47,4 +47,4 @@ require("core.colorscheme").setup({
 	base0D = "#83a598",
 	base0E = "#d3869b",
 	base0F = "#d65d0e",
-})
+}

@@ -13,11 +13,11 @@ if not dap_install_status_ok then
 	return
 end
 
-dap_install.setup({})
+dap_install.setup {}
 
 dap_install.config("chrome", {})
 
-dap_ui.setup({
+dap_ui.setup {
 	expand_lines = true,
 	icons = { expanded = "", collapsed = "", circular = "" },
 	mappings = {
@@ -57,7 +57,7 @@ dap_ui.setup({
 			close = { "q", "<Esc>" },
 		},
 	},
-})
+}
 
 vim.fn.sign_define("DapBreakpoint", { text = "", texthl = "DiagnosticSignError", linehl = "", numhl = "" })
 

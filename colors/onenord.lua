@@ -1,6 +1,6 @@
 vim.g.colors_name = "onenord"
 
-require("core.colorscheme").setup({
+require("core.colorscheme").setup {
 	white = "#D8DEE9",
 	darker_black = "#252b37",
 	black = "#2a303c", --  nvim bg
@@ -47,4 +47,4 @@ require("core.colorscheme").setup({
 	base0D = "#81A1C1",
 	base0E = "#B48EAD",
 	base0F = "#d57780",
-})
+}

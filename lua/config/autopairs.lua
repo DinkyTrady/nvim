@@ -18,7 +18,7 @@ if not cmp_autopairs_ok then
 	return
 end
 
-npairs.setup({
+npairs.setup {
 	check_ts = true,
 	ts_config = {
 		lua = { "string" }, -- it will not add a pair on that treesitter node
@@ -36,7 +36,7 @@ npairs.setup({
 		highlight = "Search",
 		highlight_grey = "Comment",
 	},
-})
+}
 
-local cmp = require("cmp")
+local cmp = require "cmp"
 cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())

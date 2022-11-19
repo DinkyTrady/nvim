@@ -43,10 +43,10 @@ function M.setup(colors, config)
 		colors = M.colorschemes[colors]
 	end
 
-	if vim.fn.exists("syntax_on") then
-		vim.cmd("syntax reset")
+	if vim.fn.exists "syntax_on" then
+		vim.cmd "syntax reset"
 	end
-	vim.cmd("set termguicolors")
+	vim.cmd "set termguicolors"
 
 	M.colors = colors or M.colorschemes[vim.env.BASE16_THEME] or M.colorschemes["schemer-dark"]
 	local hi = M.highlight

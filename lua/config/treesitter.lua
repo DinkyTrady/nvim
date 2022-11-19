@@ -3,7 +3,7 @@ if not treesitter_ok then
 	return
 end
 
-treesitter.setup({
+treesitter.setup {
 	ensure_installed = { "lua", "javascript", "html", "css", "c", "cpp" },
 	sync_install = false,
 	highlight = {
@@ -28,4 +28,4 @@ treesitter.setup({
 		enable = true,
 		enable_autocmd = false,
 	},
-})
+}

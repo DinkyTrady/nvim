@@ -3,7 +3,7 @@ if not status then
 	return
 end
 
-navic.setup({
+navic.setup {
 	icons = {
 		File = " ",
 		Module = " ",
@@ -32,6 +32,6 @@ navic.setup({
 		Operator = " ",
 		TypeParameter = " ",
 	},
-})
+}
 
 vim.opt.winbar = "%{%v:lua.require'nvim-navic'.get_location()%}"
