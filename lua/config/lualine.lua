@@ -18,7 +18,7 @@ lualine.setup({
   options = {
     icons_enabled = true,
     theme = "auto",
-    component_separators = { right = "/", left = "" },
+    component_separators = { right = "│", left = ""--[[ / ]] },
     section_separators = { right = " ", left = "" },
     fmt = string.lower,
     disabled_filetypes = {
@@ -44,7 +44,7 @@ lualine.setup({
     lualine_b = { { "filetype", icon_only = true }, "filename", "filesize" },
     lualine_c = { { "branch", icon = "", color = { fg = "#ff0000" } } },
     lualine_x = { "diagnostics", diff },
-    lualine_y = { "progress", "fileformat" },
+    lualine_y = { "progress"  },
     lualine_z = { "location" },
   },
   inactive_sections = {

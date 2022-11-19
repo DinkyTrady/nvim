@@ -86,11 +86,12 @@ local mappings = {
   f = {
     name = "Telescope",
     t = { ":Telescope<cr>", "Open Telescope" },
-    f = { "<cmd>Telescope find_files layout_strategy=vertical<cr>", "Find Fles" },
-    o = { ":Telescope oldfiles layout_strategy=vertical<cr>", "Recent Files" },
+    f = { "<cmd>Telescope find_files <cr>", "Find Fles" },
+    o = { ":Telescope oldfiles <cr>", "Recent Files" },
     b = { "<cmd>Telescope buffers<cr>", "Choose Buffers" },
     c = { ":Telescope colorscheme<cr>", "Choose Colorscheme" },
     k = { ":Telescope keymaps<cr>", "See all Keybindings" },
+    d = { ":Telescope file_browser<cr>", "Find Browser" }
   },
   p = {
     name = "Packer",
@@ -115,17 +116,17 @@ local mappings = {
     f = { ":Lspsaga lsp_finder<cr>", "Saga Finder" },
     a = { ":Lspsaga code_action<cr>", "Saga Code Action" },
     r = { ":Lspsaga rename<cr>", "Saga Rename" },
-    p = { ":Lspsaga diagnostic_jump_prev<cr>", "Jump Previous" },
-    n = { ":Lspsaga diagnostic_jump_next<cr>", "Jump Next" },
+    k = { ":Lspsaga diagnostic_jump_prev<cr>", "Jump Previous" },
+    j = { ":Lspsaga diagnostic_jump_next<cr>", "Jump Next" },
     d = { ":Lspsaga hover_doc<cr>", "Saga Hover Doc" },
     l = { ":Lspsaga show_line_diagnostics<cr>", "Saga Line Diagnostic" },
     c = { ":Lspsaga show_cursor_diagnostics<cr>", "Saga Cursor Diagnostic" },
     o = { ":LSoutlineToggle<cr>", "Out Line Toggle" },
-    e = {
+    n = {
       ':lua require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })<cr>',
       "Saga go to Next Error",
     },
-    u = {
+    p = {
       ':lua require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })<cr>',
       "Saga go to Prev Error",
     },

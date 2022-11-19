@@ -5,14 +5,18 @@ end
 telescope.setup({
   defaults = {
     prompt_prefix = "  ",
+    sorting_strategy = 'ascending',
     layout_strategy = "horizontal",
     layout_config = {
-      horiozontal = {
+      horizontal = {
         prompt_position = "top",
+        preview_width = 0.55,
+        results_width = 0.8,
       },
       vertical = {
         mirror = false,
       },
+      height = 0.80,
     },
     mappings = {
       n = { ["q"] = require("telescope.actions").close },
@@ -35,5 +39,3 @@ telescope.setup({
 })
 
 telescope.load_extension("file_browser")
-
-vim.api.nvim_set_keymap("n", "<leader>fd", ":Telescope file_browser<cr>", { noremap = true })
