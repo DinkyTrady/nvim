@@ -3,31 +3,6 @@ if not lsp_ok then
   return
 end
 
-local mason_ok, mason = pcall(require, "mason")
-if not mason_ok then
-  return
-end
-
-local masonlsp_ok, masonlsp = pcall(require, "mason-lspconfig")
-if not masonlsp_ok then
-  return
-end
-
-mason.setup({
-  ui = {
-    icons = {
-      package_installed = "✓",
-      package_pending = "➜",
-      package_uninstalled = "✗",
-    },
-  },
-})
-
-masonlsp.setup({
-  ensure_installed = { "html", "cssls", "tsserver", "emmet_ls" },
-  automatic_installation = false,
-})
-
 local capabilities = {
   vim.lsp.protocol.make_client_capabilities(),
   require("cmp_nvim_lsp").default_capabilities(),
@@ -39,12 +14,15 @@ local function on_attach(client, bufnr)
     navic.attach(client, bufnr)
   end
 
-  if client.name == "tsserver" or "sumneko_lua" then
+  if client.name == "tsserver" then
+    client.server_capabilities.documentFormattingProvider = false
+  end
+  if client.name == "sumneko_lua" then
     client.server_capabilities.documentFormattingProvider = false
   end
 end
 
-for _, lsp in ipairs(masonlsp.get_installed_servers()) do
+for _, lsp in ipairs(require("mason-lspconfig").get_installed_servers()) do
   nvim_lsp[lsp].setup({
     on_attach = on_attach,
     capabilities = capabilities,
@@ -74,8 +52,16 @@ nvim_lsp.clangd.setup({
   capabilities = capabilities,
 })
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
 for type, icon in pairs(signs) do
   local hl = "DiagnosticSign" .. type
   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
+
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = "●", -- Could be '■', '▎', 'x'
+    spacing = 2,
+  },
+  update_in_insert = true,
+})

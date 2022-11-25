@@ -66,7 +66,8 @@ local opts = {
 
 local mappings = {
   ["a"] = { ":Alpha<cr>", "Open Alpha" },
-  ["e"] = { "<cmd>NvimTreeToggle<cr>", "Files Explorer" },
+  ["e"] = { "<cmd>NeoTreeRevealToggle<cr>", "Files Explorer, Left" },
+  ["t"] = { "<cmd>NeoTreeFloatToggle<cr>", "File Explorer, Float" },
   ["r"] = { "<cmd>so<cr>", "Reload File" },
   ["x"] = { ":bdelete<cr>", "Close Buffer" },
   w = {
@@ -91,7 +92,7 @@ local mappings = {
     b = { "<cmd>Telescope buffers<cr>", "Choose Buffers" },
     c = { ":Telescope colorscheme<cr>", "Choose Colorscheme" },
     k = { ":Telescope keymaps<cr>", "See all Keybindings" },
-    d = { ":Telescope file_browser<cr>", "Find Browser" }
+    d = { ":Telescope file_browser<cr>", "Find Browser" },
   },
   p = {
     name = "Packer",
@@ -103,32 +104,27 @@ local mappings = {
   },
   l = {
     name = "LSP",
+    a = { ":Lspsaga code_action<cr>", "Code Action" },
+    d = { ":Lspsaga hover_doc<cr>", "Hover Doc" },
     m = { ":Mason<cr>", "Open Mason" },
     i = { ":LspInfo<cr>", "LSP Info" },
     s = { ":LspStart<cr>", "Start LSP" },
-    o = { ":LspStop<cr>", "Stop LSP" },
-    t = { ":lua vim.diagnostic.open_float()<cr>", "Diagnostic Float" },
-    r = { ":LspRestart<cr>", "Restar LSP" },
+    S = { ":LspStop<cr>", "Stop LSP" },
     f = { ":lua vim.lsp.buf.format({ timeout_ms = 2000 })<cr>", "Format Code" },
-  },
-  s = {
-    name = "Lsp Saga",
-    f = { ":Lspsaga lsp_finder<cr>", "Saga Finder" },
-    a = { ":Lspsaga code_action<cr>", "Saga Code Action" },
-    r = { ":Lspsaga rename<cr>", "Saga Rename" },
+    l = { ":Lspsaga show_line_diagnostics<cr>", "Line Diagnostic" },
+    c = { ":Lspsaga show_cursor_diagnostics<cr>", "Cursor Diagnostic" },
+    F = { ":Lspsaga lsp_finder<cr>", "Finder" },
+    r = { ":Lspsaga rename<cr>", "Rename" },
     k = { ":Lspsaga diagnostic_jump_prev<cr>", "Jump Previous" },
     j = { ":Lspsaga diagnostic_jump_next<cr>", "Jump Next" },
-    d = { ":Lspsaga hover_doc<cr>", "Saga Hover Doc" },
-    l = { ":Lspsaga show_line_diagnostics<cr>", "Saga Line Diagnostic" },
-    c = { ":Lspsaga show_cursor_diagnostics<cr>", "Saga Cursor Diagnostic" },
     o = { ":LSoutlineToggle<cr>", "Out Line Toggle" },
     n = {
       ':lua require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })<cr>',
-      "Saga go to Next Error",
+      "Next Error",
     },
     p = {
       ':lua require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })<cr>',
-      "Saga go to Prev Error",
+      "Prev Error",
     },
   },
   g = {

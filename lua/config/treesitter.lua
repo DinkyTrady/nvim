@@ -4,7 +4,7 @@ if not treesitter_ok then
 end
 
 treesitter.setup({
-  ensure_installed = { "lua", "javascript", "html", "css", "c", "cpp" },
+  ensure_installed = { "lua", "javascript", "html", "css", "c", "cpp", "json" },
   sync_install = false,
   highlight = {
     enable = true,

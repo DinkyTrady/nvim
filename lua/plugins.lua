@@ -37,14 +37,32 @@ return packer.startup(function(use)
   use("wbthomason/packer.nvim")
   use("nvim-lua/plenary.nvim")
   use("lewis6991/impatient.nvim")
-  use("goolord/alpha-nvim")
-  use("akinsho/toggleterm.nvim")
-  use("SmiteshP/nvim-navic")
   use("dstein64/vim-startuptime")
   use("karb94/neoscroll.nvim")
+  use("lewis6991/gitsigns.nvim")
+  use("akinsho/toggleterm.nvim")
+  use("nvim-tree/nvim-web-devicons")
+  use("DaikyXendo/nvim-material-icon")
+  use({
+    "iamcco/markdown-preview.nvim",
+    run = "cd app && npm install",
+    cmd = "MarkdownPreview",
+    setup = function()
+      vim.g.mkdp_filetypes = { "markdown" }
+    end,
+    ft = { "markdown" },
+  })
 
   --for fast to another file and icons
-  use({ "nvim-tree/nvim-tree.lua", tag = "nightly" })
+  -- use({ "nvim-tree/nvim-tree.lua", tag = "nightly" })
+  use({
+    "nvim-neo-tree/neo-tree.nvim",
+    -- cmd = { "NeoTreeRevealToggle", "NeoTreeFloatToggle" },
+    branch = "v2.x",
+    requires = { "MunifTanjim/nui.nvim" },
+  })
+  use("nvim-telescope/telescope.nvim")
+  use("nvim-telescope/telescope-file-browser.nvim")
 
   -- lsp (language server protocol)
   use({
@@ -75,30 +93,29 @@ return packer.startup(function(use)
   --treesitter
   use({
     "nvim-treesitter/nvim-treesitter",
-    requires = {
-      "windwp/nvim-ts-autotag",
-      "JoosepAlviste/nvim-ts-context-commentstring",
-      "p00f/nvim-ts-rainbow",
-      -- 'nvim-treesitter/nvim-treesitter-context',
-    },
     run = function()
-      require("nvim-treesitter.install").update({ with_sync = true })
+      local ts_update = require("nvim-treesitter.install").update({ with_sync = true })
+      ts_update()
     end,
+  })
+  use({
+    "windwp/nvim-ts-autotag",
+    "JoosepAlviste/nvim-ts-context-commentstring",
+    "p00f/nvim-ts-rainbow",
+    -- 'nvim-treesitter/nvim-treesitter-context',
   })
 
   --ui and ux
   use("nvim-lualine/lualine.nvim")
   use("folke/tokyonight.nvim")
   use("lukas-reineke/indent-blankline.nvim")
-  use("nvim-telescope/telescope.nvim")
-  use("nvim-telescope/telescope-file-browser.nvim")
-  use("nvim-tree/nvim-web-devicons")
   use("windwp/nvim-autopairs")
+  use("goolord/alpha-nvim")
   use("numToStr/Comment.nvim")
   use("folke/which-key.nvim")
   use("akinsho/bufferline.nvim")
   use("NvChad/nvim-colorizer.lua")
-  use("lewis6991/gitsigns.nvim")
+  use("SmiteshP/nvim-navic")
   if packer_bootstrap then
     packer.sync()
   end
