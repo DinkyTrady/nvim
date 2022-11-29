@@ -10,10 +10,6 @@ if not luasnip_ok then
   return
 end
 
-local lspkind_ok, lspkind = pcall(require, "lspkind")
-if not lspkind_ok then
-  return
-end
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))

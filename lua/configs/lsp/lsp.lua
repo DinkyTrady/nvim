@@ -14,11 +14,33 @@ local function on_attach(client, bufnr)
     navic.attach(client, bufnr)
   end
 
-  if client.name == "tsserver" then
+  if client.name == "tsserver"
+      and client.name == "sumneko_lua"
+      and client.name == "html"
+      and client.name == "cssls"
+      and client.name == "emmet_ls"
+  then
     client.server_capabilities.documentFormattingProvider = false
   end
-  if client.name == "sumneko_lua" then
-    client.server_capabilities.documentFormattingProvider = false
+
+  if client.server_capabilities.documentHighlightProvider then
+    vim.api.nvim_create_augroup("lsp_document_highlight", {
+      clear = false,
+    })
+    vim.api.nvim_clear_autocmds({
+      buffer = bufnr,
+      group = "lsp_document_highlight",
+    })
+    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+      group = "lsp_document_highlight",
+      buffer = bufnr,
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+      group = "lsp_document_highlight",
+      buffer = bufnr,
+      callback = vim.lsp.buf.clear_references,
+    })
   end
 end
 
@@ -64,4 +86,5 @@ vim.diagnostic.config({
     spacing = 2,
   },
   update_in_insert = true,
+  severity_sort = true,
 })

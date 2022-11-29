@@ -1,11 +1,5 @@
 --default colorscheme
 vim.cmd([[colorscheme onedark]])
 
---set core
+-- All options, mqppings, and plugins, will load it
 require("core")
-
---set plugins manager
-require("plugins")
-
---configuration plugins
-require("config")

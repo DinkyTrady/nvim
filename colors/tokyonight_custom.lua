@@ -50,7 +50,7 @@ require("core.colorscheme").setup({
 })
 
 if vim.cmd([[colorscheme tokyonight_custom]]) then
-  vim.cmd([[highlight @variable guifg=#f7768e]])
+  -- vim.cmd([[highlight @variable guifg=#f7768e]])
   vim.cmd([[highlight @parameter guifg=#c0caf5]])
   vim.cmd([[highlight @function.builtin guifg=#7dcfff]])
 end

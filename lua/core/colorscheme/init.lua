@@ -50,6 +50,38 @@ function M.setup(colors, config)
 
   M.colors = colors or M.colorschemes[vim.env.BASE16_THEME] or M.colorschemes["schemer-dark"]
   local hi = M.highlight
+  -- For Statusline
+  --
+  hi.normalmode = {
+    guifg = M.colors.base0B,
+  }
+  hi.command = {
+    guifg = M.colors.base0A,
+  }
+  hi.visualmode = {
+    guifg = M.colors.purple,
+  }
+  hi.Insert = {
+    guifg = M.colors.base0D,
+  }
+  hi.Replace = {
+    guifg = M.colors.red,
+  }
+  hi.Terminal = "Insert"
+  hi.linestatus = {
+    guifg = "white",
+    gui = "bold",
+  }
+  hi.dir = {
+    guifg = M.colors.base00,
+    guibg = M.colors.red,
+    gui = "bold",
+  }
+  hi.dir_sep = {
+    guifg = M.colors.red,
+    guibg = M.colors.base00,
+  }
+
   --blanklinee
   hi.IndentBlankLineChar = { guifg = M.colors.line }
   hi.IndentBlankLineSpaceChar = { guifg = M.colors.line }
@@ -196,13 +228,18 @@ function M.setup(colors, config)
   hi.Title = { guifg = M.colors.base0D }
   hi.Cursor = {
     guifg = M.colors.base00,
-    guibg = M.colors.base05,
+    guibg = M.colors.base07,
   }
   hi.NonText = { guifg = M.colors.base03 }
   hi.SignColumn = { guibg = M.colors.base00 }
   hi.ColorColumn = { guibg = M.colors.base01 }
   hi.CursorColumn = { guibg = M.colors.base01 }
-  hi.CursorLine = { guifg = nil, guibg = M.colors.one_bg, guisp = nil }
+  hi.CursorLine = {
+    guifg = nil, --[[ guibg = M.colors.one_bg, ]]
+    guibg = M.colors.base00,
+    guisp = nil,
+    gui = "bold",
+  }
   hi.QuickFixLine = { guibg = M.colors.base01 }
   hi.healthSuccess = {
     guifg = M.colors.green,
@@ -237,16 +274,16 @@ function M.setup(colors, config)
 
   --Lsp
   hi.LspReferenceText = {
-    guifg = M.colors.darker_black,
-    guibg = M.colors.white,
+    guifg = nil,
+    guibg = M.colors.one_bg2,
   }
   hi.LspReferenceRead = {
-    guifg = M.colors.darker_black,
-    guibg = M.colors.white,
+    guifg = nil,
+    guibg = M.colors.one_bg2,
   }
   hi.LspReferenceWrite = {
-    guifg = M.colors.darker_black,
-    guibg = M.colors.white,
+    guifg = nil,
+    guibg = M.colors.one_bg2,
   }
   hi.DiagnosticHint = { guifg = M.colors.purple }
   hi.DiagnosticError = { guifg = M.colors.red }
@@ -409,8 +446,18 @@ function M.setup(colors, config)
 
   --gitsigns
   hi.GitSignsAdd = { guifg = M.colors.green }
+  hi.GitSignsAddPreview = { guifg = M.colors.black, guibg = M.colors.green, gui = "bold" }
   hi.GitSignsChange = { guibg = M.colors.base00, guifg = M.colors.yellow }
   hi.GitSignsDelete = { guifg = M.colors.red }
+  hi.GitSignsDeletePreview = { guifg = M.colors.black, guibg = M.colors.red, gui = "bold" }
+  hi.git_head = {
+    guifg = "red",
+    gui = "bold",
+  }
+  hi.git_sep = {
+    guifg = nil,
+    guibg = M.colors.red,
+  }
 end
 
 function M.available_colorschemes()

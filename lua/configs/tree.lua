@@ -3,7 +3,7 @@ if not status then
   return
 end
 
-tree.setup({
+local options = {
   source_selector = {
     winbar = true,
     -- statusline = true,
@@ -27,8 +27,6 @@ tree.setup({
     mappings = {
       -- disable default mappings
       ["<space>"] = "",
-      ["<"] = "",
-      [">"] = "",
       ["<bs>"] = "",
       -- custom mappings
       [","] = {
@@ -37,8 +35,6 @@ tree.setup({
       },
       ["-"] = "navigate_up",
       ["p"] = "paste_from_clipboard",
-      ["("] = "prev_source",
-      [")"] = "next_source",
     },
   },
   nesting_rules = {},
@@ -71,4 +67,6 @@ tree.setup({
       },
     },
   },
-})
+}
+
+tree.setup(options)
