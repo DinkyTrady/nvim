@@ -3,10 +3,16 @@ if not lsp_ok then
   return
 end
 
-local capabilities = {
-  vim.lsp.protocol.make_client_capabilities(),
-  require("cmp_nvim_lsp").default_capabilities(),
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+capabilities.textDocument.completion.completionItem.resolveSupport = {
+  properties = {
+    "documentation",
+    "detail",
+    "additionalTextEdits",
+  },
 }
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 local function on_attach(client, bufnr)
   if client.server_capabilities.documentSymbolProvider then
@@ -14,12 +20,7 @@ local function on_attach(client, bufnr)
     navic.attach(client, bufnr)
   end
 
-  if client.name == "tsserver"
-      and client.name == "sumneko_lua"
-      and client.name == "html"
-      and client.name == "cssls"
-      and client.name == "emmet_ls"
-  then
+  if client.name == "tsserver" or client.name == "sumneko_lua" or client.name == "html" or client.name == "cssls" then
     client.server_capabilities.documentFormattingProvider = false
   end
 
@@ -61,9 +62,19 @@ nvim_lsp.sumneko_lua.setup({
       },
       workspace = {
         library = {
-          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+          vim.fn.expand("$VIMRUNTIME"),
+          require("neodev.config").types(),
         },
+
+        maxPreload = 5000,
+        preloadFileSize = 10000,
+        -- library = {
+        --   [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+        --   [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+        -- },
+      },
+      completion = {
+        callSnippet = "Replace",
       },
     },
   },
@@ -74,17 +85,4 @@ nvim_lsp.clangd.setup({
   capabilities = capabilities,
 })
 
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
-vim.diagnostic.config({
-  virtual_text = {
-    prefix = "●", -- Could be '■', '▎', 'x'
-    spacing = 2,
-  },
-  update_in_insert = true,
-  severity_sort = true,
-})
+require("configs.lsp.settings")

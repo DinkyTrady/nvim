@@ -1,5 +1,5 @@
 --default colorscheme
-vim.cmd([[colorscheme onedark]])
+vim.api.nvim_command([[colorscheme tokyonight]])
 
--- All options, mqppings, and plugins, will load it
+-- All options, mappings, and plugins, will load it
 require("core")

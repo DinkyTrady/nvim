@@ -1,39 +1,48 @@
 local o = vim.opt --make vim options eazier with variable
 
---settingup options
-o.encoding = "UTF-8"
-o.numberwidth = 2
--- o.number = true
-o.relativenumber = true -- set number in the left to relative
-o.cursorline = true -- set to highligh the cursorline now
-o.tabstop = 2
-o.shiftwidth = 2
-o.expandtab = true
-o.autoindent = true
-o.wrap = true
-o.hlsearch = true
-o.ignorecase = true
-o.smartcase = true
-o.termguicolors = true
-o.clipboard = "unnamedplus"
-o.mouse = "a"
-o.showmode = false
-o.laststatus = 3
--- o.showtabline = 2
-o.timeoutlen = 600
-o.updatetime = 300
-o.completeopt = { "menuone", "noselect", "noinsert", "menu" }
-o.scrolloff = 5
-o.signcolumn = "yes"
-o.splitbelow = true
-o.splitright = true
-o.undofile = true
-o.undodir = vim.fn.stdpath("cache") .. "/undofile"
-o.swapfile = false
-o.writebackup = false
-o.fillchars = { eob = " " } -- The icon [ ~ ] in end of buffer will not showwed
+local settings = {
+  --settingup options
+  encoding = "UTF-8",
+  numberwidth = 2,
+  number = true,
+  relativenumber = true, -- set number in the left to relative
+  cursorline = true, -- set to highligh the cursorline now
+  tabstop = 2,
+  shiftwidth = 2,
+  expandtab = true,
+  autoindent = true,
+  hlsearch = true,
+  ignorecase = true,
+  smartcase = true,
+  swapfile = false,
+  termguicolors = true,
+  clipboard = "unnamedplus",
+  mouse = "a",
+  showmode = false,
+  laststatus = 3,
+  showtabline = 0, --Disable tabline
+  timeoutlen = 400,
+  updatetime = 300,
+  ruler = false,
+  -- completeopt = { "menuone", "noselect", "noinsert", "menu" },
+  pumheight = 15,
+  scrolloff = 5,
+  sidescrolloff = 5,
+  signcolumn = "yes",
+  splitbelow = true,
+  splitright = true,
+  undofile = true,
+  undodir = vim.fn.stdpath("cache") .. "/undofile",
+  writebackup = false,
+  wrap = false,
+}
+
 o.shortmess:append("sI")
--- o.foldmethod = "expr"
--- o.foldexpr = "nvim_treesitter#foldexpr()"
--- o.foldlevel = 20
--- o.wrap = false
+o.whichwrap:append("<,>,[,],h,l")
+o.fillchars = { eob = " " }
+o.completeopt = { "menuone", "noselect", "noinsert", "menu" }
+
+for name, value in pairs(settings) do
+  -- vim.api.nvim_set_option(name, value)
+  o[name] = value
+end

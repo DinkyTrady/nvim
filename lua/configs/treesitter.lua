@@ -3,10 +3,12 @@ if not treesitter_ok then
   return
 end
 
-local setup = {
+treesitter.setup({
   ensure_installed = {
     "lua",
-    "javascript", --[[ "html", "css", ]]
+    "javascript",
+    "html",
+    "help",
     "c",
     "cpp",
     "json",
@@ -14,6 +16,8 @@ local setup = {
   sync_install = false,
   highlight = {
     enable = true,
+    -- additional_vim_regex_highlighting = false,
+    -- disable = { "html", "css" },
   },
   indent = {
     enable = true,
@@ -29,11 +33,21 @@ local setup = {
   autotag = {
     enable = true,
     disable = { "xml", "markdown" },
+    filetypes = {
+      "html",
+      "javascript",
+      "javascriptreact",
+      "svelte",
+      "typescript",
+      "typescriptreact",
+      "vue",
+    },
   },
   context_commentstring = {
     enable = true,
     enable_autocmd = false,
   },
-}
-
-return treesitter.setup(setup)
+  playground = {
+    enable = true,
+  },
+})

@@ -3,7 +3,7 @@ if not telescope_ok then
   return
 end
 
-telescope.setup({
+local options = {
   defaults = {
     prompt_prefix = "  ",
     sorting_strategy = "ascending",
@@ -23,4 +23,23 @@ telescope.setup({
       n = { ["q"] = require("telescope.actions").close },
     },
   },
-})
+  extensions = {
+    file_browser = {
+      hidden = true,
+      mappings = {
+        ["i"] = {
+          ["/"] = telescope.extensions.file_browser.actions.create,
+        },
+        ["n"] = {
+          ["-"] = telescope.extensions.file_browser.actions.goto_parent_dir,
+          ["n"] = telescope.extensions.file_browser.actions.create,
+        },
+      },
+    },
+    projects = {},
+    -- noice = {},
+  },
+}
+
+telescope.setup(options)
+telescope.load_extension("file_browser")

@@ -8,7 +8,10 @@ api.nvim_set_hl(0, "lock", { fg = "yellow" })
 api.nvim_set_hl(0, "Sep", { fg = "#61efef" })
 
 -- git name
-api.nvim_set_hl(0, "git_name", { bg = "red", fg = "white" })
+api.nvim_set_hl(0, "git_name", {
+  bg = "red",
+  fg = "white",--[[ , bold = true ]]
+})
 
 local modes = {
   ["n"] = { "", "normalmode" },
@@ -39,7 +42,7 @@ local modes = {
   ["!"] = { "", "Terminal" },
 }
 
-local filetype = {
+local filetypes = {
   "TelescopePrompt",
   "mason",
   "lspinfo",
@@ -47,50 +50,56 @@ local filetype = {
   "neo-tree",
   "neo-tree-popup",
   "startuptime",
-  "terminal",
-  "bash",
-  "Shell",
+  "noice",
   "packer",
+  "tsplayground",
+  "sagarename",
+  "sagacodeaction",
+  "null-ls-info",
+  "lspsagafinder",
+  "notify",
+  -- "",
 }
 
-local M = {}
-
-M.sep = function()
+local sep = function()
   return "%#Sep#" .. "▊" .. "%*"
 end
 
 --set modes
-M.mode = function()
+local mode = function()
   local m = vim.api.nvim_get_mode().mode
-  local current_mode = "%#" .. modes[m][2] .. "#" .. "  " .. modes[m][1]
-  local mode_sep1 = "%#" .. modes[m][2] .. "Sep" .. "#" .. ""
+  local current_mode = "%#" .. modes[m][2] .. "#" .. "   " .. modes[m][1]
 
-  return current_mode .. mode_sep1 .. "" .. "%*"
+  return current_mode .. "" .. "%*"
 end
 
 -- filetype with icons
-M.filetype = function()
+local filetype = function()
   local status, dev = pcall(require, "nvim-web-devicons")
   if not status then
     return
   end
 
-  local filename, extension = vim.fn.expand("%:t"), vim.fn.expand("%:e")
+  local filename, extension = fn.expand("%:t"), fn.expand("%:e")
   local file_icon, icon_colors = dev.get_icon_color(filename, extension, { default = true })
   local type = string.format(" %s ", vim.bo.filetype):lower()
 
   -- to set color
-  api.nvim_set_hl(0, "hl_icon", { bg = tostring(icon_colors), fg = "#000000" })
+  api.nvim_set_hl(0, "hl_icon", { bg = tostring(icon_colors), fg = "#000000", bold = true })
   api.nvim_set_hl(0, "Empty", { fg = "white" })
 
   api.nvim_set_hl(0, "sepicon", { fg = tostring(icon_colors) })
   api.nvim_set_hl(0, "sepiconright", { fg = tostring(icon_colors), bg = "red" })
 
-  for _, fileignore in ipairs(filetype) do
+  for _, fileignore in ipairs(filetypes) do
     if vim.bo.filetype == fileignore then
-      local file_icon = ""
+      local file_icon = " "
       return "%#lock#" .. file_icon .. "%*" .. "%#linestatus#" .. type .. "%*"
     end
+  end
+
+  if filename == "bash" then
+    return "%#sepicon#" .. " " .. "%#hl_icon#" .. "  Terminal " .. "%*" .. "%#sepicon#" .. " " .. "%*"
   end
 
   if vim.bo.filetype == "alpha" then
@@ -98,13 +107,13 @@ M.filetype = function()
   end
 
   if vim.bo.filetype == "" then
-    return "%#Empty#" .. " Empty " .. "%*"
+    return "%#Empty#" .. "  Empty " .. "%*"
   end
 
-  return "%#sepicon#" .. "" .. "%#hl_icon#" .. " " .. file_icon .. type .. "%*" .. "%#sepicon#" .. "" .. "%*"
+  return "%#sepicon#" .. " " .. "%#hl_icon#" .. " " .. file_icon .. type .. "%*" .. "%#sepicon#" .. " " .. "%*"
 end
 
-M.diagnostics = function()
+local diagnostics = function()
   if not rawget(vim, "lsp") then
     return ""
   end
@@ -121,17 +130,17 @@ M.diagnostics = function()
   return errors .. warnings .. hints .. info .. "%*"
 end
 
-M.git_head = function()
+local git_head = function()
   if not vim.b.gitsigns_head or vim.b.gitsigns_git_status then
     return ""
   end
 
   local git_status = vim.b.gitsigns_status_dict
   local branch_name = "  " .. git_status.head .. " "
-  return "%#git_head#" .. "" .. "%#git_name#" .. branch_name .. "%#git_head#" .. " "
+  return "%#git_head#" .. " " .. "%#git_name#" .. branch_name .. "%#git_head#" .. "  "
 end
 
-M.git = function()
+local git = function()
   if not vim.b.gitsigns_head or vim.b.gitsigns_git_status then
     return ""
   end
@@ -142,20 +151,20 @@ M.git = function()
   local changed = (git_status.changed and git_status.changed ~= 0) and ("  " .. git_status.changed .. " ") or ""
   local removed = (git_status.removed and git_status.removed ~= 0) and ("  " .. git_status.removed .. " ") or ""
 
-  return "%#GitSignsAdd#" .. added .. "%#GitSignsChange#" .. changed .. "%#GitSignsRemove#" .. removed
+  return "%#GitSignsAdd#" .. added .. "%#GitSignsChange#" .. changed .. "%#GitSignsDelete#" .. removed
 end
 
-M.dir = function()
+local dir = function()
   local dir_icon = " "
   local dir_name = " " .. fn.fnamemodify(fn.getcwd(), ":t") .. " "
   return (
-    vim.o.columns >= 85
+    vim.o.columns >= 95
     and ("%#dir_sep#" .. "" .. "%*" .. "%#dir#" .. dir_icon .. dir_name .. "%*" .. "%#dir_sep#" .. "" .. "%*")
   ) or ""
 end
 
 -- whereare we now?
-M.cursor_position = function()
+local cursor_position = function()
   local current_line = fn.line(".")
   local total_line = fn.line("$")
   local text = math.modf((current_line / total_line) * 100) .. tostring("%%")
@@ -166,13 +175,39 @@ M.cursor_position = function()
   return "%#linestatus#" .. " %l:%c" .. " " .. text .. " "
 end
 
-M.progress = function()
-  local current_line = vim.fn.line(".")
-  local total_lines = vim.fn.line("$")
+local progress = function()
+  local current_line = fn.line(".")
+  local total_lines = fn.line("$")
   local chars = { "__", "▁▁", "▂▂", "▃▃", "▄▄", "▅▅", "▆▆", "▇▇", "██" }
   local line_ratio = current_line / total_lines
   local index = math.ceil(line_ratio * #chars)
   return "%#Sep#" .. chars[index]
+end
+
+local M = {}
+
+M.config = function()
+  return table.concat({
+    sep()
+      .. mode()
+      .. filetype()
+      .. git_head()
+      .. diagnostics()
+      .. "%="
+      .. dir()
+      .. "%="
+      .. git()
+      .. cursor_position()
+      .. progress(),
+  })
+end
+
+M.setup = function()
+  api.nvim_create_autocmd("UIEnter", {
+    callback = function()
+      vim.opt.statusline = "%{%v:lua.require'others.statusline'.config()%}"
+    end,
+  })
 end
 
 return M

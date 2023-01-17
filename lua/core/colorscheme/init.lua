@@ -1,3 +1,7 @@
+local hl = function(name, table)
+  vim.api.nvim_set_hl(0, name, table)
+end
+
 local M = {}
 
 M.highlight = setmetatable({}, {
@@ -46,418 +50,334 @@ function M.setup(colors, config)
   if vim.fn.exists("syntax_on") then
     vim.cmd("syntax reset")
   end
-  vim.cmd("set termguicolors")
 
   M.colors = colors or M.colorschemes[vim.env.BASE16_THEME] or M.colorschemes["schemer-dark"]
-  local hi = M.highlight
+
   -- For Statusline
-  --
-  hi.normalmode = {
-    guifg = M.colors.base0B,
-  }
-  hi.command = {
-    guifg = M.colors.base0A,
-  }
-  hi.visualmode = {
-    guifg = M.colors.purple,
-  }
-  hi.Insert = {
-    guifg = M.colors.base0D,
-  }
-  hi.Replace = {
-    guifg = M.colors.red,
-  }
-  hi.Terminal = "Insert"
-  hi.linestatus = {
-    guifg = "white",
-    gui = "bold",
-  }
-  hi.dir = {
-    guifg = M.colors.base00,
-    guibg = M.colors.red,
-    gui = "bold",
-  }
-  hi.dir_sep = {
-    guifg = M.colors.red,
-    guibg = M.colors.base00,
-  }
+  hl("normalmode", { fg = M.colors.base0B })
+  hl("command", { fg = M.colors.base0A })
+  hl("visualmode", { fg = M.colors.purple })
+  hl("Insert", { fg = M.colors.base0D })
+  hl("Terminal", { link = "Insert" })
+  hl("Replace", { fg = M.colors.red })
+  hl("linestatus", { fg = "white", bold = true })
+  hl("dir", { fg = M.colors.base00, bg = M.colors.red, bold = true })
+  hl("dir_sep", { fg = M.colors.red, bg = M.colors.base00 })
 
   --blanklinee
-  hi.IndentBlankLineChar = { guifg = M.colors.line }
-  hi.IndentBlankLineSpaceChar = { guifg = M.colors.line }
+  hl("IndentBlankLineChar", { fg = M.colors.line })
+  hl("indentblankline", { fg = M.colors.line })
 
   --auto completion
-  hi.CmpItemAbbr = {
-    guifg = M.colors.white,
-  }
-  hi.CmpItemAbbrDefault = "CmpItemAbbr"
-  hi.CmpItemAbbrMatch = {
-    guifg = M.colors.blue,
-    gui = "bold",
-  }
-  hi.CmpBorder = { guifg = M.colors.grey }
-  hi.CmpDocumentation = { guifg = M.colors.white, guibg = M.colors.grey }
-  hi.CmpDocumentationBorder = "CmpBorder"
-  hi.CmpItemMenuDefault = "CmpItemAbbr"
-  hi.CmpItemKindConstant = {
-    guifg = M.colors.base09,
-  }
-  hi.CmpItemKindFunction = {
-    guifg = M.colors.base0D,
-  }
-  hi.CmpItenKindIdentifier = {
-    guifg = M.colors.base08,
-  }
-  hi.CmpItemKindField = {
-    guifg = M.colors.base08,
-  }
-  hi.CmpItemKindVariable = {
-    guifg = M.colors.base0E,
-  }
-  hi.CmpItemKindSnippet = {
-    guifg = M.colors.red,
-  }
-  hi.CmpItemKindText = {
-    guifg = M.colors.base0B,
-  }
-  hi.CmpItemKindStructure = {
-    guifg = M.colors.base0E,
-  }
-  hi.CmpItemKindType = {
-    guifg = M.colors.base0A,
-  }
-  hi.CmpItemeKindKeyword = {
-    guifg = M.colors.base07,
-  }
-  hi.CmpItemKindMethod = {
-    guifg = M.colors.base0D,
-  }
-  hi.CmpItemKindConstrucor = {
-    guifg = M.colors.blue,
-  }
-  hi.CmpItemKindFolder = { guifg = M.colors.base07 }
-  hi.CmpItemKindModule = { guifg = M.colors.base0A }
-  hi.CmpItemKindProperty = { guifg = M.colors.base08 }
-  hi.CmpItemKindUnit = { guifg = M.colors.base0E }
-  hi.CmpItemKindFile = { guifg = M.colors.base07 }
-  hi.CmpItemKindColor = { guifg = M.colors.red }
-  hi.CmpItemKindRefrence = { guifg = M.colors.base05 }
-  hi.CmpItemKindStruct = { guifg = M.colors.base0E }
-  hi.CmpItemKindOperator = { guifg = M.colors.base05 }
-  hi.CmpItemKindTypeParameter = { guifg = M.colors.base08 }
-  hi.CmpItemKindCopilot = { guifg = M.colors.green }
+  -- hl("CmpItemMenuDefault", { fg = M.colors.base0D }
+  hl("CmpItemMenu", { fg = M.colors.base0D })
+  hl("CmpItemAbbr", { fg = M.colors.white })
+  hl("CmpItemAbbrDefault", { link = "CmpItemAbbr" })
+  hl("CmpItemAbbrMatch", { fg = M.colors.blue })
+  hl("CmpBorder", { fg = M.colors.grey })
+  hl("CmpDocumentation", { fg = M.colors.white, bg = M.colors.grey })
+  hl("CmpDocumentationBorder", { link = "CmpBorder" })
+  -- hl('CmpItemMenuDefault', { link = 'CmpItemAbbr' })
+  hl("CmpItemKindConstant", { fg = M.colors.base09 })
+  hl("CmpItemKindFunction", { fg = M.colors.base0D })
+  hl("CmpItemKindIdentifier", { fg = M.colors.base08 })
+  hl("CmpItemKindField", { fg = M.colors.base08 })
+  hl("CmpItemKindVariable", { fg = M.colors.base0E })
+  hl("CmpItemKindSnippet", { fg = M.colors.red })
+  hl("CmpItemKindText", { fg = M.colors.base0B })
+  hl("CmpItemKindStructure", { fg = M.colors.base0E })
+  hl("CmpItemKindType", { fg = M.colors.base0A })
+  hl("CmpItemKindMethod", { fg = M.colors.base0D })
+  hl("CmpItemKindConstrucor", { fg = M.colors.blue })
+  hl("CmpItemKindFolder", { fg = M.colors.base07 })
+  hl("CmpItemKindModule", { fg = M.colors.base0A })
+  hl("CmpItemKindProperty", { fg = M.colors.base08 })
+  hl("CmpItemKindUnit", { fg = M.colors.base0E })
+  hl("CmpItemKindFile", { fg = M.colors.base07 })
+  hl("CmpItemKindColor", { fg = M.colors.red })
+  hl("CmpItemKindRefrence", { fg = M.colors.base05 })
+  hl("CmpItemKindStruct", { fg = M.colors.base0E })
+  hl("CmpItemKindOperator", { fg = M.colors.base08 })
+  hl("CmpItemKindTypeParameter", { fg = M.colors.base08 })
+  hl("CmpItemKindCopilot", { fg = M.colors.green })
+
   --Default
-  hi.Statusline = { guifg = M.colors.base00, guibg = M.colors.statusline_bg }
-  hi.MatchWord = {
-    guifg = nil,
-    guibg = M.colors.grey,
-  }
-  hi.MatchParen = "MatchWord"
-  hi.PMenu = { guibg = M.colors.one_bg }
-  hi.PMenuSbar = { guibg = M.colors.one_bg }
-  hi.PMenuSel = {
-    guifg = M.colors.black,
-    guibg = M.colors.pmenu_bg,
-  }
-  hi.PMenuThumb = { guibg = M.colors.grey }
-  hi.Comment = { guifg = M.colors.grey_fg, gui = "italic" }
-  hi.CursorLineNr = { guifg = M.colors.white }
-  hi.LineNr = { guifg = M.colors.grey }
-  hi.FloatBorder = { guifg = M.colors.blue }
-  hi.NormalFloat = { guifg = M.colors.white }
-  hi.NvimInternalError = { guifg = M.colors.red }
-  hi.WinSeparator = { guifg = M.colors.line }
-  hi.PackerPackageName = { guifg = M.colors.red }
-  hi.PackerSucces = { guifg = M.colors.green }
-  hi.PackerStatusSucces = { guifg = M.colors.base08 }
-  hi.PackerStatusCommit = { guifg = M.colors.blue }
-  hi.PackerProgress = { guifg = M.colors.blue }
-  hi.PacketOutput = { guifg = M.colors.red }
-  hi.PackerStatus = { guifg = M.colors.blue }
-  hi.PackerHash = { guifg = M.colors.blue }
-  hi.Normal = {
-    guifg = M.colors.base05,
-    guibg = M.colors.base00,
-  }
-  hi.EndofBuffer = { guifg = M.colors.base00 }
-  hi.Debug = { guifg = M.colors.base08 }
-  hi.Directory = { guifg = M.colors.base0D }
-  hi.Error = {
-    guifg = M.colors.black,
-    guibg = M.colors.base08,
-  }
-  hi.ErrorMsg = {
-    guifg = M.colors.base08,
-    guibg = M.colors.base00,
-  }
-  hi.Exception = { guifg = M.colors.base08 }
-  hi.FoldColumn = {
-    guifg = M.colors.base0C,
-    guibg = M.colors.base01,
-  }
-  hi.Folded = {
-    guifg = M.colors.white,
-    guibg = M.colors.base01,
-  }
-  hi.InSearch = {
-    guifg = M.colors.base01,
-    guibg = M.colors.base09,
-  }
-  hi.Macro = { guifg = M.colors.base08 }
-  hi.ModeMsg = { guifg = M.colors.base0B }
-  hi.MoreMsg = { guifg = M.colors.base0B }
-  hi.Question = { guifg = M.colors.base0D }
-  hi.Search = {
-    guifg = M.colors.base01,
-    guibg = M.colors.base0A,
-  }
-  hi.Subtitute = {
-    guifg = M.colors.base01,
-    guibg = M.colors.base0A,
-  }
-  hi.SpecialKey = { guifg = M.colors.base03 }
-  hi.TooLong = { guifg = M.colors.base08 }
-  hi.UnderLined = { guifg = M.colors.base0B }
-  hi.Visual = { guibg = M.colors.base02 }
-  hi.VisualNOS = { guifg = M.colors.base08 }
-  hi.WarningMsg = { guifg = M.colors.base08 }
-  hi.WildMenu = {
-    guifg = M.colors.base08,
-    guibg = M.colors.base0A,
-  }
-  hi.Title = { guifg = M.colors.base0D }
-  hi.Cursor = {
-    guifg = M.colors.base00,
-    guibg = M.colors.base07,
-  }
-  hi.NonText = { guifg = M.colors.base03 }
-  hi.SignColumn = { guibg = M.colors.base00 }
-  hi.ColorColumn = { guibg = M.colors.base01 }
-  hi.CursorColumn = { guibg = M.colors.base01 }
-  hi.CursorLine = {
-    guifg = nil, --[[ guibg = M.colors.one_bg, ]]
-    guibg = M.colors.base00,
-    guisp = nil,
-    gui = "bold",
-  }
-  hi.QuickFixLine = { guibg = M.colors.base01 }
-  hi.healthSuccess = {
-    guifg = M.colors.green,
-    guibg = M.colors.black,
-  }
+  hl("StatusLine", { link = "Normal" })
+  hl("MatchWord", { fg = nil, bg = M.colors.grey })
+  hl("MatchParen", { link = "MatchWord" })
+  hl("PMenu", { bg = M.colors.one_bg })
+  hl("PMenuSbar", { link = "PMenu" })
+  hl("PMenuSel", { fg = M.colors.black, bg = M.colors.pmenu_bg })
+  hl("PMenuThumb", { bg = M.colors.grey })
+  hl("Italic", { fg = M.colors.grey, italic = true })
+  hl("CursorLineNr", { fg = M.colors.white })
+  hl("LineNr", { fg = M.colors.grey })
+  hl("FloatBorder", { fg = M.colors.blue })
+  hl("NormalFloat", { fg = M.colors.white, bg = M.colors.darker_black })
+  hl("NvimInternalError", { fg = M.colors.red })
+  hl("WinSeparator", { fg = M.colors.line })
+  hl("PackerPackageName", { fg = M.colors.red })
+  hl("PackerSucces", { fg = M.colors.green })
+  hl("PackerStatusSucces", { fg = M.colors.base08 })
+  hl("PackerStatusCommit", { fg = M.colors.blue })
+  hl("PackerProgress", { fg = M.colors.blue })
+  hl("PacketOutput", { fg = M.colors.red })
+  hl("PackerHash", { fg = M.colors.blue })
+  hl("Normal", { fg = M.colors.base05, bg = M.colors.base00 })
+  hl("EndofBuffer", { fg = M.colors.base00 })
+  hl("Debug", { fg = M.colors.base08 })
+  hl("Directory", { fg = M.colors.base0D })
+  hl("NvimTreeBufferLine", { fg = M.colors.white, bg = M.colors.statusline_bg })
+  hl("Error", { fg = M.colors.black, bg = M.colors.base08 })
+  hl("ErrorMsg", { fg = M.colors.base08, bg = M.colors.base00 })
+  hl("Exception", { fg = M.colors.base08 })
+  hl("FoldColumn", { fg = M.colors.base0C, bg = M.colors.base01 })
+  hl("Folded", { fg = M.colors.white, bg = M.colors.base01 })
+  hl("InSearch", { fg = M.colors.base01, bg = M.colors.base0A })
+  hl("CurSearch", { link = "InSearch" })
+  hl("Macro", { fg = M.colors.base08 })
+  hl("ModeMsg", { fg = M.colors.base0B })
+  hl("MoreMsg", { fg = M.colors.base0B })
+  hl("Question", { fg = M.colors.base0D })
+  hl("Search", { fg = M.colors.white, bg = "#3d59a1" })
+  hl("Subtitute", { fg = M.colors.base01, bg = M.colors.base0A, sp = nil })
+  hl("SpecialKey", { fg = M.colors.base03 })
+  hl("TooLong", { fg = M.colors.base08 })
+  hl("UnderLined", { fg = M.colors.base0B, underline = true })
+  hl("Visual", { bg = M.colors.base02 })
+  hl("VisualNOS", { fg = M.colors.base08 })
+  hl("WarningMsg", { fg = M.colors.base08 })
+  hl("WildMenu", { fg = M.colors.base08, bg = M.colors.base0A })
+  hl("Title", { fg = M.colors.base0D, sp = nil })
+  hl("Cursor", { fg = M.colors.base00, bg = M.colors.base07 })
+  hl("NonText", { fg = M.colors.base03 })
+  hl("SignColumn", { bg = M.colors.base00, sp = nil })
+  hl("CursorColumn", { bg = M.colors.base01 })
+  hl("CursorLine", { bg = M.colors.base00, bold = true })
+  hl("QuickFixLine", { bg = M.colors.base01 })
+  hl("healthSuccess", { fg = M.colors.green, bg = M.colors.black })
 
   --Diff
-  hi.DiffAdd = { guifg = M.colors.blue }
-  hi.DiffAdded = { guifg = M.colors.green }
-  hi.DiffChange = { guifg = M.colors.light_grey }
-  hi.DiffChangeDelete = { guifg = M.colors.red }
-  hi.DiffModified = { guifg = M.colors.orange }
-  hi.DiffDelete = { guifg = M.colors.red }
-  hi.DiffRemoved = { guifg = M.colors.red }
+  hl("DiffAdd", { fg = M.colors.blue })
+  hl("DiffAdded", { fg = M.colors.green })
+  hl("DiffChange", { fg = M.colors.light_grey })
+  hl("DiffChangeDelete", { fg = M.colors.red })
+  hl("DiffModified", { fg = M.colors.orange })
+  hl("DiffDelete", { fg = M.colors.red })
+  hl("DiffRemoved", { fg = M.colors.red })
 
   -- git commits
-  hi.gitcommitOverflow = { guifg = M.colors.base08 }
-  hi.gitcommitSummary = { guifg = M.colors.base08 }
-  hi.gitcommitComment = { guifg = M.colors.base03 }
-  hi.gitcommitUntracked = { guifg = M.colors.base03 }
-  hi.gitcommitDiscarded = { guifg = M.colors.base03 }
-  hi.gitcommitSelected = { guifg = M.colors.base03 }
-  hi.gitcommitHeader = { guifg = M.colors.base0E }
-  hi.gitcommitSelectedType = { guifg = M.colors.base0D }
-  hi.gitcommitUnmergedType = { guifg = M.colors.base0D }
-  hi.gitcommitDiscardedType = { guifg = M.colors.base0D }
-  hi.gitcommitBranch = { guifg = M.colors.base09 }
-  hi.gitcommitUntrackedFile = { guifg = M.colors.base0A }
-  hi.gitcommitUnmergedFile = { guifg = M.colors.base08 }
-  hi.gitcommitDiscardedFile = { guifg = M.colors.base08 }
-  hi.gitcommitSelectedFile = { guifg = M.colors.base0B }
+  hl("gitcommitOverflow", { fg = M.colors.base08 })
+  hl("gitcommitSummary", { fg = M.colors.base08 })
+  hl("gitcommitComment", { fg = M.colors.base03 })
+  hl("gitcommitUntracked", { fg = M.colors.base03 })
+  hl("gitcommitDiscarded", { fg = M.colors.base03 })
+  hl("gitcommitSelected", { fg = M.colors.base03 })
+  hl("gitcommitHeader", { fg = M.colors.base0E })
+  hl("gitcommitSelectedType", { fg = M.colors.base0D })
+  hl("gitcommitUnmergedType", { fg = M.colors.base0D })
+  hl("gitcommitDiscardedType", { fg = M.colors.base0D })
+  hl("gitcommitBranch", { fg = M.colors.base09 })
+  hl("gitcommitUntrackedFile", { fg = M.colors.base0A })
+  hl("gitcommitUnmergedFile", { fg = M.colors.base08 })
+  hl("gitcommitDiscardedFile", { fg = M.colors.base08 })
+  hl("gitcommitSelectedFile", { fg = M.colors.base0B })
 
   --Lsp
-  hi.LspReferenceText = {
-    guifg = nil,
-    guibg = M.colors.one_bg2,
-  }
-  hi.LspReferenceRead = {
-    guifg = nil,
-    guibg = M.colors.one_bg2,
-  }
-  hi.LspReferenceWrite = {
-    guifg = nil,
-    guibg = M.colors.one_bg2,
-  }
-  hi.DiagnosticHint = { guifg = M.colors.purple }
-  hi.DiagnosticError = { guifg = M.colors.red }
-  hi.DiagnosticWarn = { guifg = M.colors.yellow }
-  hi.DiagnosticInformation = { guifg = M.colors.green }
-  hi.LspSignatureActiveParameter = {
-    guifg = M.colors.black,
-    guibg = M.colors.green,
-  }
-  hi.RenamerTitle = { guifg = M.colors.black, guibg = M.colors.red }
-  hi.RenamerBorder = { guifg = M.colors.red }
+  hl("LspReferenceText", { fg = nil, bg = M.colors.one_bg2 })
+  hl("LspReferenceRead", { link = "LspReferenceText" })
+  hl("LspReferenceWrite", { link = "LspReferenceText" })
+  hl("DiagnosticHint", { fg = M.colors.purple })
+  hl("DiagnosticError", { fg = M.colors.red })
+  hl("DiagnosticWarn", { fg = M.colors.yellow })
+  hl("DiagnosticInformation", { fg = M.colors.green })
+  hl("LspSignatureActiveParameter", { fg = M.colors.black, bg = M.colors.green })
+  hl("RenamerTitle", { fg = M.colors.black, bg = M.colors.red })
+  hl("RenamerBorder", { fg = M.colors.red })
 
   --Madon
-  hi.MasonHeader = { guibg = M.colors.red, guifg = M.colors.black }
-  hi.MasonHighlight = { guifg = M.colors.blue }
-  hi.MasonHighlightBlock = {
-    guifg = M.colors.black,
-    guibg = M.colors.green,
-  }
-  hi.MasonHighlightBlockBold = {
-    guifg = M.colors.black,
-    guibg = M.colors.green,
-  }
-  hi.MasonHeaderSecondary = {
-    guifg = M.colors.black,
-    guibg = M.colors.green,
-  }
-  hi.MasonMuted = { guifg = M.colors.light_grey }
-  hi.MasonMutedBlock = {
-    guifg = M.colors.light_grey,
-    guibg = M.colors.one_bg,
-  }
+  hl("MasonHeader", { fg = M.colors.black, bg = M.colors.red })
+  hl("MasonHighlight", { fg = M.colors.blue })
+  hl("MasonHighlightBlock", { fg = M.colors.black, bg = M.colors.green })
+  hl("MasonHighlightBlockBold", { link = "MasonHighlightBlock" })
+  hl("MasonHeaderSecondary", { link = "MasonHighlightBlock" })
+  hl("MasonMuted", { fg = M.colors.light_grey })
+  hl("MasonMutedBlock", { fg = M.colors.light_grey, bg = M.colors.one_bg })
 
   --NvimTree
-  hi.NvimTreeEmptyFolderName = { guifg = M.colors.folder_bg }
-  hi.NvimTreeEndOfBuffer = { guifg = M.colors.darker_black }
-  hi.NvimTreeFolderIcon = { guifg = M.colors.folder_bg }
-  hi.NvimTreeFolderName = { guifg = M.colors.folder_bg }
-  hi.NvimTreeGitDirty = { guifg = M.colors.base0D }
-  hi.NvimTreeIndentMarker = { guifg = M.colors.grey_fg }
-  hi.NvimTreeNormal = { guibg = M.colors.darker_black }
-  hi.NvimTreeNormalNC = { guibg = M.colors.darker_black }
-  hi.NvimTreeOpenedFolderName = { guifg = M.colors.folder_bg }
-  hi.NvimTreeGitIgnored = { guifg = M.colors.light_grey }
-  hi.NvimTreeWinSeparator = {
-    guifg = M.colors.darker_black,
-    guibg = M.colors.darker_black,
-  }
-  hi.NvimTreeWindowPicker = { guifg = M.colors.red, guibg = M.colors.black2 }
-  hi.NvimTreeCursorLine = { guibg = M.colors.black2 }
-  hi.NvimTreeGitNew = { guifg = M.colors.green }
-  hi.NvimTreeGitDeleted = { guifg = M.colors.red }
-  hi.NvimTreeSpecialFile = { guifg = M.colors.yellow }
-  hi.NvimTreeRootFolder = { guifg = M.colors.base0E }
+  hl("NvimTreeEmptyFolderName", { fg = M.colors.folder_bg })
+  hl("NvimTreeEndOfBuffer", { fg = M.colors.darker_black })
+  hl("NvimTreeFolderIcon", { fg = M.colors.folder_bg })
+  hl("NvimTreeFolderName", { fg = M.colors.folder_bg })
+  hl("NvimTreeGitDirty", { fg = M.colors.base0D })
+  hl("NvimTreeIndentMarker", { fg = M.colors.grey_fg })
+  hl("NvimTreeNormal", { bg = M.colors.darker_black })
+  hl("NvimTreeNormalNC", { bg = M.colors.darker_black })
+  hl("NvimTreeOpenedFolderName", { fg = M.colors.folder_bg })
+  hl("NvimTreeGitIgnored", { fg = M.colors.light_grey })
+  hl("NvimTreeWinSeparator", { fg = M.colors.darker_black, bg = M.colors.darker_black })
+  hl("NvimTreeWindowPicker", { fg = M.colors.red, bg = M.colors.black2 })
+  hl("NvimTreeCursorLine", { bg = M.colors.black2 })
+  hl("NvimTreeGitNew", { fg = M.colors.green })
+  hl("NvimTreeGitDeleted", { fg = M.colors.red })
+  hl("NvimTreeSpecialFile", { fg = M.colors.yellow })
+  hl("NvimTreeRootFolder", { fg = M.colors.base0E })
 
   --syntax
-  hi.Boolean = { guifg = M.colors.base09 }
-  hi.Character = { guifg = M.colors.base08 }
-  hi.Conditional = { guifg = M.colors.base0E }
-  hi.Constant = { guifg = M.colors.base08 }
-  hi.Define = { guifg = M.colors.base0E }
-  hi.Delimiter = { guifg = M.colors.base0F }
-  hi.Float = { guifg = M.colors.base09 }
-  hi.Function = { guifg = M.colors.base0D }
-  hi.Identifier = { guifg = M.colors.base08 }
-  hi.Include = { guifg = M.colors.base0D }
-  hi.Keyword = { guifg = M.colors.base0E }
-  hi.Label = { guifg = M.colors.base0A }
-  hi.Number = { guifg = M.colors.base09 }
-  hi.Operator = { guifg = M.colors.base05 }
-  hi.PreProc = { guifg = M.colors.base0A }
-  hi.Repeat = { guifg = M.colors.base0A }
-  hi.Special = { guifg = M.colors.base0C }
-  hi.SpecialChar = { guifg = M.colors.base0F }
-  hi.Statement = { guifg = M.colors.base08 }
-  hi.StorageClass = { guifg = M.colors.base0A }
-  hi.String = { guifg = M.colors.base0B }
-  hi.Structure = { guifg = M.colors.base0E }
-  hi.Tag = { guifg = M.colors.base0A }
-  hi.Todo = { guifg = M.colors.base0A, guibg = M.colors.base01 }
-  hi.Type = { guifg = M.colors.base0A }
-  hi.Typedef = { guifg = M.colors.base0A }
+  hl("Comment", { fg = M.colors.grey_fg, italic = true })
+  hl("Conceal", { sp = nil })
+  hl("bold", { bold = true })
+  hl("Italic", { italic = true })
+  hl("Boolean", { fg = M.colors.base09 })
+  hl("Character", { fg = M.colors.base08 })
+  hl("Conditional", { fg = M.colors.base0E })
+  hl("Constant", { link = "Boolean" })
+  hl("Define", { fg = M.colors.base0E, sp = nil })
+  hl("Delimiter", { fg = M.colors.base0F })
+  hl("Float", { link = "Boolean" })
+  hl("Function", { fg = M.colors.base0D })
+  hl("Identifier", { fg = M.colors.base08, sp = nil })
+  hl("Include", { fg = M.colors.base0D })
+  hl("Keyword", { fg = M.colors.base0E })
+  hl("Label", { fg = M.colors.base0A })
+  hl("Number", { fg = M.colors.base09 })
+  hl("Operator", { fg = M.colors.base05, sp = nil })
+  hl("PreProc", { fg = M.colors.base0A })
+  hl("Repeat", { fg = M.colors.base0A })
+  hl("Special", { fg = M.colors.base0C })
+  hl("SpecialChar", { fg = M.colors.base0F })
+  hl("Statement", { fg = M.colors.base08 })
+  hl("StorageClass", { fg = M.colors.base0A })
+  hl("String", { fg = M.colors.base0B })
+  hl("Structure", { fg = M.colors.base0E })
+  hl("Tag", { fg = M.colors.base0A })
+  hl("Todo", { fg = M.colors.base0A, bg = M.colors.base01 })
+  hl("Type", { fg = M.colors.base0A, sp = nil })
+  hl("Typedef", { fg = M.colors.base0A })
 
   --Telescope
-  hi.TelescopeBorder = { guifg = M.colors.darker_black, guibg = M.colors.darker_black }
-  hi.TelescopePromptBorder = { guifg = M.colors.black2, guibg = M.colors.black2 }
-  hi.TelescopePromptNormal = { guifg = M.colors.white, guibg = M.colors.black2 }
-  hi.TelescopePromptPrefix = { guifg = M.colors.red, guibg = M.colors.black2 }
-  hi.TelescopeNormal = { guibg = M.colors.base00 }
-  hi.TelescopePreviewNormal = { guibg = M.colors.darker_black }
-  hi.TelescopePreviewTitle = { guifg = M.colors.black, guibg = M.colors.green }
-  hi.TelescopePreviewBorder = { guifg = M.colors.darker_black, guibg = M.colors.darker_black }
-  hi.TelescopePromptTitle = { guifg = M.colors.black, guibg = M.colors.red }
-  hi.TelescopeResultsBorder = { guifg = M.colors.white, guibg = M.colors.base00 }
-  hi.TelescopeResultsTitle = { guifg = M.colors.black, guibg = M.colors.yellow }
-  hi.TelescopeSelection = { guibg = M.colors.grey, guifg = M.colors.white }
-  hi.TelescopeResultsDiffAdd = { guifg = M.colors.green }
-  hi.TelescopeResultsDiffChange = { guifg = M.colors.yellow }
-  hi.TelescopeResultsDiffDelete = { guifg = M.colors.red }
+  hl("TelescopeBorder", { fg = M.colors.darker_black, bg = M.colors.darker_black })
+  hl("TelescopePromptBorder", { fg = M.colors.black2, bg = M.colors.black2 })
+  hl("TelescopePromptTitle", { fg = M.colors.black, bg = M.colors.red })
+  hl("TelescopePromptNormal", { fg = M.colors.white, bg = M.colors.black2 })
+  hl("TelescopePromptPrefix", { fg = M.colors.red, bg = M.colors.black2 })
+  hl("TelescopeNormal", { bg = M.colors.base00 })
+  hl("TelescopePreviewNormal", { fg = M.colors.darker_black })
+  hl("TelescopePreviewTitle", { fg = M.colors.black2, bg = M.colors.green })
+  hl("TelescopePreviewBorder", { fg = M.colors.darker_black, bg = M.colors.darker_black })
+  hl("TelescopeResultsBorder", { fg = M.colors.white, bg = M.colors.base00 })
+  hl("TelescopeResultsTitle", { fg = M.colors.black, bg = M.colors.yellow })
+  hl("TelescopeResultsDiffAdd", { fg = M.colors.green })
+  hl("TelescopeResultsDiffChange", { fg = M.colors.yellow })
+  hl("TelescopeResultsDiffDelete", { fg = M.colors.red })
+  hl("TelescopeSelection", { fg = M.colors.white, bg = M.colors.grey, bold = true })
 
   --treesitter
-  hi["@annotation"] = { guifg = M.colors.base0F }
-  hi["@attribute"] = { guifg = M.colors.base0A }
-  hi["@constructor"] = { guifg = M.colors.base0C }
-  hi["@constant.builtin"] = { guifg = M.colors.base09 }
-  hi["@constant.macro"] = { guifg = M.colors.base08 }
-  hi["@error"] = { guifg = M.colors.base08 }
-  hi["@exception"] = { guifg = M.colors.base08 }
-  hi["@float"] = { guifg = M.colors.base09 }
-  hi["@keyword"] = { guifg = M.colors.base0E }
-  hi["@keyword.function"] = { guifg = M.colors.base0E }
-  hi["@keyword.return"] = { guifg = M.colors.base0E }
-  hi["@function.builtin"] = { guifg = M.colors.base0D }
-  hi["@function.macro"] = { guifg = M.colors.base08 }
-  hi["@keyword.operator"] = { guifg = M.colors.base0E }
-  hi["@method"] = { guifg = M.colors.base0D }
-  hi["@namespace"] = { guifg = M.colors.base08 }
-  hi["@none"] = { guifg = M.colors.base05 }
-  hi["@parameter"] = { guifg = M.colors.base08 }
-  hi["@reference"] = { guifg = M.colors.base05 }
-  hi["@punctuation.bracket"] = { guifg = M.colors.base0F }
-  hi["@punctuation.delimiter"] = { guifg = M.colors.base0F }
-  hi["@punctuation.special"] = { guifg = M.colors.base08 }
-  hi["@string.regex"] = { guifg = M.colors.base0C }
-  hi["@string.escape"] = { guifg = M.colors.base0C }
-  hi["@symbol"] = { guifg = M.colors.base0B }
-  hi["@tag"] = { guifg = M.colors.base0A }
-  hi["@tag.attribute"] = { guifg = M.colors.base08 }
-  hi["@tag.delimiter"] = { guifg = M.colors.base0F }
-  hi["@text"] = { guifg = M.colors.base05 }
-  hi["@text.strong"] = { gui = "bold" }
-  hi["@text.emphasis"] = { guifg = M.colors.base09, gui = "italic" }
-  hi["@text.strike"] = { guifg = M.colors.base00 }
-  hi["@text.literal"] = { guifg = M.colors.base09 }
-  hi["@text.url"] = { guifg = M.colors.base09, gui = "underline" }
-  hi["@type.builtin"] = { guifg = M.colors.base0A }
-  hi["@variable.builtin"] = { guifg = M.colors.base09 }
-  hi["@definition"] = { guisp = M.colors.base04, gui = "underline" }
-  hi.TSDefinitionUsage = { guisp = M.colors.base04, gui = "underline" }
-  hi["@scope"] = { gui = "bold" }
-  hi["@field"] = { guifg = M.colors.base08 }
-  -- hi["@field.key"] = { guifg = M.colors.base0D }
-  hi["@property"] = { guifg = M.colors.base08 }
-  hi["@include"] = { guifg = M.colors.base0D }
-  hi["@conditional"] = { guifg = M.colors.base0E }
+  hl("@annotation", { fg = M.colors.base0F })
+  hl("@attribute", { fg = M.colors.base0A })
+  hl("@constructor", { fg = M.colors.base0C })
+  hl("@constant.builtin", { fg = M.colors.base09 })
+  hl("@constant.macro", { fg = M.colors.base08 })
+  hl("@error", { fg = M.colors.base08 })
+  hl("@exception", { fg = M.colors.base08 })
+  hl("@float", { fg = M.colors.base09 })
+  hl("@keyword", { fg = M.colors.base0E })
+  hl("@keyword.function", { fg = M.colors.base0E })
+  hl("@keyword.return", { fg = M.colors.base0E })
+  hl("@function.builtin", { fg = M.colors.base0D })
+  hl("@function.macro", { fg = M.colors.base08 })
+  hl("@operator", { link = "@keyword.operator" })
+  hl("@keyword.operator", { fg = M.colors.base0E })
+  hl("@method", { fg = M.colors.base0D })
+  hl("@namespace", { fg = M.colors.base08 })
+  hl("@none", { fg = M.colors.base05 })
+  hl("@parameter", { fg = M.colors.base08 })
+  hl("@reference", { fg = M.colors.base05 })
+  hl("@repeat", { link = "@keyword" })
+  hl("@punctuation.bracket", { fg = M.colors.base0F })
+  hl("@punctuation.delimiter", { fg = M.colors.base0F })
+  hl("@punctuation.special", { fg = M.colors.base08 })
+  hl("@string.regex", { fg = M.colors.base0C })
+  hl("@string.escape", { fg = M.colors.base0C })
+  hl("@symbol", { fg = M.colors.base0B })
+  hl("@tag", { fg = M.colors.base0A })
+  hl("@tag.attribute", { fg = M.colors.base0E })
+  hl("@tag.delimiter", { fg = M.colors.base0F })
+  hl("@text", { fg = M.colors.white })
+  hl("@text.strong", { bold = true })
+  hl("@text.attribute", { fg = M.colors.base0D })
+  hl("@text.title", { fg = M.colors.base0D, bold = true })
+  hl("@text.emphasis", { fg = M.colors.base09, italic = true })
+  hl("@text.strike", { fg = M.colors.base00 })
+  hl("@text.literal", { fg = M.colors.base09 })
+  hl("@text.uri", { fg = M.colors.base0B, underline = true })
+  hl("@type.builtin", { fg = M.colors.base0A })
+  hl("@variable.builtin", { fg = M.colors.base09 })
+  hl("@definition", { sp = M.colors.base04, underline = true })
+  hl("TSDefinitionUsage", { sp = M.colors.base04, underline = true })
+  hl("@scope", { bold = true })
+  hl("@field", { fg = M.colors.base08 })
+  hl("@field.key", { fg = M.colors.base0D })
+  hl("@property", { fg = M.colors.base08 })
+  hl("@include", { link = "Include" })
+  hl("@conditional", { link = "Conditional" })
+  hl("@spell", { fg = nil })
 
   --ts rainbow
-  hi.rainbowcol1 = { guifg = M.colors.yellow }
-  hi.rainbowcol2 = { guifg = M.colors.blue }
-  hi.rainbowcol3 = { guifg = M.colors.green }
-  hi.rainbowcol4 = { guifg = M.colors.base0D }
-  hi.rainbowcol5 = { guifg = M.colors.pink }
-  hi.rainbowcol6 = { guifg = M.colors.base0E }
-  hi.rainbowcol7 = { guifg = M.colors.base0F }
+  hl("rainbowcol1", { fg = M.colors.yellow })
+  hl("rainbowcol2", { fg = M.colors.blue })
+  hl("rainbowcol3", { fg = M.colors.red })
+  hl("rainbowcol4", { fg = M.colors.base0D })
+  hl("rainbowcol5", { fg = M.colors.pink })
+  hl("rainbowcol6", { fg = M.colors.base0E })
+  hl("rainbowcol7", { fg = M.colors.base0F })
 
   --Alpha
-  hi.AlphaHeader = { guifg = M.colors.blue, gui = "bold" }
-  hi.AlphaButtons = "rainbowcol1"
-  hi.AlphaFooter = { guifg = M.colors.green, gui = "italic" }
+  hl("AlphaHeader", { fg = M.colors.blue, bold = true })
+  hl("AlphaButtons", { link = "rainbowcol1" })
+  hl("AlphaFooter", { fg = M.colors.green, italic = true })
 
   --gitsigns
-  hi.GitSignsAdd = { guifg = M.colors.green }
-  hi.GitSignsAddPreview = { guifg = M.colors.black, guibg = M.colors.green, gui = "bold" }
-  hi.GitSignsChange = { guibg = M.colors.base00, guifg = M.colors.yellow }
-  hi.GitSignsDelete = { guifg = M.colors.red }
-  hi.GitSignsDeletePreview = { guifg = M.colors.black, guibg = M.colors.red, gui = "bold" }
-  hi.git_head = {
-    guifg = "red",
-    gui = "bold",
-  }
-  hi.git_sep = {
-    guifg = nil,
-    guibg = M.colors.red,
-  }
+  hl("GitSignsAdd", { fg = M.colors.green })
+  hl("GitSignsAddPreview", { fg = M.colors.black, bg = M.colors.green, bold = true })
+  hl("GitSignsChange", { bg = M.colors.base00, fg = M.colors.yellow })
+  hl("GitSignsDelete", { fg = M.colors.red })
+  hl("GitSignsDeletePreview", { fg = M.colors.black, bg = M.colors.red, bold = true })
+  hl("git_head", { fg = "red", bold = true })
+  hl("git_sep", { bg = M.colors.red })
+
+  -- Winbar
+  hl("NavicIconsFunction", { link = "@keyword.function" })
+  hl("NavicIconsMethod", { link = "@method" })
+  hl("NavicIconsConstructor", { link = "@method" })
+  hl("NavicIconsClass", { link = "@constructor" })
+  hl("NavicIconsString", { link = "String" })
+  hl("NavicIconsArray", { link = "String" })
+  hl("NavicIconsField", { link = "@field" })
+  hl("NavicIconsPackage", { link = "@repeat" })
+  hl("NavicIconsFile", { link = "CmpItemKindFile" })
+  hl("NavicIconsProperty", { link = "@property" })
+  hl("NavicIconsEnum", { link = "CmpItemKindEnum" })
+  hl("NavicIconsEnumMember", { link = "CmpItemKindEnum" })
+  hl("NavicIconsObject", { link = "@field" })
+  hl("NavicIconsBoolean", { link = "Boolean" })
+  hl("NavicIconsNumber", { link = "@number" })
+  hl("NavicSeparator", { link = "linestatus" })
+
+  -- Neo-tree
+  hl("NeoTreeNormal", { bg = M.colors.darker_black })
+  hl("NeoTreeDirectoryIcon", { fg = M.colors.folder_bg })
+  hl("NeoTreeNormalNC", { link = "NeoTreeNormal" })
+  hl("NeoTreeEndofBuffer", { link = "NeoTreeNormal" })
+  hl("NeoTreeCursorLine", { bg = nil, bold = true })
+
+  -- BufferLine
+  hl("BufferLineIndicatorSelected", { fg = M.colors.blue })
+  hl("BufferLineTabSelected", { fg = M.colors.white, bold = true })
+  hl("BufferLineTabSeparatorVisible", { link = "BufferLineIndicatorVisible" })
+  hl("BufferLineTabSeparatorSelected", { link = "BufferLineIndicatorSelected" })
+  hl("BufferLineCloseButton", { fg = M.colors.red, bg = "#1b1e2c" })
+  hl("BufferLineCloseButtonSelected", { fg = M.colors.red, bg = M.colors.base00, bold = true })
 end
 
 function M.available_colorschemes()

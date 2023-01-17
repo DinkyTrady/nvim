@@ -119,7 +119,13 @@ M.bufferline = function()
     options = {
       numbers = "ordinal",
       offsets = {
-        { filetype = "neo-tree" },
+        {
+          filetype = "neo-tree",
+          text = "  File Explorer  ",
+          highlight = "NvimTreeBufferLine",
+          padding = 0,
+        },
+        { filetype = "" },
       },
       always_show_bufferline = false,
     },
@@ -169,9 +175,10 @@ M.navic = function()
       Operator = " ",
       TypeParameter = " ",
     },
+    highlight = true,
   })
 
-  vim.opt.winbar = "%{%v:lua.require'others.winbar'.full()%}"
+  require("others.winbar").setup()
 end
 
 M.indentline = function()
@@ -197,7 +204,21 @@ M.neoscroll = function()
   end
 
   neoscroll.setup({
-    mappings = { "<C-u>", "<C-d>", "<C-b>", "<C-f>", "<C-y>", "<C-e>", "zt", "zz", "zb", "Up", "Down" },
+    mappings = {
+      "<C-u>",
+      "<C-d>",
+      "<C-b>",
+      "<C-f>",
+      "<C-y>",
+      "<C-e>",
+      "zt",
+      "zz",
+      "zb",
+      "<Up>",
+      "<Down>",
+      "<ScrollWheelUp>",
+      "<ScrollWheelDown>",
+    },
   })
 end
 
@@ -207,7 +228,7 @@ M.better_escape = function()
     return
   end
 
-  bs.setup({ clear_empty_lines = true })
+  bs.setup({ clear_empty_lines = true, mapping = { "jk", "jj", "kj", "kk" } })
 end
 
 return M

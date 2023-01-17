@@ -1,69 +1,186 @@
-local map = function(mode, key, result)
-  vim.api.nvim_set_keymap(mode, key, result, { noremap = true, silent = true })
-end
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
---vim.api.nvim_set_keymap("n", "<leader>ll", ":lua vim.lsp.buf.format({timeout_ms = 2000})")
+local general_mappings = {
+  i = {
+    ["<C-a>"] = { "<ESC><CMD>%y+<CR>gi", "Copy Whole lines" },
+    ["<C-r>"] = { "<ESC><C-r>gi", "Redo File" },
+    ["<C-u>"] = { "<ESC>ugi", "Undo File" },
+    ["<C-p>"] = { "<ESC>Pgi", "Paste" },
+    ["<C-f>"] = { "<ESC>zzgi", "Focus" },
+    ["<C-b>"] = { "<ESC>zz<C-u>gi", "Go Up" },
+    ["<C-d>"] = { "<ESC>zz<C-d>gi", "Go Down" },
+    ["<C-x>"] = { "<ESC>ddgi", "Delete Line" },
+    ["<C-h>"] = { "<Left>", "Left" },
+    ["<C-j>"] = { "<Down>", "Down" },
+    ["<C-k>"] = { "<Up>", "Up" },
+    ["<C-l>"] = { "<Right>", "Right" },
+    ["<A-H>"] = { "<C-Left>", "b -normal mode" },
+    ["<A-L>"] = { "<C-Right>", "w -normal mode" },
+    ["<C-n>"] = { "<HOME>", "Go to First Line" },
+    ["<C-e>"] = { "<END>", "Go to End Line" },
+    ["<A-k>"] = { "<ESC>v:m .-2<CR>==gi", "Move Line to Up" },
+    ["<A-j>"] = { "<ESC>v:m .+1<CR>==gi", "Move Line to Down" },
+  },
+  s = {
+    ["jj"] = { "<ESC>", "Go to Normal" },
+    ["jk"] = { "<ESC>", "Go to Normal" },
+  },
+  n = {
+    ["<C-t>h"] = { "<CMD>sp | resize -12 | ter<CR>", "Split Term" },
+    ["<C-t>v"] = { "<CMD>vs | vertical resize -5 | ter<CR>", "VertSplit Term" },
+    ["<C-t>t"] = { "<CMD>term<CR>", "New Buffer Term" },
+    ["<C-t>n"] = { [[:lua vim.api.nvim_command(":!node " .. vim.fn.expand("%:f"))<CR>]], "node js" },
+    ["<C-a>"] = { "<CMD>%y+<CR>", "Copy All Lines" },
+    ["<C-Up>"] = { "<CMD>resize -2<CR>", "Resize Up" },
+    ["<C-Down>"] = { "<CMD>resize +2<CR>", "Resize Down" },
+    ["<C-Right>"] = { "<CMD>vertical resize -2<CR>", "Resize to Right" },
+    ["<C-Left>"] = { "<CMD>vertical resize +2<CR>", "Resize to Left" },
+    ["<Tab>"] = { "<CMD>bnext<CR>", "Next Buffer" },
+    ["<BS>"] = { "<CMD>bprev<CR>", "Prev Buffer" },
+    ["<C-h>"] = { "<C-w>h", "Go to Left Window" },
+    ["<C-j>"] = { "<C-w>j", "Go to Bottom Window" },
+    ["<C-k>"] = { "<C-w>k", "Go to Top Window" },
+    ["<C-l>"] = { "<C-w>l", "Go to Right Window" },
+    ["n"] = { "nzz", "Next Search & Focus" },
+    ["N"] = { "Nzz", "Prev Search & Focus" },
+    ["X"] = { '"_x', "Delete Without Copy" },
+    ["dD"] = { '"_dd', "Delete Line Without Copy" },
+    ["<ScrollWheelDown>"] = { "<C-e><C-e><C-e><C-e><C-e>", "Down" },
+    ["<ScrollWheelUp>"] = { "<C-y><C-y><C-y><C-y><C-y>", "Up" },
+    -- smooth scrolling
+    ["<C-d>"] = { "<C-d>zz" },
+    ["<C-f>"] = { "<C-f>zz" },
+    ["<C-u>"] = { "<C-u>zz" },
+    ["<C-b>"] = { "<C-b>zz" },
+  },
+  v = {
+    ["jk"] = { "<ESC>", "Normal Mode" },
+    ["<A-Up>"] = { "<CMD>m .-2<CR>==gv", "Move Up" },
+    ["<A-Down>"] = { "<CMD>m .+1<CR>==gv", "Move Down" },
+    ["X"] = { '"_x', "Delete no Copy" },
+    ["<"] = { "<gv", "Move Left" },
+    [">"] = { ">gv", "Move Right" },
+  },
+  t = {
+    ["<C-h>"] = { [[<C-\><C-n><C-W>h]], "Go Left Window" },
+    ["<C-j>"] = { [[<C-\><C-n><C-W>j]], "Go bottom Window" },
+    ["<C-k>"] = { [[<C-\><C-n><C-W>k]], "Go Up Window" },
+    ["<C-l>"] = { [[<C-\><C-n><C-W>l]], "Go Right Window" },
+    ["<C-Tab>"] = { [[<C-\><C-n><CMD>bnext<CR>]], "Next Buffer" },
+    ["<C-BS>"] = { [[<C-\><C-n><CMD>bprev<CR>]], "Prev Buffer" },
+    ["<C-t>"] = { [[<C-\><C-n><CMD>bd!<CR>]], "Quit Term" },
+    ["<C-q>"] = { [[<C-\><C-n>]], "Normal mode" },
+    ["<A-t>h"] = { [[<C-\><C-n>:sp | resize -10 | term<CR>]], "New Split Term" },
+    ["<A-t>v"] = { [[<C-\><C-n>:vs | resize -5 | term<CR>]], "New VertSplit Term" },
+  },
+}
 
--- Change mode
-map("i", "jj", "<esc>")
-map("s", "jj", "<esc>")
-map("v", "jk", "<esc>")
+local set_maps = function(bruh)
+  for mode, mode_value in pairs(bruh) do
+    for keymap, keymap_value in pairs(mode_value) do
+      local opts = { noremap = true, silent = true, nowait = true } or {}
+      opts.desc = keymap_value[2]
+      opts.expr = keymap_value.opts
+      vim.api.nvim_set_keymap(mode, keymap, keymap_value[1], opts)
+    end
+  end
+end
 
---better moving for window to window
-map("n", "<C-h>", "<C-w>h")
-map("n", "<C-l>", "<C-w>l")
-map("n", "<C-j>", "<C-w>j")
-map("n", "<C-k>", "<C-w>k")
+set_maps(general_mappings)
 
---Move word in visual mode
-map("v", "<C-Up>", ":m .-2<CR>==")
-map("v", "<C-Down>", ":m .+1<CR>==")
+-- regsiter mappings in whichkey
 
--- map("n", "<leader>", ":WhichKey<cr><leader>")
+local register = {
+  whichkey = {
+    a = { ":Alpha<CR>", "Open Dashboard" },
+    e = { ":NeoTreeRevealToggle<CR>", "Focus neo-tree" },
+    t = { ":NeoTreeFloatToggle<CR>", "Float neo-tree" },
+    x = { ":bdelete!<CR>", "Close Buffer" },
+    c = { ":ColorizerToggle<CR>", "See Colors" },
+    r = { ":so<CR>", "Reload File" },
+    w = {
+      name = "Save",
+      w = { ":w<cr>", "Save File" },
+      a = { ":wall<cr>", "Save All Files" },
+      q = { ":wq<cr>", "Save & Quit" },
+      f = { ":wa | qall<cr>", "Save All Files & Quit" },
+    },
+    q = {
+      name = "Quits",
+      q = { ":q<cr>", "Quit File" },
+      a = { ":qall<cr>", "Quit All Files" },
+      f = { ":q!<cr>", "Force Quit" },
+      i = { ":qall!<cr>", "Force Quit All Files" },
+    },
+    f = {
+      name = "Telescope",
+      t = { ":Telescope<cr>", "Open Telescope" },
+      f = { "<cmd>Telescope find_files <cr>", "Find Fles" },
+      o = { ":Telescope oldfiles <cr>", "Recent Files" },
+      b = { "<cmd>Telescope buffers<cr>", "Choose Buffers" },
+      c = { ":Telescope colorscheme<cr>", "Choose Colorscheme" },
+      m = { ":Telescope keymaps<cr>", "See Mappings" },
+      d = { ":Telescope file_browser<cr>", "Find Browser" },
+      p = { ":Telescope projects<CR>", "Find Projects" },
+    },
+    p = {
+      name = "Packer",
+      S = { ":PackerStatus<cr>", "Packer Status" },
+      i = { ":PackerInstall<cr>", "Packer Installing Plugins" },
+      c = { ":PackerCompile<cr>", "Packer Compile" },
+      C = { ":PackerClean<CR>", "Clean Plugins" },
+      s = { ":PackerSync<cr>", "Packer Sync" },
+    },
+    l = {
+      name = "LSP",
+      a = { ":Lspsaga code_action<cr>", "Code Action" },
+      d = { ":lua vim.lsp.buf.hover()<cr>", "Hover Doc" },
+      D = { ":Lspsaga peek_definition<CR>", "Float Definition" },
+      m = { ":Mason<cr>", "Open Mason" },
+      i = { ":LspInfo<cr>", "LSP Info" },
+      s = { ":LspStart<cr>", "Start LSP" },
+      S = { ":LspStop<cr>", "Stop LSP" },
+      f = { ":lua vim.lsp.buf.format({ timeout_ms = 2000 })<cr>", "Format Code" },
+      l = { ":Lspsaga show_line_diagnostics<cr>", "Line Diagnostic" },
+      c = { ":Lspsaga show_cursor_diagnostics<cr>", "Cursor Diagnostic" },
+      F = { ":Lspsaga lsp_finder<cr>", "Finder" },
+      r = { ":lua require'others.rename'.open()<cr>", "Rename" },
+      k = { ":Lspsaga diagnostic_jump_prev<cr>", "Jump Previous" },
+      j = { ":Lspsaga diagnostic_jump_next<cr>", "Jump Next" },
+      o = { ":Lspsaga outline<cr>", "Out Line Toggle" },
+      n = {
+        ':lua require("lspsaga.diagnostic").goto_next({ severity = vim.diagnostic.severity.ERROR })<cr>',
+        "Next Error",
+      },
+      p = {
+        ':lua require("lspsaga.diagnostic").goto_prev({ severity = vim.diagnostic.severity.ERROR })<cr>',
+        "Prev Error",
+      },
+    },
+    g = {
+      name = "Git",
+      g = { "<cmd>lua _LAZYGIT_TOGGLE()<CR>", "Lazygit" },
+      j = { "<cmd>lua require 'gitsigns'.next_hunk()<cr>", "Next Hunk" },
+      k = { "<cmd>lua require 'gitsigns'.prev_hunk()<cr>", "Prev Hunk" },
+      l = { "<cmd>lua require 'gitsigns'.blame_line()<cr>", "Blame" },
+      p = { "<cmd>lua require 'gitsigns'.preview_hunk()<cr>", "Preview Hunk" },
+      r = { "<cmd>lua require 'gitsigns'.reset_hunk()<cr>", "Reset Hunk" },
+      R = { "<cmd>lua require 'gitsigns'.reset_buffer()<cr>", "Reset Buffer" },
+      s = { "<cmd>lua require 'gitsigns'.stage_hunk()<cr>", "Stage Hunk" },
+      u = {
+        "<cmd>lua require 'gitsigns'.undo_stage_hunk()<cr>",
+        "Undo Stage Hunk",
+      },
+      o = { "<cmd>Telescope git_status<cr>", "Open changed file" },
+      b = { "<cmd>Telescope git_branches<cr>", "Checkout branch" },
+      c = { "<cmd>Telescope git_commits<cr>", "Checkout commit" },
+      d = {
+        "<cmd>Gitsigns diffthis HEAD<cr>",
+        "Diff",
+      },
+    },
+  },
+}
 
--- reload files not work in blanl file!
-map("n", "<leader>r", ":so%<cr>")
-map("n", "<leader>qq", ":q<cr>")
-
--- Resize pane
-map("n", "<C-Up>", ":resize -2<CR>")
-map("n", "<C-Down>", ":resize +2<CR>")
-map("n", "<C-Left>", ":vertical resize -2<CR>")
-map("n", "<C-Right>", ":vertical resize +2<CR>")
-
--- Fast another tabs
-map("n", "<TAB>", ":bnext<cr>")
-map("n", "<BS>", ":bprev<cr>")
-
--- to explore with NeoTree
-map("n", "<leader>e", ":NeoTreeRevealToggle<cr>")
-map("n", "<leader>t", ":NeoTreeFloatToggle<cr>")
-
--- Close cureent buffers
-map("n", "<leader>x", ":bdelete!<cr>")
-
--- Activate colorizer
-map("n", "<leader>c", ":ColorizerToggle<cr>")
-
--- Teleacope mappings
-map("n", "<leader>ft", ":Telescope<cr>")
-map("n", "<leader>ff", ":Telescope find_files<cr>")
-map("n", "<leader>fo", ":Telescope oldfiles<cr>")
-map("n", "<leader>fb", ":Telescope buffers<cr>")
-map("n", "<leader>fk", ":Telescope keymaps<cr>")
-map("n", "<leader>fc", ":Telescope colorscheme<cr>")
-map("n", "<leader>fd", ":Telescope file_browser<cr>")
-
--- PackerCommands
-map("n", "<leader>ps", ":PackerSync<cr>")
-map("n", "<leader>pS", ":PackerStatus<cr>")
-map("n", "<leader>pc", ":PackerCompile<cr>")
-map("n", "<leader>pC", ":PackerClean<cr>")
-
--- Float - terminal with Lspsaga
-map("n", "<C-t>", [[:Lspsaga open_floaterm<cr>]])
-map("t", "jj", [[<C-\><C-n>]])
-map("t", "<C-t>", [[<C-\><C-n>:Lspsaga close_floaterm<cr>]])
+return register

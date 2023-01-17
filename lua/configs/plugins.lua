@@ -1,10 +1,3 @@
-vim.cmd([[
-  augroup packer_user_config
-    autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerSync
-  augroup end
-]])
-
 local status, packer = pcall(require, "packer")
 if not status then
   return
@@ -19,7 +12,7 @@ packer.init({
 })
 
 return packer.startup(function(use)
-  -- make packer setu itself
+  -- make packer setup itself
   use({
     "wbthomason/packer.nvim",
     module = "packer",
@@ -31,13 +24,14 @@ return packer.startup(function(use)
 
   --mostly used for many plugins
   use({
-    "nvim-lua/plenary.nvim", --[[ opt = true, ]]
+    "nvim-lua/plenary.nvim",
     module = "plenary",
   })
   use({ "nvim-lua/popup.nvim", opt = true, module = "popup" })
 
   -- For fast open neovim
   use({ "lewis6991/impatient.nvim" })
+
   -- Chechk startup time
   use({ "dstein64/vim-startuptime", cmd = "StartupTime" })
 
@@ -45,33 +39,14 @@ return packer.startup(function(use)
   use({
     "nvim-tree/nvim-web-devicons",
     opt = true,
-    event = "VimEnter",
-    requires = { { "DaikyXendo/nvim-material-icon", opt = true, module = "nvim-material-icon" } },
+    event = "UIEnter",
+    requires = { { "DaikyXendo/nvim-material-icon", after = "nvim-web-devicons", module = "nvim-material-icon" } },
     config = function()
       require("configs.others").devicons()
     end,
   })
 
-  -- colorscheme
-  --use({
-  --"folke/tokyonight.nvim",
-  --setup = function()
-  --require("core.commands").on_file_open "tokyonight.nvim"
-  --end,
-  --config = function()
-  --require("configs.tokyonight")
-  --end,
-  --})
-
-  use({
-    "NvChad/nvim-colorizer.lua",
-    opt = true,
-    cmd = "ColorizerToggle",
-    config = function()
-      require("colorizer").setup()
-    end,
-  })
-
+  -- syntax highlighting
   use({
     "nvim-treesitter/nvim-treesitter",
     module = "nvim-treesitter",
@@ -87,53 +62,75 @@ return packer.startup(function(use)
     end,
   })
 
+  -- for html file or js family
   use({
     "windwp/nvim-ts-autotag",
     after = "nvim-treesitter",
   })
 
+  -- better pairs highlighting
   use({
     "p00f/nvim-ts-rainbow",
     after = "nvim-treesitter",
   })
 
+  -- not really used to be honest
   use({
     "JoosepAlviste/nvim-ts-context-commentstring",
     after = "nvim-treesitter",
   })
 
+  -- for known what the syntax highlight
+  use({
+    "nvim-treesitter/playground",
+    after = "nvim-treesitter",
+  })
+
+  -- bstter file explorer with buffer and git
   use({
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v2.x",
     module = "neo-tree",
     cmd = require("core.commands").neo_tree,
     config = function()
-      require("configs.tree")
+      require("configs.neo-tree")
     end,
     requires = { { "MunifTanjim/nui.nvim", opt = true, module = "nui" } },
   })
 
+  -- find file faster
   use({
     "nvim-telescope/telescope.nvim",
     opt = true,
     cmd = "Telescope",
-    -- cmd = require("core.commands").telescope, --[[ require("core.commands").telescope ]]
-    module = "telescope",
     config = function()
       require("configs.telescope")
     end,
   })
 
+  -- find directory
   use({
     "nvim-telescope/telescope-file-browser.nvim",
-    opt = true,
     after = "telescope.nvim",
-    config = function()
-      require("telescope").load_extension("file_browser")
-    end,
-    -- module = "file_browser",
+    module = { "telescope", "file_browser" },
   })
 
+  -- find projects
+  use({
+    "ahmedkhalf/project.nvim",
+    after = "telescope.nvim",
+    module = { "telescope", "projects" },
+    config = function()
+      require("project_nvim").setup({
+        detection_methods = { "pattern" },
+        -- show_hidden = true,
+        silent_chdir = true,
+      })
+      require("telescope").load_extension("projects")
+    end,
+  })
+
+  -- builtin lsp
   use({
     "neovim/nvim-lspconfig",
     opt = true,
@@ -146,6 +143,7 @@ return packer.startup(function(use)
     end,
   })
 
+  -- diagnostic lsp ui
   use({
     "glepnir/lspsaga.nvim",
     module = "lspsaga",
@@ -155,6 +153,17 @@ return packer.startup(function(use)
     end,
   })
 
+  -- use for support lsp builtin
+  use({
+    "jose-elias-alvarez/null-ls.nvim",
+    module = "null-ls",
+    after = "nvim-lspconfig",
+    config = function()
+      require("configs.lsp.null-ls")
+    end,
+  })
+
+  -- helper for downloader like lsp, linter, formatter, and debug
   use({
     "williamboman/mason.nvim",
     opt = true,
@@ -165,15 +174,7 @@ return packer.startup(function(use)
     end,
   })
 
-  use({
-    "jose-elias-alvarez/null-ls.nvim",
-    module = "null-ls",
-    after = "nvim-lspconfig",
-    config = function()
-      require("configs.lsp.null-ls")
-    end,
-  })
-
+  -- helper for download lsp
   use({
     "williamboman/mason-lspconfig.nvim",
     opt = true,
@@ -184,6 +185,18 @@ return packer.startup(function(use)
     end,
   })
 
+  -- To know color
+  use({
+    "NvChad/nvim-colorizer.lua",
+    opt = true,
+    cmd = "ColorizerToggle",
+    after = "nvim-lspconfig",
+    config = function()
+      require("colorizer").setup()
+    end,
+  })
+
+  -- navigation to know current cursor in winbar
   use({
     "SmiteshP/nvim-navic",
     opt = true,
@@ -197,8 +210,7 @@ return packer.startup(function(use)
     end,
   })
 
-  -- Completion
-
+  -- Completion and snippets
   use({
     "rafamadriz/friendly-snippets",
     opt = true,
@@ -212,7 +224,7 @@ return packer.startup(function(use)
     module = "cmp",
     after = "friendly-snippets",
     config = function()
-      require("configs.completion")
+      require("configs.cmp")
     end,
   })
 
@@ -252,40 +264,32 @@ return packer.startup(function(use)
     after = "nvim-cmp",
   })
 
+  -- ui of bufferline
   use({
     "akinsho/bufferline.nvim",
-    disable = true,
-    tah = "v3.*",
-    event = "UIEnter",
+    -- disable = true,
+    tag = "v3.*",
+    event = "BufNew",
     config = function()
       require("configs.others").bufferline()
     end,
   })
 
-  use({
-    "nvim-lualine/lualine.nvim",
-    disable = true,
-    event = "UIEnter",
-    config = function()
-      require("configs.lualine")
-    end,
-  })
-
+  -- use for markdown
   use({
     "iamcco/markdown-preview.nvim",
     run = "cd app && npm install",
-    cmd = "MarkdownPreview",
+    cmd = "MarkdownPreviewToggle",
     setup = function()
       vim.g.mkdp_filetypes = { "markdown" }
     end,
     ft = { "markdown" },
   })
 
+  --helper for what we add or delete or change shown in left
   use({
     "lewis6991/gitsigns.nvim",
     opt = true,
-    -- cmd = "Gitsigns",
-    -- module = "gitsigns",
     ft = "gitcommit",
     setup = function()
       require("core.commands").gitsigns()
@@ -295,6 +299,7 @@ return packer.startup(function(use)
     end,
   })
 
+  -- helper indentline
   use({
     "lukas-reineke/indent-blankline.nvim",
     opt = true,
@@ -306,6 +311,7 @@ return packer.startup(function(use)
     end,
   })
 
+  -- to help fast code
   use({
     "windwp/nvim-autopairs",
     after = "nvim-cmp",
@@ -314,6 +320,7 @@ return packer.startup(function(use)
     end,
   })
 
+  -- faster commenr
   use({
     "numToStr/Comment.nvim",
     module = { "Comment", "Comment.api" },
@@ -323,16 +330,33 @@ return packer.startup(function(use)
     end,
   })
 
+  -- better scroll
   use({
     "karb94/neoscroll.nvim",
+    opt = true,
     disable = true,
     module = "neoscroll",
-    after = "nvim-treesitter",
+    keys = {
+      "<C-u>",
+      "<C-d>",
+      "<C-b>",
+      "<C-f>",
+      "<C-y>",
+      "<C-e>",
+      "zt",
+      "zz",
+      "zb",
+      "Up",
+      "Down",
+      "<SrollWhellUp>",
+      "<SrollWhellDown>",
+    },
     config = function()
       require("configs.others").neoscroll()
     end,
   })
 
+  -- dashboard when opening neovim
   use({
     "goolord/alpha-nvim",
     cmd = "Alpha",
@@ -343,21 +367,32 @@ return packer.startup(function(use)
     end,
   })
 
+  -- don't forgot ksymaps
   use({
     "folke/which-key.nvim",
     cmd = "WhichKey",
-    key = { "<leader>", "`", "'", "@", '"' },
-    after = "indent-blankline.nvim",
+    keys = { "<leader>", "`", "'", "@", '"' },
     config = function()
       require("configs.whichkey")
     end,
   })
 
+  -- better escape
   use({
     "max397574/better-escape.nvim",
     event = "InsertEnter",
     config = function()
       require("configs.others").better_escape()
     end,
+  })
+
+  -- better develop neovim with lua
+  use({
+    "folke/neodev.nvim",
+    module = "neodev",
+    config = function()
+      require("neodev").setup()
+    end,
+    ft = "lua",
   })
 end)

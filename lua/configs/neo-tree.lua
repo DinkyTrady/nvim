@@ -8,10 +8,10 @@ local options = {
     winbar = true,
     -- statusline = true,
   },
-  popup_border_style = "rounded",
+  popup_border_style = "single",
   default_component_configs = {
     icon = {
-      folder_empty = "",
+      folder_empty = " ",
     },
     git_status = {
       symbols = {
@@ -23,7 +23,7 @@ local options = {
     },
   },
   window = {
-    width = 35,
+    width = 30,
     mappings = {
       -- disable default mappings
       ["<space>"] = "",
@@ -41,6 +41,9 @@ local options = {
   filesystem = {
     filtered_items = {
       visible = true, -- when true, they will just be displayed differently than normal items
+      hide_by_name = {
+        "node_modules",
+      },
       hide_dotfiles = false,
       hide_gitignored = false,
       hide_hidden = true, -- only works on Windows for hidden files/directories

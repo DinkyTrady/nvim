@@ -12,7 +12,7 @@ end
 
 vim.api.nvim_set_hl(0, "ModifColors", { fg = "#98c379" })
 
-M.full = function()
+M.config = function()
   -- to get icon and colors it
   local filename = vim.fn.expand("%:t")
   local extension = vim.fn.expand("%:e")
@@ -31,10 +31,6 @@ M.full = function()
   -- will return value we all declared before
 
   local winbar_filetype_exclude = {
-    "bash",
-    "no name",
-    "Empty",
-    "term",
     "help",
     "terminal",
     "packer",
@@ -45,24 +41,37 @@ M.full = function()
     "toggleterm",
     "lspsagaoutline",
     "startuptime",
+    "tsplayground",
+    "telescope",
+    "noice",
+    "notify",
     "",
   }
 
-  if vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype) then
+  -- local winbar_exclude_term = {
+  --   "bash",
+  --   "zsh",
+  --   "fish",
+  -- }
+
+  if
+    vim.tbl_contains(winbar_filetype_exclude, vim.bo.filetype)--[[  or vim.tbl_contains(winbar_exclude_term, filename) ]]
+  then
     return " "
   else
-    return " "
-      .. "%#hl_icon#"
-      .. file_icon
-      .. " "
-      .. "%*"
-      .. name_file
-      .. "%*"
-      .. "%#ModifColors#"
-      .. modif
-      .. "%*"
-      .. were
+    return table.concat({
+      " " .. "%#hl_icon#" .. file_icon .. " " .. "%*" .. name_file .. "%*" .. "%#ModifColors#" .. modif .. "%*" .. were,
+    })
   end
+end
+
+M.setup = function()
+  vim.opt.winbar = "%{%v:lua.require('others.winbar').config()%}"
+  -- vim.api.nvim_create_autocmd("LspAttach", {
+  --   callback = function()
+  --     vim.opt.winbar = "%{%v:lua.require'others.winbar'.config()%}"
+  --   end,
+  -- })
 end
 
 return M

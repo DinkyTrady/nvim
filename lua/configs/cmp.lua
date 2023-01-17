@@ -1,5 +1,3 @@
-vim.opt.completeopt = { "menuone", "menu", "noselect" }
-
 local cmp_ok, cmp = pcall(require, "cmp")
 if not cmp_ok then
   return
@@ -9,7 +7,6 @@ local luasnip_ok, luasnip = pcall(require, "luasnip")
 if not luasnip_ok then
   return
 end
-
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -47,24 +44,23 @@ local kind_icons = {
 cmp.setup({
   snippet = {
     expand = function(args)
-      require("luasnip").lsp_expand(args.body) -- For `luasnip` users.
+      luasnip.lsp_expand(args.body)
     end,
   },
   window = {
-    -- completion = cmp.config.window.bordered(),
+    completion = {
+      border = "single",
+      winhighlight = "Normal:Normal,FloatBorder:NormalFloat,CursorLine:PmenuSel,Search:None",
+    },
     documentation = cmp.config.window.bordered(),
   },
   formatting = {
-    format = function(entry, vim_item)
-      -- Kind icons
-      vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind)
-      vim_item.menu = ({
-        buffer = "[BUF]",
-        nvim_lsp = "[LSP]",
-        luasnip = "[SNIP]",
-        nvim_lua = "[Lua]",
-        latex_symbols = "[LTX]",
-      })[entry.source.name]
+    fields = { "kind", "abbr", "menu" },
+    format = function(_, vim_item)
+      local kind = vim_item.kind
+      local icons = string.format("%s", kind_icons[kind])
+      vim_item.kind = (icons or "?") .. " "
+      vim_item.menu = " (" .. kind .. ") "
       vim_item.abbr = string.sub(vim_item.abbr, 1, 25)
       return vim_item
     end,
@@ -72,13 +68,14 @@ cmp.setup({
   mapping = {
     ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
     ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-s>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
     ["<C-y>"] = cmp.config.disable,
     ["<C-e>"] = cmp.mapping({
       i = cmp.mapping.abort(),
       c = cmp.mapping.close(),
     }),
     ["<CR>"] = cmp.mapping.confirm({ select = true }),
+
     --Down or Next
     ["<Down>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -98,6 +95,7 @@ cmp.setup({
         fallback()
       end
     end, { "i", "s" }),
+
     -- Up or Prev
     ["<Up>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -117,9 +115,19 @@ cmp.setup({
     end, { "i", "s" }),
   },
   sources = cmp.config.sources({
-    { name = "nvim_lsp", priority = 30 },
+    { name = "nvim_lsp" },
     { name = "nvim_lsp_signature_help" },
-    { name = "luasnip", priority = 40 }, -- For luasnip users.
-    { name = "buffer", priority = 30 },
+    { name = "luasnip" },
+    { name = "buffer" },
   }),
+  experimental = {
+    ghost_text = true,
+  },
+})
+
+cmp.setup.cmdline({ "/", "?" }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = "buffer" },
+  },
 })

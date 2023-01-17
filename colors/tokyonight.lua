@@ -1,9 +1,9 @@
-vim.g.colors_name = "tokyonight_custom"
+vim.g.colors_name = "tokyonight"
 
 require("core.colorscheme").setup({
   white = "#c0caf5",
-  darker_black = "#16161e",
-  black = "#1a1b26", --  nvim bg
+  darker_black = "#1f2335",
+  black = "#24283b", --  nvim bg
   black2 = "#1f2336",
   one_bg = "#24283b",
   one_bg2 = "#414868",
@@ -27,11 +27,11 @@ require("core.colorscheme").setup({
   teal = "#1abc9c",
   orange = "#ff9e64",
   cyan = "#7dcfff",
-  statusline_bg = "#1d1e29",
+  statusline_bg = "#1c1b21",
   lightbg = "#32333e",
   pmenu_bg = "#7aa2f7",
-  folder_bg = "#7aa2f7",
-  base00 = "#1A1B26",
+  folder_bg = "#ff9e64",
+  base00 = "#24283b",
   base01 = "#3b4261",
   base02 = "#3b4261",
   base03 = "#545c7e",
@@ -49,8 +49,16 @@ require("core.colorscheme").setup({
   base0F = "#c0caf5",
 })
 
-if vim.cmd([[colorscheme tokyonight_custom]]) then
-  -- vim.cmd([[highlight @variable guifg=#f7768e]])
-  vim.cmd([[highlight @parameter guifg=#c0caf5]])
-  vim.cmd([[highlight @function.builtin guifg=#7dcfff]])
+if vim.cmd([[colorscheme tokyonight]]) then
+  local hl = vim.api.nvim_set_hl
+  hl(0, "@variable.builtin", { fg = "#f7768e" })
+  hl(0, "@constructor", { fg = "#bb9af7" })
+  hl(0, "@parameter", { fg = "#e0af68" })
+  hl(0, "@property", { fg = "#73daca" })
+  hl(0, "@function.builtin", { fg = "#2ac3de" })
+  hl(0, "@keyword.return", { fg = "#9d7cd8", italic = true })
+  hl(0, "@keyword", { fg = "#9d7cd8", italic = true })
+  hl(0, "@keyword.operator", { fg = "#7dcfff", bold = true })
+  hl(0, "@field", { link = "@property" })
+  -- hl(0, "Search", { bg = "#3d59a1" })
 end
