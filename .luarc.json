@@ -1,14 +1,4 @@
 {
     "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-    "Lua.diagnostics.disable": [
-        "cast-local-type",
-        "miss-field",
-        "different-requires",
-        "deprecated"
-    ],
-    "Lua.diagnostics.globals": [
-        "vim",
-        "nvim_create_augroups"
-    ],
     "Lua.workspace.checkThirdParty": false
 }
