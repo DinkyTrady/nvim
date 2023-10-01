@@ -64,10 +64,6 @@ function M.setup()
       })
     end
 
-    -- if client.server_capabilities.semanticTokensProvider then
-    --   client.server_capabilities.semanticTokensProvider = nil
-    -- end
-
     if client.server_capabilities.documentHighlightProvider then
       vim.api.nvim_create_augroup("lsp_document_highlight", {
         clear = false,
