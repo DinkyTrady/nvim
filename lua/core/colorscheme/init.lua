@@ -13,7 +13,6 @@ function M.with_config(config)
     telescope = true,
     indentblankline = true,
     notify = false,
-    ts_rainbow = true,
     cmp = true,
     illuminate = false,
     nvimtree = false,
@@ -44,6 +43,7 @@ function M.setup(colors, config)
 
   --indent-blankline depracted!
   if M.config.indentblankline then
+    hl("@ibl.scope.underline.1", { bg = M.colors.one_bg3 })
     hl("IndentBlankLineChar", { fg = M.colors.grey_fg })
     hl("indentblankline", { fg = M.colors.grey_fg })
   end
@@ -323,17 +323,6 @@ function M.setup(colors, config)
   hl("@lsp.type.type", { link = "@type" })
   hl("@lsp.type.typeParamater", { link = "TypeDef" })
   hl("@lsp.type.variable", { link = "@variable" })
-
-  if M.config.ts_rainbow then
-    --ts rainbow
-    hl("rainbowcol1", { fg = M.colors.yellow })
-    hl("rainbowcol2", { fg = M.colors.blue })
-    hl("rainbowcol3", { fg = M.colors.red })
-    hl("rainbowcol4", { fg = M.colors.green })
-    hl("rainbowcol5", { fg = M.colors.orange })
-    hl("rainbowcol6", { fg = M.colors.base0E })
-    hl("rainbowcol7", { fg = M.colors.base0F })
-  end
 
   if M.config.alpha then
     --Alpha

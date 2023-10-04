@@ -14,7 +14,6 @@ M.config = {
   dependencies = {
     "windwp/nvim-ts-autotag",
     "JoosepAlviste/nvim-ts-context-commentstring",
-    "p00f/nvim-ts-rainbow",
   },
 }
 
@@ -40,12 +39,6 @@ function M.setup()
     },
     indent = {
       enable = true,
-    },
-    rainbow = {
-      enable = true,
-      extended_mode = false,
-      max_file_lines = nil,
-      disable = { "html" },
     },
     autotag = {
       enable = true,
