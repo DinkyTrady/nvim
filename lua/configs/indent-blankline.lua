@@ -26,9 +26,6 @@ function M.setup()
     indent = {
       char = "⎜",
     },
-    show_current_context = true,
-    show_current_context_start = true,
-    show_end_of_line = true,
   })
   local hooks = require("ibl.hooks")
   hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
