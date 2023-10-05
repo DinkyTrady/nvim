@@ -110,29 +110,6 @@ local autocmds = {
       end,
     },
   },
-  shada = {
-    ["VimEnter"] = {
-      "LazyVimStarted",
-      function()
-        vim.opt.shada = false
-        vim.g.syntax_on = false
-      end,
-    },
-    ["BufRead"] = {
-      "LazyDone",
-      function()
-        vim.opt.shada = true
-        vim.g.syntax_on = true
-      end,
-    },
-    ["VimLeavePre"] = {
-      "*",
-      function()
-        vim.opt.shada = false
-        vim.g.syntax_on = false
-      end,
-    },
-  },
 }
 
 local aucmnds = function(group)

@@ -27,7 +27,7 @@ local settings = {
   ruler = false,
   pumheight = 15,
   scrolloff = 5,
-  sidescrolloff = 5,
+  sidescrolloff = 8,
   signcolumn = "yes",
   splitbelow = true,
   splitright = true,
@@ -36,7 +36,6 @@ local settings = {
   writebackup = false,
   wrap = false,
   lazyredraw = true,
-  list = true,
 }
 o.shortmess:append("sI")
 o.whichwrap:append("<,>,[,],h,l")
