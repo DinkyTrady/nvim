@@ -89,6 +89,11 @@ function M.setup()
     lsp[lsp_name].setup({
       on_attach = on_attach,
       capabilities = capabilities,
+      on_init = {
+        preferencesz = {
+          disableSuggestions = true,
+        },
+      },
     })
   end
 
