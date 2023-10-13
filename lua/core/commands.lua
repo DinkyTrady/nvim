@@ -21,24 +21,12 @@ local autocmds = {
     },
   },
   terminal_job = {
-    ["TermOpen"] = {
-      "*",
+    [{ "BufEnter", "WinEnter", "TermOpen" }] = {
+      "term://*",
       function()
-        cmd("startinsert | setlocal listchars= nonumber norelativenumber")
+        cmd("startinsert! | setlocal nobuflisted listchars= nonumber norelativenumber")
       end,
     },
-    ["TermEnter"] = {
-      "*",
-      function()
-        cmd("startinsert | setlocal listchars= nonumber norelativenumber")
-      end,
-    },
-    -- ["BufEnter"] = {
-    -- 	"term://*",
-    -- 	function()
-    -- 		cmd("startinsert! | setlocal listchars= nonumber norelativenumber")
-    -- 	end,
-    -- },
   },
   restore_cursor = {
     ["BufRead"] = {

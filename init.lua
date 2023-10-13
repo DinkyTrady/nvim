@@ -36,7 +36,6 @@ require("lazy").setup("plugins", {
     -- only generate markdown helptags for plugins that dont have docs
     skip_if_doc_exists = true,
   },
-  install = { colorscheme = { "tokyonight" } },
 })
 
 require("core.ui")
