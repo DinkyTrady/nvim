@@ -31,7 +31,7 @@ null_ls.setup({
         buffer = bufnr,
         callback = function()
           -- on 0.7, you should use vim.lsp.buf.formatting_sync() instead
-          vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 2000 })
+          vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 1500 })
         end,
       })
     end

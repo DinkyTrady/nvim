@@ -66,8 +66,8 @@ local autocmds = {
         "telescope",
         "neo-tree",
         "neo-tree-popup",
-        "lspsagacodeaction",
-        "lspsagafinder",
+        "saga_codeaction",
+        "sagafinder",
         "sagarename",
         "lazy",
         "mason",
@@ -84,17 +84,11 @@ local autocmds = {
       end,
     },
   },
-  chechk_html = {
-    [{ "BufReadPre", "BufEnter" }] = {
-      "*.html",
+  statusline = {
+    ["UIEnter"] = {
+      "*",
       function()
-        vim.opt.wrap = true
-      end,
-    },
-    ["BufLeave"] = {
-      "*.html",
-      function()
-        vim.opt.wrap = false
+        require("core.ui.statusline").setup()
       end,
     },
   },

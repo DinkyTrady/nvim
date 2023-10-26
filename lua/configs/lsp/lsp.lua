@@ -55,14 +55,14 @@ function M.setup()
       client.server_capabilities.documentFormattingProvider = false
     end
 
-    if client.server_capabilities.documentFormattingProvider then
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        group = "LspFormatting",
-        callback = function()
-          vim.lsp.buf.format()
-        end,
-      })
-    end
+    -- if client.server_capabilities.documentFormattingProvider then
+    --   vim.api.nvim_create_autocmd("BufWritePre", {
+    --     group = "LspFormatting",
+    --     callback = function()
+    --       vim.lsp.buf.format()
+    --     end,
+    --   })
+    -- end
 
     if client.server_capabilities.documentHighlightProvider then
       vim.api.nvim_create_augroup("lsp_document_highlight", {
@@ -94,6 +94,11 @@ function M.setup()
           disableSuggestions = true,
         },
       },
+      -- settings = {
+      --   implicitProjectConfiguration = {
+      --     checkJs = true,
+      --   },
+      -- },
     })
   end
 

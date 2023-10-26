@@ -53,7 +53,7 @@ M.term_exec = function()
     },
     on_submit = function(item)
       if item.text == "Top" then
-        Splitting("top", 15)
+        Splitting("top", 10)
       end
 
       if item.text == "Right" then
@@ -61,7 +61,7 @@ M.term_exec = function()
       end
 
       if item.text == "Bottom" then
-        Splitting("bottom", 15)
+        Splitting("bottom", 10)
       end
 
       if item.text == "Left" then
