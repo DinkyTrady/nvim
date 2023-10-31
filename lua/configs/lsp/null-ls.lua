@@ -3,10 +3,10 @@ if not status then
   return
 end
 
-local diagnostic = null_ls.builtins.diagnostics
-local format = null_ls.builtins.formatting
+-- local diagnostic = null_ls.builtins.diagnostics
+-- local format = null_ls.builtins.formatting
 -- local action = null_ls.builtins.code_actions
-local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
+-- local augroup = vim.api.nvim_create_augroup("LspFormatting", { clear = true })
 
 null_ls.setup({
   debug = true,
