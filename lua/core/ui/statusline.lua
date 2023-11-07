@@ -103,7 +103,7 @@ local filetype = function()
   end
 
   if filename == "bash" then
-    return "%#sepicon#" .. " " .. "%#hl_icon#" .. "  Terminal " .. "%*" .. "%#sepicon#" .. " " .. "%*"
+    return "%#sepicon#" .. " " .. "%#hl_icon#" .. "  Terminal " .. "%*" .. "%#sepicon#" .. " " .. "%*"
   end
 
   if vim.bo.filetype == "alpha" then
@@ -128,8 +128,8 @@ local diagnostics = function()
 
   errors = (errors and errors > 0) and ("%#DiagnosticError#" .. "  " .. errors .. " ") or ""
   warnings = (warnings and warnings > 0) and ("%#DiagnosticWarn#" .. "  " .. warnings .. " ") or ""
-  hints = (hints and hints > 0) and ("%#DiagnosticHint#" .. "  " .. hints .. " ") or ""
-  info = (info and info > 0) and ("%#DiagnosticInfo#" .. "  " .. info .. " ") or ""
+  hints = (hints and hints > 0) and ("%#DiagnosticHint#" .. " 󰌵 " .. hints .. " ") or ""
+  info = (info and info > 0) and ("%#DiagnosticInfo#" .. "  " .. info .. " ") or ""
 
   return errors .. warnings .. hints .. info .. "%*"
 end

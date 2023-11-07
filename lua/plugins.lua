@@ -10,17 +10,8 @@ return {
   },
   {
     "NvChad/nvim-colorizer.lua",
-    init = function()
-      require("core.commands").lazyload("nvim-colorizer.lua")
-    end,
+    cmd = "ColorizerToggle",
     config = true,
-  },
-  {
-    "folke/neodev.nvim",
-    config = function()
-      require("neodev").setup()
-    end,
-    ft = "lua",
   },
   { require("configs.alpha").config },
   { require("configs.gitsigns").config },

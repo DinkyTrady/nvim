@@ -55,14 +55,14 @@ function M.setup()
       client.server_capabilities.documentFormattingProvider = false
     end
 
-    -- if client.server_capabilities.documentFormattingProvider then
-    --   vim.api.nvim_create_autocmd("BufWritePre", {
-    --     group = "LspFormatting",
-    --     callback = function()
-    --       vim.lsp.buf.format()
-    --     end,
-    --   })
-    -- end
+    if client.server_capabilities.documentFormattingProvider then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = "LspFormatting",
+        callback = function()
+          vim.lsp.buf.format()
+        end,
+      })
+    end
 
     if client.server_capabilities.documentHighlightProvider then
       vim.api.nvim_create_augroup("lsp_document_highlight", {
@@ -106,9 +106,18 @@ function M.setup()
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
-      lua = {
-        completion = {
-          callSnippet = "Replace",
+      Lua = {
+        diagnostics = {
+          globals = { "vim" },
+        },
+        workspace = {
+          library = {
+            [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+            [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+            [vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
+          },
+          maxPreload = 100000,
+          preloadFileSize = 10000,
         },
       },
     },

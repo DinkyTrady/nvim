@@ -28,15 +28,15 @@ function M.setup()
   }
 
   db.section.buttons.val = {
-    db.button("f", "  Find files", ":Telescope find_files<CR>"),
-    db.button("r", "  Recently files", ":Telescope oldfiles<CR>"),
+    db.button("f", "󰱽  Find files", ":Telescope find_files<CR>"),
+    db.button("r", "󱀸  Recently files", ":Telescope oldfiles<CR>"),
     db.button("n", "  New file", ":ene <BAR> startinsert<CR>"),
-    db.button("m", "  Mappings", ":Telescope keymaps<CR>"),
+    db.button("m", "󰥻  Mappings", ":Telescope keymaps<CR>"),
     db.button("e", "  Explore Tree", ":NeoTreeRevealToggle<CR>"),
     db.button("d", "  Find Directory", ":Telescope file_browser<CR>"),
     db.button("p", "  Find Projects", ":Telescope projects<CR>"),
     db.button("c", "  Configuration", ":e $MYVIMRC<CR>"),
-    db.button("q", "  Quit Neovim", ":q<CR>"),
+    db.button("q", "󰅙  Quit Neovim", ":q<CR>"),
   }
 
   db.section.footer.opts.hl = "AlphaFooter"

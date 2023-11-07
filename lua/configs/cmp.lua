@@ -32,31 +32,31 @@ function M.setup()
   end
 
   local kind_icons = {
-    Text = " ",
-    Method = " ",
-    Function = " ",
-    Constructor = " ",
-    Field = " ",
-    Variable = " ",
-    Class = "",
-    Interface = " ",
-    Module = " ",
-    Property = " ",
-    Unit = " ",
-    Value = " ",
-    Enum = " ",
-    Keyword = " ",
-    Snippet = " ",
-    Color = " ",
-    File = " ",
-    Reference = " ",
-    Folder = " ",
-    EnumMember = " ",
-    Constant = " ",
-    Struct = " ",
-    Event = " ",
-    Operator = " ",
-    TypeParameter = " ",
+    Text = "  ",
+    Method = "  ",
+    Function = "  ",
+    Constructor = "  ",
+    Field = "  ",
+    Variable = "  ",
+    Class = "  ",
+    Interface = "  ",
+    Module = "  ",
+    Property = "  ",
+    Unit = "  ",
+    Value = "  ",
+    Enum = "  ",
+    Keyword = "  ",
+    Snippet = "  ",
+    Color = "  ",
+    File = "  ",
+    Reference = "  ",
+    Folder = "  ",
+    EnumMember = "  ",
+    Constant = "  ",
+    Struct = "  ",
+    Event = "  ",
+    Operator = "  ",
+    TypeParameter = "  ",
   }
 
   cmp.setup({
@@ -77,7 +77,7 @@ function M.setup()
       format = function(_, vim_item)
         local kind = vim_item.kind
         local icons = string.format("%s", kind_icons[kind])
-        vim_item.kind = (icons or "?") .. " "
+        vim_item.kind = (icons or "?")
         vim_item.menu = " (" .. kind .. ") "
         vim_item.abbr = string.sub(vim_item.abbr, 1, 25)
         return vim_item
@@ -85,8 +85,7 @@ function M.setup()
     },
     mapping = {
       ["<C-b>"] = cmp.mapping(cmp.mapping.scroll_docs(-4), { "i", "c" }),
-      ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
-      ["<C-s>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+      ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(4), { "i", "c" }),
       ["<C-y>"] = cmp.config.disable,
       ["<C-e>"] = cmp.mapping({
         i = cmp.mapping.abort(),
@@ -95,13 +94,13 @@ function M.setup()
       ["<CR>"] = cmp.mapping.confirm({ select = true }),
 
       --Down or Next
-      ["<Down>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        else
-          fallback()
-        end
-      end, { "i", "s" }),
+      -- ["<Down>"] = cmp.mapping(function(fallback)
+      --   if cmp.visible() then
+      --     cmp.select_next_item()
+      --   else
+      --     fallback()
+      --   end
+      -- end, { "i", "s" }),
       ["<TAB>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
@@ -115,13 +114,13 @@ function M.setup()
       end, { "i", "s" }),
 
       -- Up or Prev
-      ["<Up>"] = cmp.mapping(function(fallback)
-        if cmp.visible() then
-          cmp.select_prev_item()
-        else
-          fallback()
-        end
-      end, { "i", "s" }),
+      -- ["<Up>"] = cmp.mapping(function(fallback)
+      --   if cmp.visible() then
+      --     cmp.select_prev_item()
+      --   else
+      --     fallback()
+      --   end
+      -- end, { "i", "s" }),
       ["<S-TAB>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
