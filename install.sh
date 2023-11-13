@@ -29,6 +29,6 @@ echo "Congratulations, depedencies has successfully installed!"
 
 echo "Now, Clone repos"
 
-git clone https://github.com/DinkyTrady --depth=1 $HOME/.config/nvim
+git clone https://github.com/DinkyTrady/nvim --depth=1 $HOME/.config/nvim
 
 nvim
