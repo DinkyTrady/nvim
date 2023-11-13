@@ -159,7 +159,7 @@ local git = function()
 end
 
 local dir = function()
-  local dir_icon = " "
+  local dir_icon = "󱧽 "
   local dir_name = " " .. fn.fnamemodify(fn.getcwd(), ":t") .. " "
   return (
     vim.o.columns >= 100

@@ -3,5 +3,6 @@
   "Lua.workspace.checkThirdParty": false,
   "diagnostics.globals": [
     "vim"
-  ]
+  ],
+    "workspace.checkThirdParty": "Disable"
 }

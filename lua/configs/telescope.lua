@@ -44,7 +44,11 @@ function M.setup()
         height = 0.80,
       },
       mappings = {
-        n = { ["q"] = require("telescope.actions").close },
+        n = {
+          ["q"] = require("telescope.actions").close,
+          -- ["<C-j>"] = require("telescope.actions").down,
+          -- ["<C-k>"] = require("telescope.actions").up,
+        },
       },
       file_ignore_patterns = { "node_modules" },
     },

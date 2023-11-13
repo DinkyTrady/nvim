@@ -2,7 +2,7 @@ local M = {}
 
 M.config = {
   "nvim-neo-tree/neo-tree.nvim",
-  branch = "v2.x",
+  branch = "v3.x",
   cmd = require("core.commands").neo_tree,
   config = function()
     require("configs.neo-tree").setup()
@@ -19,6 +19,11 @@ function M.setup()
   local options = {
     source_selector = {
       winbar = true,
+      sources = {
+        { source = "filesystem", display_name = "  Files" },
+        { source = "buffers", display_name = " 󱌣 Buffers" },
+        { source = "git_status", display_name = " 󰊢 Git" },
+      },
     },
     popup_border_style = "single",
     default_component_configs = {
