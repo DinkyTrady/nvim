@@ -8,7 +8,7 @@ function M.setup()
 
   masonlsp.setup({
     ensure_installed = { "html", "cssls", "tsserver", "emmet_ls", "jsonls" },
-    automatic_installation = false,
+    automatic_installation = true,
   })
 end
 
