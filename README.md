@@ -26,5 +26,5 @@ Thanks for vist my repository and intrested to use my neovim setup.
 - **Do this in your terminal**
 
 ```bash
-git clone https://github.com/DinkyTrady/nvim ~/.config/nvim --depth 1 && nvim
+bash <(curl -s https://raw.githubusercontent.com/DinkyTrady/nvim/main/install.sh)
 ```
