@@ -4,12 +4,9 @@ Thanks for vist my repository and intrested to use my neovim setup.
 
 - **Note**
   - In here the **_leader_** change to **_space_**, _remember it's only work in normal mode_.
-  - If you want save use 'space + ww'
-  - Quit neovim use 'space + qq'
-  - Force quit (ignore change file before saved) use 'space + qf'
-  - To save and quit use 'space + wq'
-  - Reset neovim (not quit neovim and open it) use 'space + r'
-    > For another information please visit **[wiki](https://github.com/DinkyTrady/nvim/wiki).**
+  - If you want save use 'ctrl + s'
+  - Reset neovim (not quit neovim and open it) use 'space + r' `note: only work in lua file`
+    > for detail mappings open [mappings](https://github.com/DinkyTrady/nvim/blob/main/lua/core/mappings.lua)
 
 ## ⚠️ Requirements
 
