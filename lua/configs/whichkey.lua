@@ -2,8 +2,8 @@ local M = {}
 
 M.config = {
   "folke/which-key.nvim",
-  -- event = "VeryLazy",
-  keys = { "<leader>", "," },
+  event = "VeryLazy",
+  -- keys = { "<leader>", "," },
   config = function()
     require("configs.whichkey").setup()
   end,
@@ -33,11 +33,11 @@ function M.setup()
       scroll_down = "<C-j>",
       scroll_up = "<C-k>",
     },
-    triggers_blacklist = {
+    --[[ triggers_blacklist = {
       i = { "j", "j" },
       n = { "z", "g", "d" },
       v = { "j", "k" },
-    },
+    }, ]]
   }
 
   local opts = {
