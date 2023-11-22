@@ -31,23 +31,10 @@ function M.setup()
     defaults = {
       prompt_prefix = "   ",
       sorting_strategy = "ascending",
-      layout_strategy = "horizontal",
-      layout_config = {
-        horizontal = {
-          prompt_position = "top",
-          preview_width = 0.55,
-          results_width = 0.8,
-        },
-        vertical = {
-          mirror = false,
-        },
-        height = 0.80,
-      },
+      layout_strategy = "flex",
       mappings = {
         n = {
           ["q"] = require("telescope.actions").close,
-          -- ["<C-j>"] = require("telescope.actions").down,
-          -- ["<C-k>"] = require("telescope.actions").up,
         },
       },
       file_ignore_patterns = { "node_modules" },
