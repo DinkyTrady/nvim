@@ -33,11 +33,6 @@ function M.setup()
       scroll_down = "<C-j>",
       scroll_up = "<C-k>",
     },
-    --[[ triggers_blacklist = {
-      i = { "j", "j" },
-      n = { "z", "g", "d" },
-      v = { "j", "k" },
-    }, ]]
   }
 
   local opts = {
