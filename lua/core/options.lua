@@ -34,7 +34,7 @@ local settings = {
   undofile = true,
   undodir = vim.fn.stdpath("cache") .. "/undofile",
   writebackup = false,
-  wrap = false,
+  wrap = true,
   lazyredraw = true,
 }
 o.shortmess:append("sI")
