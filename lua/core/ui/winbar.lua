@@ -1,40 +1,13 @@
 local M = {}
 
-local filetypes = {
-  "qf",
-  "toggleterm",
-  "diff",
-  "TelescopePrompt",
-  "mason",
-  "lspinfo",
-  "lspsagaoutline",
-  "neo-tree",
-  "neo-tree-popup",
-  "startuptime",
-  "noice",
-  "packer",
-  "tsplayground",
-  "sagarename",
-  "sagacodeaction",
-  "null-ls-info",
-  "lspsagafinder",
-  "notify",
-  "lazy",
-  "alpha",
-  "",
-  -- "",
-}
-
 local fn = vim.fn
 vim.api.nvim_set_hl(0, "edited", { fg = "#9ece6a" })
 
 local sep = function()
-  for _, fileIgnore in ipairs(filetypes) do
-    if vim.bo.filetype == fileIgnore then
-      return ""
-    end
+  if next(vim.lsp.buf_get_clients(0)) ~= nil then
+    return "%#Empty#" .. " > " .. "%*"
   end
-  return "%#Empty#" .. " > " .. "%*"
+  return ""
 end
 
 local fileName = function()
