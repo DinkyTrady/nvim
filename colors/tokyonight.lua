@@ -1,4 +1,5 @@
 vim.g.colors_name = "tokyonight"
+local base00 = "" --  = "#24283b"
 
 require("core.colorscheme").setup({
   white = "#c0caf5",
@@ -31,7 +32,7 @@ require("core.colorscheme").setup({
   lightbg = "#32333e",
   pmenu_bg = "#7aa2f7",
   folder_bg = "#ff9e64",
-  base00 = "#24283b",
+  base00,
   base01 = "#3b4261",
   base02 = "#3b4261",
   base03 = "#545c7e",
@@ -61,5 +62,6 @@ if vim.cmd([[colorscheme tokyonight]]) then
   hl(0, "@keyword", { fg = "#9d7cd8", italic = true })
   hl(0, "@keyword.operator", { fg = "#7dcfff", bold = true })
   hl(0, "@field", { link = "@property" })
+  hl(0, "NeoTreeNormal", { bg = base00 })
   -- hl(0, "Search", { bg = "#3d59a1" })
 end
