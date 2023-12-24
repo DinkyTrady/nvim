@@ -33,6 +33,14 @@ function M.setup()
       parse = parse,
     },
   })
+
+  local snippet = ls.snippet
+
+  ls.add_snippets("html", {
+    snippet("eruda", {
+      ls.text_node({ '<script src="//cdn.jsdelivr.net/npm/eruda"></script>', "<script>eruda.init()</script>" }),
+    }),
+  })
 end
 
 return M
