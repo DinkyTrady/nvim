@@ -1,14 +1,16 @@
 return {
   -- { "dstein64/vim-startuptime",                cmd = "StartupTime" },
-  {
-    "iamcco/markdown-preview.nvim",
-    ft = "markdown",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    build = "cd app && npm install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-  },
+  -- {
+  --   "iamcco/markdown-preview.nvim",
+  --   ft = "markdown",
+  --   cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+  --   build = function()
+  --     vim.fn["mkdp#util#install"]()
+  --   end,
+  --   init = function()
+  --     vim.g.mkdp_filetypes = { "markdown" }
+  --   end,
+  -- },
   {
     "NvChad/nvim-colorizer.lua",
     cmd = "ColorizerToggle",
