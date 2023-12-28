@@ -305,7 +305,7 @@ function M.setup(colors, config)
   hl("@property", { fg = M.colors.base08 })
   hl("@include", { link = "Include" })
   hl("@conditional", { link = "Conditional" })
-  hl("@spell", { fg = nil })
+  hl("@spell", { link = "@variable" })
   -- Semantic
   hl("@lsp.type.variable", {})
   hl("@lsp.type.class", { link = "Structure" })
