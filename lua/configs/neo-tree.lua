@@ -3,7 +3,7 @@ local M = {}
 M.config = {
   "nvim-neo-tree/neo-tree.nvim",
   branch = "v3.x",
-  cmd = require("core.commands").neo_tree,
+  cmd = "Neotree",
   config = function()
     require("configs.neo-tree").setup()
   end,
