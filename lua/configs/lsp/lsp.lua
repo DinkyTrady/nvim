@@ -28,21 +28,23 @@ M.config = {
 }
 
 function M.setup()
-  require("lspconfig")
   local status, lsp = pcall(require, "lspconfig")
   if not status then
     return
   end
 
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities.textDocument.completion.completionItem.snippetSupport = true
-  capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {
-      "documentation",
-      "detail",
-      "additionalTextEdits",
+  capabilities.textDocument.completion.completionItem = {
+    snippetSupport = true,
+    resolveSupport = {
+      properties = {
+        "documentation",
+        "detail",
+        "additionalTextEdits",
+      },
     },
   }
+
   capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
   local function on_attach(client, bufnr)
@@ -105,6 +107,7 @@ function M.setup()
   lsp.lua_ls.setup({
     on_attach = on_attach,
     capabilities = capabilities,
+
     settings = {
       Lua = {
         diagnostics = {
