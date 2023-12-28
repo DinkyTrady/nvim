@@ -115,7 +115,7 @@ local register = {
     x = { ":bdelete!<CR>", "Close Buffer" },
     c = { ":ColorizerToggle<CR>", "See Colors" },
     o = { ":Telescope oldfiles <cr>", "Recent Files" },
-    r = { ":so<CR>", "Reload File" },
+    r = { ":edit<CR>", "Reload File" },
     -- w = {
     --   name = "Save",
     --   w = { ":w!<cr>", "Save File" },
@@ -132,6 +132,7 @@ local register = {
     -- },
     f = {
       name = "Telescope",
+      a = { ":Telescope fd hidden=true<CR>", "Find All Files" },
       w = { ":Telescope live_grep<CR>", "Find Words in All Files" },
       W = { ":Telescope grep_string<CR>", "Find Current Cursor Words" },
       -- t = { ":Telescope<cr>", "Open Telescope" },
