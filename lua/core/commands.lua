@@ -46,7 +46,7 @@ local autocmds = {
     ["VimResized"] = {
       "*",
       function()
-        cmd(":wincmd=")
+        cmd("wincmd=")
       end,
     },
   },
@@ -92,6 +92,16 @@ local autocmds = {
       end,
     },
   },
+  -- lsp = {
+  --   ["VimEnter"] = {
+  --     "*.*",
+  --     function()
+  --       if next(vim.lsp.buf_get_clients(0)) ~= nil then
+  --         cmd("LspStart")
+  --       end
+  --     end,
+  --   },
+  -- },
 }
 
 local aucmnds = function(group)
@@ -122,30 +132,13 @@ function M.lazyload(plugins_name)
 end
 
 -- for commands plugins
-M.neo_tree = {
-  "Neotree",
-  "NeoTreeShow",
-  "NeoTreeShowToggle",
-  "NeoTreeFlot",
-  "NeoTreeFloatToggle",
-  "NeoTreeReveal",
-  "NeoTreeRevealToggle",
-  "NeoTreeFocus",
-  "NeoTreeFocusToggle",
-  "NeoTreeLogs",
-}
-
 M.mason = {
   "Mason",
-  "MasonUninsatall",
-  "MasonUninsatAll",
+  "MasonUninstalAll",
   "MasonInstall",
   "MasonLog",
-}
-
-M.mason_lsp = {
   "LspInstall",
-  "LspUnisntall",
+  "LspUninstall"
 }
 
 M.lsp = {
