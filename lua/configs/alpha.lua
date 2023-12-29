@@ -35,6 +35,7 @@ function M.setup()
     db.button("e", "  Explore Tree", ":Neotree toggle<CR>"),
     db.button("d", "  Find Directory", ":Telescope file_browser<CR>"),
     db.button("p", "  Find Projects", ":Telescope projects<CR>"),
+    db.button("s", "   Session Restore", ":lua require('persistence').load({ last = true })<cr>"),
     db.button("c", "  Configuration", ":e $MYVIMRC<CR>"),
     db.button("q", "󰅙  Quit Neovim", ":q<CR>"),
   }
