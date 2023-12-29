@@ -42,4 +42,5 @@ return {
   { require("configs.bufferline").config },
   { require("configs.autopairs").config },
   { require("configs.term").config },
+  { require("configs.session-nvim") },
 }

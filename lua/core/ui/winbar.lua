@@ -4,7 +4,7 @@ local fn = vim.fn
 vim.api.nvim_set_hl(0, "edited", { fg = "#9ece6a" })
 
 local sep = function()
-  if next(vim.lsp.buf_get_clients(0)) ~= nil then
+  if next(vim.lsp.buf_get_clients(0)) ~= nil and require("nvim-navic").get_location() ~= "" then
     return "%#Empty#" .. " > " .. "%*"
   end
   return ""
