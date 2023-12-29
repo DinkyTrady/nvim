@@ -1,10 +1,8 @@
-# Information
+# Information (WIP ⚠️)
 
-- **Note**
-  - **_leader_** change to **_space_**, _remember it's only work in normal mode_.
-  - If you want save use 'ctrl + s'
-  - Reset neovim (not quit neovim and open it) use 'space + r' `note: only work in lua file`
-    > for detail mappings open [mappings](https://github.com/DinkyTrady/nvim/blob/main/lua/core/mappings.lua)
+- Note
+  - Using starter template from [LazyVim/starter](https://github.com/LazyVim/starter).
+  - Which is contain all [LazyVim](https://github.com/LazyVim/LazyVim) plugins but with a custom configuration
 
 ## ⚠️ Requirements
 
@@ -18,5 +16,5 @@
 ## 🚀 Installation
 
 ```bash
-git clone https://github.com/DinkyTrady/nvim --depth=1 ~/.config/nvim && nvim
+git clone --branch migrate-LazyVim https://github.com/DinkyTrady/nvim --depth=1 ~/.config/nvim && nvim
 ```
