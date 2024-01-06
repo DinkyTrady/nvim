@@ -7,7 +7,6 @@
 ## ⚠️ Requirements
 
 - Up to Date package 📦
-<!-- TODO: gonna add another package needed ASAP -->
 - [git](https://github.com/git-guides/install-git)
 - [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
 - **c/cpp** compiler
@@ -21,5 +20,5 @@
 ## 🚀 Installation
 
 ```bash
-git clone --branch migrate-LazyVim https://github.com/DinkyTrady/nvim --depth=1 ~/.config/nvim && nvim
+git clone https://github.com/DinkyTrady/nvim --depth=1 ~/.config/nvim && nvim
 ```
