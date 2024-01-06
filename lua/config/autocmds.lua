@@ -4,7 +4,7 @@
 local autocmd = vim.api.nvim_create_autocmd
 
 autocmd({ "FileType" }, {
-  pattern = { "lua" },
+  pattern = { "lua", "html", "css" },
   callback = function()
     vim.b.autoformat = false
   end,
@@ -13,19 +13,5 @@ autocmd({ "FileType" }, {
 autocmd("LspAttach", {
   callback = function()
     require("config.lsp-settings")
-  end,
-})
-
-autocmd("InsertEnter", {
-  pattern = "*",
-  callback = function()
-    vim.opt.relativenumber = false
-  end,
-})
-
-autocmd("InsertLeave", {
-  pattern = "*",
-  callback = function()
-    vim.opt.relativenumber = true
   end,
 })

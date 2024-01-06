@@ -11,4 +11,24 @@ map("i", "<C-k>", "<Up>", { desc = "Move cursor to up", remap = true })
 map("i", "<C-l>", "<RIGHT>", { desc = "Move cursor to right" })
 
 map({ "n", "x" }, "<leader>h", ":noh<cr>", { desc = "Remove search highlight" })
-map("n", "<leader>fa", ":Telescope fd hidden=true<cr>", { desc = "Find all files" })
+
+map("n", "<leader>r", ":set rnu!<cr>", { desc = "Relative Number toggle" })
+
+map("n", "<leader>gg", function()
+  require("lazyvim.util").terminal.open(
+    { "gitui" },
+    { cwd = require("lazyvim.util").root.get(), esc_esc = false, ctrl_hjkl = false }
+  )
+end, { desc = "gitui (root dir)" })
+map("n", "<leader>gG", function()
+  require("lazyvim.util").terminal.open(
+    { "gitui" },
+    { cwd = require("lazyvim.util").root.get(), esc_esc = false, ctrl_hjkl = false }
+  )
+end, { desc = "gitui (root dir)" })
+
+map("n", "<ScrollWheelUp>", "<C-y><C-y><C-y><C-y><C-y>")
+map("n", "<ScrollWheelDown>", "<C-e><C-e><C-e><C-e><C-e>")
+
+-- vim.keymap.del("n", "<leader>gg")
+-- vim.keymap.d;el("n", "<leader>gG")

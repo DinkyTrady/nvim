@@ -8,7 +8,6 @@ local settings = {
   encoding = "UTF-8",
   numberwidth = 2,
   number = true,
-  relativenumber = true,
   tabstop = 2,
   softtabstop = 2,
   smartindent = true,
