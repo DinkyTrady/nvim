@@ -3,9 +3,12 @@ return {
     "hrsh7th/nvim-cmp",
     dependencies = {
       "hrsh7th/cmp-emoji",
+      -- "hrsh7th/cmp-nvim-lua",
     },
     ---@param opts cmp.ConfigSchema
     opts = function(_, opts)
+      -- local kind_icons = require("lazyvim.config").icons.kinds
+
       local has_words_before = function()
         unpack = unpack or table.unpack
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
