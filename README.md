@@ -1,19 +1,21 @@
-# Information
+# Information (WIP ⚠️)
 
-- **Note**
-  - **_leader_** change to **_space_**, _remember it's only work in normal mode_.
-  - If you want save use 'ctrl + s'
-  - Reset neovim (not quit neovim and open it) use 'space + r' `note: only work in lua file`
-    > for detail mappings open [mappings](https://github.com/DinkyTrady/nvim/blob/main/lua/core/mappings.lua)
+- Note
+  - Using starter template from [LazyVim/starter](https://github.com/LazyVim/starter).
+  - Which is contain all [LazyVim](https://github.com/LazyVim/LazyVim) plugins but with a custom configuration
 
 ## ⚠️ Requirements
 
 - Up to Date package 📦
 - [git](https://github.com/git-guides/install-git)
 - [neovim](https://github.com/neovim/neovim/wiki/Installing-Neovim)
-- **clang** compiler
+- **c/cpp** compiler
+  - _clang_
+  - _gcc_
+- make
 - [node.js](https://github.com/nodejs/node)
 - [ripgrep](https://github.com/BurntSushi/ripgrep)
+- [gitui](https://github.com/extrawurst/gitui) -- i changes lazygit to gitui
 
 ## 🚀 Installation
 

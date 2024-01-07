@@ -1,3 +1,6 @@
+-- Options are automatically loaded before lazy.nvim startup
+-- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
+-- Add any additional options here
 local o = vim.opt --make vim options eazier with variable
 
 local settings = {
@@ -5,7 +8,6 @@ local settings = {
   encoding = "UTF-8",
   numberwidth = 2,
   number = true,
-  relativenumber = true,
   tabstop = 2,
   softtabstop = 2,
   smartindent = true,
@@ -34,7 +36,7 @@ local settings = {
   undofile = true,
   undodir = vim.fn.stdpath("cache") .. "/undofile",
   writebackup = false,
-  wrap = true,
+  -- wrap = true,
   lazyredraw = true,
 }
 o.shortmess:append("sI")

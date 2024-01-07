@@ -1,12 +1,12 @@
 local border = {
-  { "🭽", "FloatBorder" },
-  { "▔", "FloatBorder" },
-  { "🭾", "FloatBorder" },
-  { "▕", "FloatBorder" },
-  { "🭿", "FloatBorder" },
-  { "▁", "FloatBorder" },
-  { "🭼", "FloatBorder" },
-  { "▏", "FloatBorder" },
+  { "┍", "FloatBorder" },
+  { "━", "FloatBorder" },
+  { "┑", "FloatBorder" },
+  { "│", "FloatBorder" },
+  { "┙", "FloatBorder" },
+  { "━", "FloatBorder" },
+  { "┕", "FloatBorder" },
+  { "│", "FloatBorder" },
 }
 -- 🭽(left-top) 🭾(top-right) 🭿(bottm-right) 🭼(bottm-left)
 
