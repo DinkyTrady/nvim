@@ -42,7 +42,6 @@ local settings = {
 o.shortmess:append("sI")
 o.whichwrap:append("<,>,[,],h,l")
 o.fillchars = { eob = " " }
-o.listchars:append("eol:↴")
 o.completeopt = { "menuone", "noselect" }
 
 for name, value in pairs(settings) do
