@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local map = function(mode, map, mapdo)
-  vim.api.nvim_set_keymap(mode, map, mapdo, { noremap = true, silent = true })
+	vim.api.nvim_set_keymap(mode, map, mapdo, { noremap = true, silent = true })
 end
 
 map("n", "<leader>x", "<Cmd>bd<Cr>")
@@ -41,5 +41,9 @@ map("i", "<A-k>", "<Esc>v:m .-2<CR>==gi")
 map("i", "<A-j>", "<Esc>v:m .+1<CR>==gi")
 
 -- visual mode
-map("v", "K", ":m .-2<CR>==gi")
-map("v", "A", ":m .+1<CR>==gi")
+map("v", "K", ":m .-2<CR>gv")
+map("v", "J", ":m .+1<CR>gv")
+
+-- visual-line mode
+map("x", "K", ":m .-2<CR>gv")
+map("x", "J", ":m .+1<CR>gv")
