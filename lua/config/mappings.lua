@@ -2,7 +2,7 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 local map = function(mode, map, mapdo)
-	vim.api.nvim_set_keymap(mode, map, mapdo, { noremap = true, silent = true })
+  vim.api.nvim_set_keymap(mode, map, mapdo, { noremap = true, silent = true })
 end
 
 map("n", "<leader>x", "<Cmd>bd<Cr>")
@@ -25,7 +25,7 @@ map("n", "<leader>D", "<Cmd>lua vim.lsp.buf.type_definition()<Cr>")
 map("n", "<leader>cr", "<Cmd>lua vim.lsp.buf.rename()<Cr>")
 map("n", "<leader>ca", "<Cmd>lua vim.lsp.buf.code_action()<Cr>")
 map("n", "gr", "<Cmd>lua vim.lsp.buf.references()<Cr>")
-map("n", "<leader>lf", "<Cmd>lua vim.lsp.buf.format({ async = true, timeout_ms = 2000 })<Cr>")
+map("n", "<leader>lf", "<Cmd>lua vim.lsp.buf.format({ async = false, timeout_ms = 2000 })<Cr>")
 map("n", "<leader>cd", "<Cmd>lua vim.diagnostic.open_float()<Cr>")
 map("n", "[d", "<Cmd>lua vim.diagnostic.goto_prev()<Cr>")
 map("n", "]d", "<Cmd>lua vim.diagnostic.goto_next()<Cr>")

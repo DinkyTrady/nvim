@@ -83,6 +83,8 @@ return {
 
 			nls.setup({
 				sources = {
+					nls.builtins.diagnostics.fish,
+					nls.builtins.formatting.fish_indent,
 					nls.builtins.formatting.stylua,
 					nls.builtins.formatting.prettier,
 				},
