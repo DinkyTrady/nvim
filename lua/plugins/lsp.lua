@@ -8,7 +8,7 @@ return {
     opts = {
       servers = {
         lua_ls = {
-          mason = false,
+          mason = true,
         },
         html = {
           mason = true,
