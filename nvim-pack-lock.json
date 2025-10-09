@@ -1,0 +1,26 @@
+{
+  "plugins": {
+    "blink.cmp": {
+      "rev": "d918ebd"
+    },
+    "catppuccin": {
+      "version": "'v1.11.0'"
+    },
+    "codecompanion.nvim": {
+      "rev": "2e8a40c"
+    },
+    "friendly-snippets": [],
+    "gitsigns.nvim": [],
+    "lazydev.nvim": [],
+    "mason.nvim": [],
+    "mini.icons": [],
+    "mini.surround": [],
+    "nvim-colorizer.lua": [],
+    "nvim-lspconfig": [],
+    "nvim-treesitter": [],
+    "oil.nvim": [],
+    "plenary.nvim": [],
+    "snacks.nvim": [],
+    "vim-fugitive": []
+  }
+}
