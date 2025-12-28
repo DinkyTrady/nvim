@@ -1,110 +1,105 @@
+local lsp_core = require 'core.lsp-core'
+
 return {
-	{
-		"neovim/nvim-lspconfig",
-		event = "BufReadPre",
-		config = function()
-			vim.cmd("LspStart")
-
-			local capabilities = vim.lsp.protocol.make_client_capabilities()
-			capabilities.textDocument.completion.completionItem = {
-				snippetSupport = true,
-				resolveSupport = {
-					properties = {
-						"documentation",
-						"detail",
-						"additionalTextEdits",
-					},
-				},
-			}
-
-			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-
-			local on_attach = function(client, bufnr)
-				if client.server_capabilities.documentHighlightProvider then
-					vim.api.nvim_create_augroup("lsp_document_highlight", {
-						clear = false,
-					})
-					vim.api.nvim_clear_autocmds({
-						buffer = bufnr,
-						group = "lsp_document_highlight",
-					})
-					vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
-						group = "lsp_document_highlight",
-						buffer = bufnr,
-						callback = vim.lsp.buf.document_highlight,
-					})
-					vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
-						group = "lsp_document_highlight",
-						buffer = bufnr,
-						callback = vim.lsp.buf.clear_references,
-					})
-				end
-			end
-
-			local lsp = require("lspconfig")
-			local servers = { "tsserver", "eslint", "jsonls", "emmet_ls", "html", "cssls" }
-
-			for _, server in ipairs(servers) do
-				lsp[server].setup({
-					capabilities = capabilities,
-					on_attach = on_attach,
-				})
-			end
-
-			lsp.lua_ls.setup({
-				capabilities = capabilities,
-				on_attach = on_attach,
-				settings = {
-					Lua = {
-						diagnostics = {
-							globals = { "vim" },
-						},
-						workspace = {
-							library = {
-								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-								[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-								[vim.fn.stdpath("data") .. "/lazy/lazy.nvim/lua/lazy"] = true,
-							},
-							maxPreload = 100000,
-							preloadFileSize = 10000,
-						},
-					},
-				},
-			})
-
-			require("config.lsp-settings")
-		end,
-	},
-	{
-		"nvimtools/none-ls.nvim",
-		event = "BufReadPre",
-		config = function()
-			local nls = require("null-ls")
-
-			nls.setup({
-				sources = {
-					nls.builtins.diagnostics.fish,
-					nls.builtins.formatting.fish_indent,
-					nls.builtins.formatting.stylua,
-					nls.builtins.formatting.prettier,
-				},
-				on_attach = function(client, bufnr)
-					if client.supports_method("textDocument/formatting") then
-						vim.api.nvim_clear_autocmds({
-							group = vim.api.nvim_create_augroup("LspFormat", { clear = true }),
-							buffer = bufnr,
-						})
-						vim.api.nvim_create_autocmd("BufWritePre", {
-							group = vim.api.nvim_create_augroup("LspFormat", { clear = true }),
-							buffer = bufnr,
-							callback = function()
-								-- on 0.7, use vim.lsp.buf.formatting_sync() instead
-								vim.lsp.buf.format({ bufnr = bufnr, timeout_ms = 1500 })
-							end,
-						})
-					end
-				end,
-			})
-		end,
-	},
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      -- 'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+    -- TODO: keep this commit for now until fixed
+    -- https://github.com/neovim/nvim-lspconfig/pull/4027
+    commit = '63a016437e44283e4aa54802be3002d06f724253',
+    event = 'BufReadPre',
+    opts = {
+      servers = {
+        lua_ls = {},
+        vtsls = {},
+        eslint = {},
+        jsonls = {},
+        emmet_language_server = {},
+        tailwindcss = {},
+        cssls = {},
+        html = {},
+        yamlls = {},
+        bashls = {},
+        fish_lsp = {},
+        dockerls = {},
+        clangd = {},
+        gopls = {},
+      },
+    },
+    config = function(_, opts)
+      for server, settings in pairs(opts.servers) do
+        vim.lsp.enable(server)
+        vim.lsp.config(server, { capabilities = lsp_core.capabilities, on_attach = lsp_core.on_attach, settings })
+      end
+    end,
+  },
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        -- made luv library not avaiable only when type vim.uv
+        -- it will need to load lsp again to get the library
+        { path = '${3rd}/luv/library' },
+        vim.fn.stdpath 'data' .. '/lazy/snacks.nvim',
+      },
+    },
+  },
+  {
+    'mfussenegger/nvim-lint',
+    event = { 'BufReadPre', 'BufNewFile' },
+    config = function()
+      require('lint').linters_by_ft = {
+        fish = { 'fish' },
+        typescript = { 'eslint' },
+        ShellCheck = { 'shellcheck' },
+        php = { 'phpcs' },
+      }
+    end,
+  },
+  {
+    'mason-org/mason.nvim',
+    event = 'BufRead',
+    cmd = { 'Mason', 'MasonLog', 'MasonUpdate', 'MasonUninstall', 'MasonUninstallAll' },
+    opts = {},
+  },
+  -- {
+  --   'pmizio/typescript-tools.nvim',
+  --   ft = { 'typescript', 'javascript' },
+  --   dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+  --   config = function()
+  --     require('typescript-tools').setup {
+  --       on_attach = lsp_core.on_attach,
+  --       settings = {
+  --         tsserver_file_preferences = {
+  --           quotePrefrence = 'single',
+  --           includeInlayParameterNameHints = 'literals',
+  --           includeInlayEnumMemberValueHints = true,
+  --           includeInlayFunctionLikeReturnTypeHints = true,
+  --           includeInlayFunctionParameterTypeHints = true,
+  --           includeInlayPropertyDeclarationTypeHints = true,
+  --           includeInlayVariableTypeHints = true,
+  --         },
+  --       },
+  --     }
+  --   end,
+  -- },
+  {
+    'nvim-flutter/flutter-tools.nvim',
+    ft = 'dart',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      -- 'stevearc/dressing.nvim', -- optional for vim.ui.select
+    },
+    config = function()
+      require('flutter-tools').setup {
+        -- fvm = true,
+        lsp = {
+          on_attach = lsp_core.on_attach,
+        },
+      }
+    end,
+  },
 }

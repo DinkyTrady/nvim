@@ -1,33 +1,30 @@
+local util = require 'core.util'
+
 ---Show attached LSP clients in `[name1, name2]` format.
 ---Returns an empty string if there aren't any attached LSP clients.
 ---@return string
-local function lsp_status()
-  local attached_clients = vim.lsp.get_clients { bufnr = 0 }
-  if #attached_clients == 0 then
-    return ''
-  end
-  local names = vim
-    .iter(attached_clients)
-    :map(function(client)
-      local name = client.name:gsub('language.server', 'ls')
-      return name
-    end)
-    :totable()
-  return '[' .. table.concat(names, ', ') .. ']'
-end
+-- local function lsp_status()
+--   local attached_clients = vim.lsp.get_clients { bufnr = 0 }
+--   if #attached_clients == 0 then
+--     return ''
+--   end
+--   local names = vim
+--     .iter(attached_clients)
+--     :map(function(client)
+--       local name = client.name:gsub('language.server', 'ls')
+--       return name
+--     end)
+--     :totable()
+--   return '[' .. table.concat(names, ', ') .. ']'
+-- end
 
 ---Get diagnostic counts for the current buffer
 ---@return string
 local function get_diagnostics()
+  local signs = util.diagnostics.signs
   local diagnostics = vim.diagnostic.count(0)
   if not diagnostics or vim.tbl_isempty(diagnostics) then
     return ''
-  end
-
-  -- Get the signs from vim's sign definitions
-  local function get_sign_text(name)
-    local sign = vim.fn.sign_getdefined('DiagnosticSign' .. name)[1]
-    return sign and sign.text or ''
   end
 
   local result = {}
@@ -41,16 +38,32 @@ local function get_diagnostics()
   for name, severity in pairs(severities) do
     local count = diagnostics[severity] or 0
     if count > 0 then
-      local icon = get_sign_text(name)
-      table.insert(result, '%#DiagnosticSign' .. name .. '#' .. icon .. count .. '%*')
+      local icon = signs[name]
+      table.insert(result, '%#DiagnosticSign' .. name .. '#' .. icon .. ':' .. count .. '%*')
     end
   end
 
-  if #result == 0 then
+  return #result == 0 and '' or table.concat(result, ' ')
+end
+
+local function get_branch()
+  local icon = ' '
+  if not package.loaded.gitsigns then
     return ''
   end
 
-  return table.concat(result, ' ')
+  local branch_name = vim.b.gitsigns_head
+  if not branch_name or vim.b.gitsigns_git_status then
+    return ''
+  end
+
+  if tostring(branch_name) == '' then
+    branch_name = ''
+  else
+    branch_name = icon .. branch_name
+  end
+
+  return '%#Error# ' .. tostring(branch_name) .. '%*'
 end
 
 ---@return string, string
@@ -84,9 +97,7 @@ local function filename()
 
   local components = {}
 
-  if ft == 'snacks_dashboard' then
-    table.insert(components, '[-]')
-  elseif not is_unnamed then
+  if not is_unnamed then
     local icon, hl_group = get_icons_and_color('filetype', ft)
     table.insert(components, '%#' .. hl_group .. '#' .. icon .. ' ' .. file_name .. '%*')
   else
@@ -114,7 +125,7 @@ end
 
 ---@return string
 local function directory()
-  local cwd = vim.fn.fnamemodify(vim.fn.getcwd(), ':t')
+  local cwd = vim.fn.fnamemodify(util.get_project_root(), ':t')
   local icon, _ = get_icons_and_color('directory', cwd)
 
   return '%#Number#' .. icon .. ' ' .. cwd .. '%*'
@@ -127,12 +138,15 @@ function _G.statusline()
     '▎',
     filename(),
     '%=',
-    lsp_status(),
+    get_branch(),
+    '%=',
+    -- lsp_status(),
     ' ',
     get_diagnostics(),
-    '%=',
-    ' %-14(%l,%c%V%)',
-    '%P',
+    ' (%l,%c%V)',
+    -- '%P',
     ' ',
   }, ' ')
 end
+
+vim.o.statusline = '%{%v:lua._G.statusline()%}'

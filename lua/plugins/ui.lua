@@ -1,81 +1,67 @@
 return {
-	{
-		"goolord/alpha-nvim",
-		event = "VimEnter",
-		config = function()
-			local alpha = require("alpha")
-			local db = require("alpha.themes.dashboard")
+  {
+    'echasnovski/mini.indentscope',
+    event = 'BufRead',
+    config = function()
+      require('mini.indentscope').setup {
+        symbol = '│',
+        options = { try_as_border = true },
+        draw = { animation = require('mini.indentscope').gen_animation.none() },
+      }
+    end,
+  },
+  {
+    'echasnovski/mini.icons',
+    version = false,
+    event = 'VeryLazy',
+    opts = {},
+  },
+  {
+    'stevearc/oil.nvim',
+    cmd = 'Oil',
+    keys = {
+      {
+        mode = { 'n', 'v' },
+        '-',
+        function()
+          require('oil').open()
+        end,
+        desc = 'Open Oil',
+      },
+    },
+    opts = {
+      columns = {
+        'size',
+        'mtime',
+        'icon',
+      },
 
-			db.section.header.val = {
-				"                                                         ",
-				"    ███    ██ ███████  ██████  ██    ██ ██ ███    ███    ",
-				"    ████   ██ ██      ██    ██ ██    ██ ██ ████  ████    ",
-				"    ██ ██  ██ █████   ██    ██ ██    ██ ██ ██ ████ ██    ",
-				"    ██  ██ ██ ██      ██    ██  ██  ██  ██ ██  ██  ██    ",
-				"    ██   ████ ███████  ██████    ████   ██ ██      ██    ",
-				"                                                         ",
-				"                                                         ",
-			}
+      keymaps = {
+        -- disable
+        ['<Cr>'] = '',
+        ['<C-c>'] = '',
+        ['<C-p>'] = '',
 
-			db.section.buttons.val = {
-				db.button("f", "󰱽  Find files", ":Telescope find_files<CR>"),
-				db.button("r", "󱀸  Recently files", ":Telescope oldfiles<CR>"),
-				db.button("n", "  New file", ":ene <BAR> startinsert<CR>"),
-				db.button("m", "󰥻  Mappings", ":Telescope keymaps<CR>"),
-				-- db.button("e", "  Explore Tree", ":Neotree toggle<CR>"),
-				db.button("d", "  Find Directory", ":Telescope file_browser<CR>"),
-				-- db.button("p", "  Find Projects", ":Telescope projects<CR>"),
-				-- db.button("s", "  Session Restore", ":lua require('persistence').load({ last = true })<cr>"),
-				db.button("c", "  Configuration", ":e $MYVIMRC<CR>"),
-				db.button("q", "󰅙  Quit Neovim", ":q<CR>"),
-			}
-
-			db.section.footer.opts.hl = "AlphaFooter"
-			db.section.header.opts.hl = "AlphaHeader"
-			db.section.buttons.opts.hl = "AlphaButtons"
-
-			db.opts.opts.noautocmd = true
-			alpha.setup(db.opts)
-
-			vim.api.nvim_create_autocmd("User", {
-				once = true,
-				pattern = "LazyVimStarted",
-				callback = function()
-					local stats = require("lazy").stats()
-					local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-					db.section.footer.val = " Neovim loaded " .. stats.count .. " plugins in " .. ms .. "ms"
-					pcall(vim.cmd.AlphaRedraw)
-				end,
-			})
-		end,
-	},
-	{
-		"echasnovski/mini.indentscope",
-		event = "BufRead",
-		config = function()
-			require("mini.indentscope").setup({
-				symbol = "│",
-				options = { try_as_border = true },
-				draw = { animation = require("mini.indentscope").gen_animation.none() },
-			})
-		end,
-	},
-	{
-		"nvim-tree/nvim-web-devicons",
-		event = "VeryLazy",
-		config = function()
-			require("nvim-web-devicons").setup({
-				default = true,
-			})
-		end,
-	},
-	{
-		"freddiehaddad/feline.nvim",
-		event = "VeryLazy",
-		config = function()
-			require("feline").setup({
-				components = require("catppuccin.groups.integrations.feline").get(),
-			})
-		end,
-	},
+        -- change to other
+        ['q'] = 'actions.close',
+        ['gl'] = 'actions.select',
+        ['gp'] = 'actions.preview',
+      },
+      view_options = {
+        show_hidden = true,
+      },
+    },
+  },
+  {
+    'catgoose/nvim-colorizer.lua',
+    event = 'BufReadPre',
+    opts = {
+      user_default_options = {
+        css = true,
+        tailwind = true,
+        -- mode = 'virtualtext',
+        virtualtext_inline = false,
+      },
+    },
+  },
 }

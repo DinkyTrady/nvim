@@ -1,11 +1,14 @@
 -- load default mappings
-require("config.mappings")
+require 'core.keymaps'
 
 -- load default settings
-require("config.options")
+require 'core.options'
+
+-- load diagnostics
+require 'core.diagnostics'
 
 -- will load lazy
-require("config.lazy")
+require 'core.lazy'
 
 -- load autocmd
-require("config.aucmds")
+require 'core.autocmds'
